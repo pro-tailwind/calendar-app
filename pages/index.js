@@ -1,7 +1,7 @@
 import { Calendar } from '../components/calendar'
 import { TimePicker } from '../components/time-picker'
 
-export default function Homepage() {
+export default function Homepage({ selectedDay, setSelectedDay }) {
   return (
     <div className="grid h-full grid-rows-[auto,1fr] gap-8">
       <div className="mt-10 px-4 sm:px-8">
@@ -9,13 +9,13 @@ export default function Homepage() {
       </div>
       <div className="grid min-h-0 divide-x md:grid-cols-[1fr,360px] xl:grid-cols-[1fr,360px]">
         <div>
-          <Calendar />
+          <Calendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
           <div className="p-4 sm:p-8">
             <p>timezone</p>
           </div>
         </div>
         <div className="min-h-0">
-          <TimePicker />
+          <TimePicker selectedDay={selectedDay} />
         </div>
       </div>
     </div>
