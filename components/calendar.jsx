@@ -13,11 +13,12 @@ import {
   isToday,
   addMonths,
   isSameDay,
+  parseISO,
 } from 'date-fns'
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 
-export function Calendar({ selectedDay, setSelectedDay }) {
+export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities }) {
   const [selectedMonth, setSelectedMonth] = useState(startOfMonth(selectedDay))
 
   const daysOfTheMonth = eachDayOfInterval({
@@ -42,7 +43,7 @@ export function Calendar({ selectedDay, setSelectedDay }) {
   const weekSplit = array_chunks(daysOfTheMonth, 7)
 
   return (
-    <div className="px-6 sm:px-8">
+    <div className="px-6 sm:px-8 xl:px-10">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">{format(selectedMonth, 'MMMM yyyy')}</h2>
         <div className="flex gap-2">
@@ -133,6 +134,7 @@ export function Calendar({ selectedDay, setSelectedDay }) {
                       selectedDay={selectedDay}
                       setSelectedDay={setSelectedDay}
                       selectedMonth={selectedMonth}
+                      bookingAvailabilities={bookingAvailabilities}
                     />
                   </td>
                 ))}
@@ -145,26 +147,37 @@ export function Calendar({ selectedDay, setSelectedDay }) {
   )
 }
 
-function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth }) {
+function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingAvailabilities }) {
   const today = startOfToday()
   const isPast = isBefore(day, today)
   const isCurrentMonth = isSameMonth(day, selectedMonth)
   const isSelected = isSameDay(selectedDay, day)
+  const hasAvailability = bookingAvailabilities.some((availability) =>
+    isSameDay(parseISO(availability.startTime), day)
+  )
 
   const styles = {
     base: 'aspect-square w-12 max-w-full rounded-full relative',
     disabled: 'text-gray-300 pointer-events-none',
     today: 'text-indigo-600 font-bold',
     selected: 'bg-indigo-600 text-white font-bold',
-    candidate: 'hover:bg-gray-100',
+    candidate: 'hover:bg-gray-100 text-gray-900',
+    hasAvailability: 'bg-indigo-100 text-indigo-700 font-semibold hover:bg-indigo-200',
   }
 
   return (
     <button
       className={cx(
+        // I probably need a state machine at this point :D
         styles.base,
         (isPast || !isCurrentMonth) && styles.disabled,
-        isCurrentMonth && !isPast && (isSelected ? styles.selected : styles.candidate),
+        isCurrentMonth &&
+          !isPast &&
+          (isSelected
+            ? styles.selected
+            : hasAvailability
+            ? styles.hasAvailability
+            : styles.candidate),
         isToday(day) && styles.today,
         isSelected && styles.selected
       )}
