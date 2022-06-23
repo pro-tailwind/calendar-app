@@ -1,5 +1,6 @@
 import { Calendar } from '../components/calendar'
 import { TimePicker } from '../components/time-picker'
+import { TimezonePicker } from '../components/timezone-picker'
 
 import { bookingAvailabilities } from '../data'
 
@@ -17,7 +18,7 @@ export default function Homepage({ selectedDay, setSelectedDay }) {
             bookingAvailabilities={bookingAvailabilities}
           />
           <div className="p-4 sm:p-8 xl:p-10">
-            <p>// TODO: Timezone picker</p>
+            <TimezonePicker />
           </div>
         </div>
         <div className="min-h-0">
