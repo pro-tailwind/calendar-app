@@ -12,7 +12,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
       {/* Scroll  mask */}
       <div className="pointer-events-none absolute inset-x-8 bottom-0 z-10 hidden h-40 bg-gradient-to-t from-white md:block"></div>
 
-      <div className="flex h-12 items-center">
+      <div className="flex h-12 items-center justify-center md:justify-start">
         <h2 className="text-lg font-semibold">{format(selectedDay, 'EEEE, do MMMM yyyy')}</h2>
       </div>
       <div className="-mx-4 mt-4 overflow-y-auto px-4">
@@ -41,7 +41,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
           ></div>
         </div>
         {availabilities.length === 0 && (
-          <p className="pb-4 text-sm text-gray-600 sm:pb-8">
+          <p className="pb-4 text-center text-sm text-gray-600 sm:pb-8 md:text-left">
             No booking availabilities on this day.
           </p>
         )}

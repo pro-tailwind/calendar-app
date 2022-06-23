@@ -31,7 +31,7 @@ export function TimezonePicker({ activeTheme }) {
   if (!selectedTimezone) return 'loading...'
   return (
     <>
-      <div className="">
+      <div className="text-center md:text-left">
         <button
           onClick={() => setIsOpen(true)}
           className="rounded-full border-2 border-indigo-50 px-4 py-2 text-slate-900 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2"
