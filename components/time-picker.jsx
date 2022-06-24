@@ -53,7 +53,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
 function TimeSlot({ availability, selectedTime, setSelectedTime }) {
   const isSelected = selectedTime === availability.startTime
   return (
-    <li className="flex gap-1 overflow-hidden rounded-lg bg-indigo-600">
+    <li className="bg-stripes flex gap-1 overflow-hidden rounded-lg bg-indigo-600">
       <button
         disabled={isSelected}
         onClick={() => setSelectedTime(availability.startTime)}

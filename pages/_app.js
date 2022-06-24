@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { startOfToday } from 'date-fns'
 
-import '../styles/globals.css'
+import '../styles/tailwind.css'
 
 import { SidePanel } from '../components/side-panel'
 import { MainPanel } from '../components/main-panel'

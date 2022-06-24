@@ -160,7 +160,7 @@ function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingA
     base: 'aspect-square w-12 max-w-full rounded-full relative',
     disabled: 'text-gray-300 pointer-events-none',
     today: 'text-indigo-600 font-bold',
-    selected: 'bg-indigo-600 text-white font-bold',
+    selected: 'bg-indigo-600 text-white font-bold bg-stripes',
     candidate: 'hover:bg-gray-100 text-gray-900',
     hasAvailability: 'bg-indigo-100 text-indigo-700 font-semibold hover:bg-indigo-200',
   }
