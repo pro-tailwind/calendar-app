@@ -36,7 +36,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
               'absolute -inset-x-2 -top-2 bottom-0 transition-all',
               availabilities.length > 0
                 ? 'bg-grayscale-0 pointer-events-none backdrop-blur-0'
-                : 'bg-white/75 backdrop-blur-sm backdrop-grayscale'
+                : 'bg-white/80 backdrop-blur-sm backdrop-grayscale [@supports(backdrop-filter:blur(0px))]:bg-white/20'
             )}
           ></div>
         </div>
@@ -79,11 +79,11 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
 function EmptyPlaceholder() {
   return (
     <ul className="space-y-2 pb-4 sm:pb-8">
-      {['unavailable', 'unavailable', 'unavailable', 'unavailable'].map((time) => {
+      {['8:00 AM', '9:00 AM', '2:00 PM', '4:00 PM'].map((time) => {
         return (
           <li
             key={time}
-            className="rounded-lg bg-indigo-50 px-5 py-3 text-center font-semibold text-indigo-700"
+            className="rounded-lg bg-indigo-50 px-5 py-3 text-center font-semibold text-indigo-700 [@supports_not_(backdrop-filter:blur(0))]:line-through"
           >
             {time}
           </li>
