@@ -38,32 +38,32 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
   // Keyboard navigation
   // TODO: handle focus rather than changing selected day
   // TODO: Scope keyboad navigation to when the calendar is in focus only
-  useEffect(() => {
-    function keyboardNavigation(event) {
-      switch (event.key) {
-        case 'ArrowRight':
-          setSelectedDay(addDays(selectedDay, 1))
-          break
-        case 'ArrowLeft':
-          setSelectedDay(addDays(selectedDay, -1))
-          break
-        case 'ArrowDown':
-          setSelectedDay(addDays(selectedDay, 7))
-          break
-        case 'ArrowUp':
-          setSelectedDay(addDays(selectedDay, -7))
-          break
-      }
-    }
-    addEventListener('keydown', keyboardNavigation)
-    return () => removeEventListener('keydown', keyboardNavigation)
-  }, [selectedDay, setSelectedDay])
+  // useEffect(() => {
+  //   function keyboardNavigation(event) {
+  //     switch (event.key) {
+  //       case 'ArrowRight':
+  //         setSelectedDay(addDays(selectedDay, 1))
+  //         break
+  //       case 'ArrowLeft':
+  //         setSelectedDay(addDays(selectedDay, -1))
+  //         break
+  //       case 'ArrowDown':
+  //         setSelectedDay(addDays(selectedDay, 7))
+  //         break
+  //       case 'ArrowUp':
+  //         setSelectedDay(addDays(selectedDay, -7))
+  //         break
+  //     }
+  //   }
+  //   addEventListener('keydown', keyboardNavigation)
+  //   return () => removeEventListener('keydown', keyboardNavigation)
+  // }, [selectedDay, setSelectedDay])
 
-  useEffect(() => {
-    if (!isSameMonth(selectedMonth, startOfMonth(selectedDay))) {
-      setSelectedMonth(startOfMonth(selectedDay))
-    }
-  }, [selectedDay, selectedMonth])
+  // useEffect(() => {
+  //   if (!isSameMonth(selectedMonth, startOfMonth(selectedDay))) {
+  //     setSelectedMonth(startOfMonth(selectedDay))
+  //   }
+  // }, [selectedDay, selectedMonth])
 
   const array_chunks = (array, chunk_size) =>
     Array(Math.ceil(array.length / chunk_size))
