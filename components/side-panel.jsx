@@ -8,7 +8,7 @@ export function SidePanel() {
           <div>
             <div className="relative aspect-square h-32 overflow-hidden rounded-xl shadow-xl sm:aspect-video sm:h-40">
               <img
-                src="https://placekitten.com/600/400"
+                src="/img/social-large.jpg"
                 alt=""
                 className="absolute h-full w-full object-cover"
               />
