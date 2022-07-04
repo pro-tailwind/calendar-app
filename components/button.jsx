@@ -1,6 +1,8 @@
 import cx from 'classnames'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 
+// This Button component is not yet used in any parts of the app - trying to build the "starting point" app and accidentally started making a button in this repo 🤣
+
 export function Button({ size = 'large', look = 'primary', noIcon = false, children, ...props }) {
   const baseStyles = 'group font-semibold'
 
@@ -28,7 +30,13 @@ export function Button({ size = 'large', look = 'primary', noIcon = false, child
   if (noIcon === true) {
     return (
       <button
-        className={cx(baseStyles, spacingStyles[size], radiusStyles[size], colorStyles[look])}
+        className={cx(
+          baseStyles,
+          spacingStyles[size],
+          radiusStyles[size],
+          colorStyles[look],
+          'hover:text-red-700'
+        )}
         {...props}
       >
         {children}
