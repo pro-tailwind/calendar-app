@@ -36,6 +36,8 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
   }
 
   // Keyboard navigation
+  // TODO: handle focus rather than changing selected day
+  // TODO: Scope keyboad navigation to when the calendar is in focus only
   useEffect(() => {
     function keyboardNavigation(event) {
       switch (event.key) {
