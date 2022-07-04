@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import cx from 'classnames'
 import {
   eachDayOfInterval,
@@ -14,6 +14,7 @@ import {
   addMonths,
   isSameDay,
   parseISO,
+  addDays,
 } from 'date-fns'
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
@@ -33,6 +34,36 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
   function decrementMonth() {
     setSelectedMonth(addMonths(selectedMonth, -1))
   }
+
+  // Keyboard navigation
+  // TODO: handle focus rather than changing selected day
+  // TODO: Scope keyboad navigation to when the calendar is in focus only
+  // useEffect(() => {
+  //   function keyboardNavigation(event) {
+  //     switch (event.key) {
+  //       case 'ArrowRight':
+  //         setSelectedDay(addDays(selectedDay, 1))
+  //         break
+  //       case 'ArrowLeft':
+  //         setSelectedDay(addDays(selectedDay, -1))
+  //         break
+  //       case 'ArrowDown':
+  //         setSelectedDay(addDays(selectedDay, 7))
+  //         break
+  //       case 'ArrowUp':
+  //         setSelectedDay(addDays(selectedDay, -7))
+  //         break
+  //     }
+  //   }
+  //   addEventListener('keydown', keyboardNavigation)
+  //   return () => removeEventListener('keydown', keyboardNavigation)
+  // }, [selectedDay, setSelectedDay])
+
+  // useEffect(() => {
+  //   if (!isSameMonth(selectedMonth, startOfMonth(selectedDay))) {
+  //     setSelectedMonth(startOfMonth(selectedDay))
+  //   }
+  // }, [selectedDay, selectedMonth])
 
   const array_chunks = (array, chunk_size) =>
     Array(Math.ceil(array.length / chunk_size))
@@ -178,7 +209,7 @@ function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingA
             : hasAvailability
             ? styles.hasAvailability
             : styles.candidate),
-        isToday(day) && styles.today,
+        isToday(day) && !isSelected && styles.today,
         isSelected && styles.selected
       )}
       onClick={() => setSelectedDay(day)}
