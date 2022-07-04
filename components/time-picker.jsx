@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Link from 'next/link'
 import cx from 'classnames'
 import { format, isSameDay, parseISO } from 'date-fns'
 
@@ -66,12 +67,14 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
       >
         {format(parseISO(availability.startTime), 'h:mm a')}
       </button>
-      <button
-        tabIndex={isSelected ? 0 : -1}
-        className="m-2 basis-1/2 rounded-md bg-indigo-100 px-3 py-1 font-medium text-indigo-800 hover:bg-white"
-      >
-        Confirm
-      </button>
+      <Link href={`/booking-details?time=${availability.startTime}`}>
+        <a
+          tabIndex={isSelected ? 0 : -1}
+          className="m-2 basis-1/2 rounded-md bg-indigo-100 px-3 py-1 text-center font-medium text-indigo-800 hover:bg-white"
+        >
+          Confirm
+        </a>
+      </Link>
     </li>
   )
 }
