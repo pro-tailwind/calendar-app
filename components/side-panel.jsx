@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { ClockIcon, VideoCameraIcon } from '@heroicons/react/outline'
 
 export function SidePanel() {
@@ -5,16 +6,16 @@ export function SidePanel() {
     <aside className="rounded-t-2xl border-8 border-b-0 border-white bg-gray-100 xl:rounded-l-2xl xl:rounded-tr-none xl:border-b-8 xl:border-r-0 xl:pr-4">
       <div className="-mt-16 py-8 px-4 sm:px-8 md:mt-0 xl:-mt-16 xl:px-10">
         <div className="flex flex-col items-center gap-6 md:flex-row xl:flex-col xl:items-start">
-          <div>
-            <div className="relative aspect-square h-32 overflow-hidden rounded-xl shadow-xl sm:aspect-video sm:h-40">
+          <Link href="/">
+            <a className="relative aspect-square h-32 overflow-hidden rounded-xl shadow-xl sm:aspect-video sm:h-40">
               <img
                 src="/img/social-large.jpg"
                 alt=""
                 className="absolute h-full w-full object-cover"
               />
               <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/25"></div>
-            </div>
-          </div>
+            </a>
+          </Link>
           <div className="text-center md:text-left">
             <h2 className="text-3xl font-extrabold">Online Workshop</h2>
             <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-indigo-600">
