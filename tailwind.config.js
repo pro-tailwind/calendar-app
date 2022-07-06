@@ -6,7 +6,9 @@ module.exports = {
     './examples/**/*.{js,jsx,ts,tsx,html}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      // TODO: Set custom font (and also choose it first heh)
+    },
   },
-  plugins: [],
+  plugins: [require('./plugins/bg-stripes')],
 }

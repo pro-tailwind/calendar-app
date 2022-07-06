@@ -14,7 +14,6 @@ import {
   addMonths,
   isSameDay,
   parseISO,
-  addDays,
 } from 'date-fns'
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
@@ -35,9 +34,10 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
     setSelectedMonth(addMonths(selectedMonth, -1))
   }
 
-  // Keyboard navigation
   // TODO: handle focus rather than changing selected day
   // TODO: Scope keyboad navigation to when the calendar is in focus only
+
+  // Keyboard navigation
   // useEffect(() => {
   //   function keyboardNavigation(event) {
   //     switch (event.key) {

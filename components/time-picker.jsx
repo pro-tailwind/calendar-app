@@ -84,6 +84,7 @@ function EmptyPlaceholder() {
     <ul className="space-y-2 pb-4 sm:pb-8">
       {['8:00 AM', '9:00 AM', '2:00 PM', '4:00 PM'].map((time) => {
         return (
+          // TODO: Sort out why the top edge is not blurred out (if you squint you will notice!)
           <li
             key={time}
             className="rounded-lg bg-indigo-50 px-5 py-3 text-center font-semibold text-indigo-700 [@supports_not_(backdrop-filter:blur(0))]:line-through"

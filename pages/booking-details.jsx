@@ -32,6 +32,7 @@ export default function BookingDetailsPage() {
       </div>
 
       <div className="mt-20">
+        {/* TODO: Make better styles for form fields (focus state, invalid, etc) */}
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-6">
             <div>
@@ -63,6 +64,8 @@ export default function BookingDetailsPage() {
               id="name"
             />
           </div>
+          {/* TODO: Button with the caret icon */}
+          {/* TODO: Loading spinner emulating an API call */}
           <input
             className="mt-6 rounded-md bg-indigo-600 px-5 py-3 text-white"
             type="submit"
