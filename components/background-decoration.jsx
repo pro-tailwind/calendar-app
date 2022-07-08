@@ -22,6 +22,12 @@ export function BackgroundDecoration({ selectedDay }) {
         <div className="absolute -left-40 -bottom-40 hidden aspect-square w-[700px] rounded-full border-[80px] border-indigo-400 xl:block"></div>
         <div className="absolute left-1/4 -top-32 hidden aspect-square w-[700px] rounded-full border-[80px] border-indigo-500 xl:block"></div>
         {/* Selected day */}
+
+        {/* TODO: 
+          Find out the cleanest way to align the digits to the bottom right edges.
+          Do a calculation like what CapSize does? What about norizontal space.
+          Is it even possible?
+        */}
         <div className="absolute -bottom-20 -right-20 hidden text-[500px] font-extrabold tabular-nums leading-none text-indigo-500/50 lg:block xl:text-indigo-500/50">
           {selectedDay ? format(selectedDay, 'd') : '01'}
         </div>

@@ -208,6 +208,8 @@ function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingA
             ? styles.selected
             : hasAvailability
             ? styles.hasAvailability
+            : isToday(day)
+            ? styles.today
             : styles.candidate),
         isToday(day) && !isSelected && styles.today,
         isSelected && styles.selected

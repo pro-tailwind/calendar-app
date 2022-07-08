@@ -5,7 +5,7 @@ export function MainPanel({ children }) {
         <mask id="cutoff">
           <rect className="h-full w-full fill-white"></rect>
           <path
-            className="translate-y-9 fill-black"
+            className="translate-y-10 fill-black"
             d="M0 1.7C0 3 .5 4.2 1.4 5.1L12 15.7c.8.7.8 2 0 2.7L1.4 29C.5 30 0 31.1 0 32.4v.6V.9v.8Z"
           />
         </mask>

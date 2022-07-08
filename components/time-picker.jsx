@@ -11,7 +11,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
   return (
     <div className="relative grid h-full grid-rows-[auto,1fr] overflow-hidden px-4 sm:px-8 xl:px-10">
       {/* Scroll  mask */}
-      <div className="pointer-events-none absolute inset-x-8 bottom-0 z-10 hidden h-40 bg-gradient-to-t from-white md:block"></div>
+      <div className="pointer-events-none absolute inset-x-10 bottom-0 z-10 hidden h-40 bg-gradient-to-t from-white md:block"></div>
 
       <div className="flex h-12 items-center justify-center md:justify-start">
         <h2 className="text-lg font-semibold">{format(selectedDay, 'EEEE, do MMMM yyyy')}</h2>
@@ -33,8 +33,9 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
             <EmptyPlaceholder />
           )}
           <div
+            // TODO: Sort out why the top edge is not blurred out (if you squint you will notice!)
             className={cx(
-              'absolute -inset-x-2 -top-2 bottom-0 transition-all',
+              'absolute -inset-x-2 -top-2 -bottom-8 -translate-y-8 py-2 transition-all',
               availabilities.length > 0
                 ? 'bg-grayscale-0 pointer-events-none backdrop-blur-0'
                 : 'bg-white/80 backdrop-blur-sm backdrop-grayscale [@supports(backdrop-filter:blur(0px))]:bg-white/20'
@@ -54,7 +55,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
 function TimeSlot({ availability, selectedTime, setSelectedTime }) {
   const isSelected = selectedTime === availability.startTime
   return (
-    <li className="bg-stripes flex gap-1 overflow-hidden rounded-lg bg-indigo-600">
+    <li className="flex gap-1 overflow-hidden rounded-lg bg-indigo-600 bg-stripes">
       <button
         disabled={isSelected}
         onClick={() => setSelectedTime(availability.startTime)}
@@ -84,7 +85,6 @@ function EmptyPlaceholder() {
     <ul className="space-y-2 pb-4 sm:pb-8">
       {['8:00 AM', '9:00 AM', '2:00 PM', '4:00 PM'].map((time) => {
         return (
-          // TODO: Sort out why the top edge is not blurred out (if you squint you will notice!)
           <li
             key={time}
             className="rounded-lg bg-indigo-50 px-5 py-3 text-center font-semibold text-indigo-700 [@supports_not_(backdrop-filter:blur(0))]:line-through"
