@@ -69,6 +69,10 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
   )
 }
 
+// ------------------------------
+//  Implememntation components
+// ------------------------------
+
 function TimeSlot({ availability, selectedTime, setSelectedTime }) {
   const isSelected = selectedTime === availability.startTime
   return (
@@ -79,7 +83,7 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
         className={cx(
           'shrink-0 transition-all',
           isSelected
-            ? 'basis-1/2 text-white'
+            ? 'basis-1/2 text-white ease-out'
             : 'basis-full rounded-lg bg-indigo-100 px-5 py-3 font-semibold text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring focus:ring-inset focus:ring-indigo-500'
         )}
       >

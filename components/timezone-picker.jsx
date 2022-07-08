@@ -53,7 +53,7 @@ export function TimezonePicker({ activeTheme }) {
         <Dialog
           data-theme={activeTheme}
           onClose={setIsOpen}
-          className="fixed inset-0 z-10 overflow-y-auto px-4 pt-[35vh]"
+          className="fixed inset-0 z-10 overflow-y-auto px-4 pt-[30vh]"
         >
           <Transition.Child
             enter="transition ease-out duration-300"
