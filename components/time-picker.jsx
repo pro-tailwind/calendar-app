@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, Fragment } from 'react'
 import Link from 'next/link'
 import cx from 'classnames'
 import { format, isSameDay, parseISO } from 'date-fns'
@@ -8,6 +8,9 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
   const availabilities = bookingAvailabilities.filter((availability) =>
     isSameDay(parseISO(availability.startTime), selectedDay)
   )
+  const hasAvailability = availabilities.length > 0
+
+  console.log({ availabilities, hasAvailability })
   return (
     <div className="relative grid h-full grid-rows-[auto,1fr] overflow-hidden px-4 sm:px-8 xl:px-10">
       {/* Scroll  mask */}
@@ -16,10 +19,20 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
       <div className="flex h-12 items-center justify-center md:justify-start">
         <h2 className="text-lg font-semibold">{format(selectedDay, 'EEEE, do MMMM yyyy')}</h2>
       </div>
-      <div className="-mx-4 mt-4 overflow-y-auto px-4">
+      <div className="-mx-4 overflow-y-auto p-4">
         <div className="relative">
-          {availabilities.length > 0 ? (
-            <ul className="space-y-2 pb-4 sm:pb-8 md:pb-40">
+          {/* Blur overlay to handle animation */}
+          <div
+            className={cx(
+              'absolute -inset-x-4 inset-y-0 backdrop-blur-sm backdrop-saturate-0 transition',
+              hasAvailability
+                ? 'pointer-events-none z-0 opacity-0 duration-300 ease-out'
+                : 'z-10 opacity-100 ease-in'
+            )}
+          ></div>
+
+          {hasAvailability ? (
+            <ul className="space-y-2 py-4 sm:pb-8 md:pb-40">
               {availabilities.map((availability) => (
                 <TimeSlot
                   key={availability.startTime}
@@ -30,20 +43,24 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
               ))}
             </ul>
           ) : (
-            <EmptyPlaceholder />
+            // Empty list placeholder (faks list)
+            <ul className="space-y-2 py-4" aria-hidden="true">
+              {['8:00 AM', '9:00 AM', '2:00 PM', '4:00 PM'].map((time) => {
+                return (
+                  <li
+                    key={time}
+                    className="rounded-lg bg-indigo-100 px-5 py-3 text-center font-semibold text-indigo-700 opacity-50
+                    [@supports_not_(backdrop-filter:blur(0))]:line-through [@supports_not_(backdrop-filter:blur(0))]:opacity-30"
+                  >
+                    {time}
+                  </li>
+                )
+              })}
+            </ul>
           )}
-          <div
-            // TODO: Sort out why the top edge is not blurred out (if you squint you will notice!)
-            className={cx(
-              'absolute -inset-x-2 -top-2 -bottom-8 -translate-y-8 py-2 transition-all',
-              availabilities.length > 0
-                ? 'bg-grayscale-0 pointer-events-none backdrop-blur-0'
-                : 'bg-white/80 backdrop-blur-sm backdrop-grayscale [@supports(backdrop-filter:blur(0px))]:bg-white/20'
-            )}
-          ></div>
         </div>
-        {availabilities.length === 0 && (
-          <p className="pb-4 text-center text-sm text-gray-600 sm:pb-8 md:text-left">
+        {!hasAvailability && (
+          <p className="pb-4 text-center text-sm text-gray-500 sm:pb-8">
             No booking availabilities on this day.
           </p>
         )}
@@ -63,7 +80,7 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
           'shrink-0 transition-all',
           isSelected
             ? 'basis-1/2 text-white'
-            : 'basis-full rounded-lg bg-indigo-200 px-5 py-3 font-semibold text-indigo-700 hover:bg-indigo-300 focus:outline-none focus:ring focus:ring-inset focus:ring-indigo-500'
+            : 'basis-full rounded-lg bg-indigo-100 px-5 py-3 font-semibold text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring focus:ring-inset focus:ring-indigo-500'
         )}
       >
         {format(parseISO(availability.startTime), 'h:mm a')}
@@ -77,22 +94,5 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
         </a>
       </Link>
     </li>
-  )
-}
-
-function EmptyPlaceholder() {
-  return (
-    <ul className="space-y-2 pb-4 sm:pb-8">
-      {['8:00 AM', '9:00 AM', '2:00 PM', '4:00 PM'].map((time) => {
-        return (
-          <li
-            key={time}
-            className="rounded-lg bg-indigo-50 px-5 py-3 text-center font-semibold text-indigo-700 [@supports_not_(backdrop-filter:blur(0))]:line-through"
-          >
-            {time}
-          </li>
-        )
-      })}
-    </ul>
   )
 }
