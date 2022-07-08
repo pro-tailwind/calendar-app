@@ -1,7 +1,9 @@
-import { useState, Fragment } from 'react'
-import Link from 'next/link'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 import cx from 'classnames'
 import { format, isSameDay, parseISO } from 'date-fns'
+
+import { Button } from '../components/button'
 
 export function TimePicker({ selectedDay, bookingAvailabilities }) {
   const [selectedTime, setSelectedTime] = useState(null)
@@ -14,7 +16,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
   return (
     <div className="relative grid h-full grid-rows-[auto,1fr] overflow-hidden px-4 sm:px-8 xl:px-10">
       {/* Scroll  mask */}
-      <div className="pointer-events-none absolute inset-x-10 bottom-0 z-10 hidden h-40 bg-gradient-to-t from-white md:block"></div>
+      <div className="pointer-events-none absolute inset-x-8 bottom-0 z-10 hidden h-40 bg-gradient-to-t from-white md:block xl:inset-x-10"></div>
 
       <div className="flex h-12 items-center justify-center md:justify-start">
         <h2 className="text-lg font-semibold">{format(selectedDay, 'EEEE, do MMMM yyyy')}</h2>
@@ -74,29 +76,37 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
 // ------------------------------
 
 function TimeSlot({ availability, selectedTime, setSelectedTime }) {
+  const router = useRouter()
   const isSelected = selectedTime === availability.startTime
   return (
-    <li className="flex gap-1 overflow-hidden rounded-lg bg-indigo-600 bg-stripes">
-      <button
-        disabled={isSelected}
-        onClick={() => setSelectedTime(availability.startTime)}
+    <li className=" flex gap-1 overflow-hidden rounded-lg bg-indigo-600 bg-stripes">
+      <div
         className={cx(
           'shrink-0 transition-all',
-          isSelected
-            ? 'basis-1/2 text-white ease-out'
-            : 'basis-full rounded-lg bg-indigo-100 px-5 py-3 font-semibold text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring focus:ring-inset focus:ring-indigo-500'
+          isSelected ? 'basis-1/2 text-white ease-out' : 'basis-full'
         )}
       >
-        {format(parseISO(availability.startTime), 'h:mm a')}
-      </button>
-      <Link href={`/booking-details?time=${availability.startTime}`}>
-        <a
+        <Button
+          block
+          noIcon
+          look={isSelected ? 'ghost' : 'secondary'}
+          disabled={isSelected}
+          onClick={() => setSelectedTime(availability.startTime)}
+        >
+          {format(parseISO(availability.startTime), 'h:mm a')}
+        </Button>
+      </div>
+      <div className="m-2 basis-1/2">
+        <Button
+          size="small"
+          look="secondary"
+          block
           tabIndex={isSelected ? 0 : -1}
-          className="m-2 basis-1/2 rounded-md bg-indigo-100 px-3 py-1 text-center font-medium text-indigo-800 hover:bg-white"
+          onClick={() => router.push(`/booking-details?time=${availability.startTime}`)}
         >
           Confirm
-        </a>
-      </Link>
+        </Button>
+      </div>
     </li>
   )
 }

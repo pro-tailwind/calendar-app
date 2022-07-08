@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router'
 
+import { Button } from '../components/button'
+
 import { parseISO, format } from 'date-fns'
 
 export default function BookingDetailsPage() {
@@ -66,11 +68,9 @@ export default function BookingDetailsPage() {
           </div>
           {/* TODO: Button with the caret icon */}
           {/* TODO: Loading spinner emulating an API call */}
-          <input
-            className="mt-6 rounded-md bg-indigo-600 px-5 py-3 text-white"
-            type="submit"
-            value="Confirm booking"
-          />
+          <div className="mt-8">
+            <Button type="input">Confirm booking</Button>
+          </div>
         </form>
       </div>
     </div>
