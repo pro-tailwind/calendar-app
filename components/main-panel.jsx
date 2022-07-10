@@ -11,7 +11,7 @@ export function MainPanel({ children }) {
         </mask>
         <rect className="h-full w-full fill-white" mask="url(#cutoff)"></rect>
       </svg>
-      <div className="relative h-full xl:-ml-4">{children}</div>
+      <div className="relative h-full overflow-y-auto xl:-ml-4">{children}</div>
     </main>
   )
 }

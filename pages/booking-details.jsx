@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { Button } from '../components/button'
+import { Input, Textarea } from '../components/input'
 
 import { parseISO, format } from 'date-fns'
 
 export default function BookingDetailsPage() {
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { time } = router.query
   console.log({ time })
@@ -14,10 +17,11 @@ export default function BookingDetailsPage() {
 
   function handleSubmit(event) {
     event.preventDefault()
-
-    // TODO: Do the form fields thing...
-    // Navigate to confirmation page
-    router.push(`/confirmation?time=${time}`)
+    setIsLoading(true)
+    setTimeout(() => {
+      router.push(`/confirmation?time=${time}`)
+      setIsLoading(false)
+    }, 2500)
   }
 
   return (
@@ -37,39 +41,29 @@ export default function BookingDetailsPage() {
         {/* TODO: Make better styles for form fields (focus state, invalid, etc) */}
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-6">
-            <div>
-              <label htmlFor="name">Name</label>
-              <input
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm"
-                type="text"
-                name="name"
-                id="name"
-              />
-            </div>
-            <div>
-              <label htmlFor="email">Email</label>
-              <input
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm"
-                type="email"
-                name="email"
-                id="email"
-              />
-            </div>
-          </div>
-          <div className="mt-8">
-            <label htmlFor="name">Notes & Questions</label>
-            <textarea
-              rows={6}
-              className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 shadow-sm"
-              type="text"
-              name="name"
-              id="name"
+            <Input name="name" id="name" label="Name" placeholder="Jina Dawkins" required />
+            <Input
+              name="email"
+              id="email"
+              label="Email"
+              type="email"
+              required
+              placeholder="jina@dakwins.com"
             />
           </div>
-          {/* TODO: Button with the caret icon */}
+          <div className="mt-8">
+            <Textarea
+              name="notes"
+              label="Notes & Questions"
+              id="notes"
+              placeholder="Any comments or suggestions to help prepare our discussion? Please share!"
+            />
+          </div>
           {/* TODO: Loading spinner emulating an API call */}
           <div className="mt-8">
-            <Button type="input">Confirm booking</Button>
+            <Button type="input" isLoading={isLoading}>
+              Confirm booking
+            </Button>
           </div>
         </form>
       </div>

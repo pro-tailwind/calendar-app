@@ -79,7 +79,7 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
   const router = useRouter()
   const isSelected = selectedTime === availability.startTime
   return (
-    <li className=" flex gap-1 overflow-hidden rounded-lg bg-indigo-600 bg-stripes">
+    <li className=" flex gap-1 overflow-hidden rounded-md bg-indigo-600 bg-stripes">
       <div
         className={cx(
           'shrink-0 transition-all',
@@ -89,6 +89,7 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
         <Button
           block
           noIcon
+          focusInset
           look={isSelected ? 'ghost' : 'secondary'}
           disabled={isSelected}
           onClick={() => setSelectedTime(availability.startTime)}
