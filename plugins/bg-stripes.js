@@ -3,19 +3,19 @@ const plugin = require('tailwindcss/plugin')
 module.exports = plugin.withOptions(function (options) {
   return function ({ addUtilities }) {
     // TODO: Check why I can't use the nullish-coalescing operator here
-    // TODO: Actually review the whole CSS approach with the absolutely positioned pseudo element and z-indexing the children
+    // TODO: The main issue with this current implementation is the "content" of the element with a class
     const name = options?.name || 'bg-stripes'
     return addUtilities({
       [`.${name}`]: {
-        '--stripes-color': options?.color || '255 255 255',
+        '--stripes-color': options?.color || '0 0 0',
         '--stripes-opacity': options?.opacity || '0.2',
         '--stripes-size': options?.size || 12,
         '--stripes-angle': options?.angle || '-45deg',
         '--stripes-speed': options?.speed || '0.7s',
         position: 'relative',
         overflow: 'hidden',
-        '&>*': { 'z-index': 1, position: 'relative' },
-        '&:after': {
+        '&>*': { isolation: 'isolate' },
+        '&:before': {
           content: '""',
           position: 'absolute',
           top: 0,

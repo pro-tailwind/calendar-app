@@ -205,7 +205,7 @@ function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingA
     return 'VACANCY'
   }
 
-  const baseClasses = 'aspect-square w-12 max-w-full rounded-full relative'
+  const baseClasses = 'relative w-12 max-w-full aspect-square rounded-full'
   const selectedClasses = 'text-white bg-indigo-600 font-bold bg-stripes'
 
   const statusClasses = {
@@ -222,7 +222,7 @@ function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingA
       className={cx(baseClasses, isSelected ? selectedClasses : statusClasses[eligibilityStatus])}
       onClick={() => setSelectedDay(day)}
     >
-      {format(day, 'd')}
+      <span>{format(day, 'd')}</span>
       {isToday(day) && (
         <span
           className={cx(

@@ -34,7 +34,7 @@ export function Button({
 
   const iconContainerClasses = {
     base: cx(
-      'grid aspect-square place-items-center rounded-r group-disabled:bg-transparent overflow-hidden',
+      'grid aspect-square place-items-center rounded-r-lg group-disabled:bg-transparent overflow-hidden',
       size === 'small' ? 'px-1' : 'px-3'
     ),
     primary: cx(
