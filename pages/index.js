@@ -8,7 +8,7 @@ export default function Homepage({ selectedDay, setSelectedDay }) {
   return (
     <div className="mx-auto grid h-full max-w-lg grid-rows-[auto,1fr] gap-8 md:max-w-none">
       <div className="mt-10 px-4 sm:px-8 xl:px-10">
-        <h1 className="text-center text-2xl font-semibold md:text-left">Select a date and time</h1>
+        <h1 className="text-center text-2xl font-bold md:text-left">Select a Date & Time</h1>
       </div>
       <div className="grid min-h-0 md:grid-cols-[1fr,360px] md:divide-x xl:grid-cols-[1fr,360px]">
         <div>

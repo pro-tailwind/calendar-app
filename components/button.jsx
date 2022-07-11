@@ -31,7 +31,7 @@ export function Button({
   }
   const radiusStyles = {
     small: 'rounded',
-    large: 'rounded-md',
+    large: 'rounded-lg',
   }
 
   const iconStyles = {

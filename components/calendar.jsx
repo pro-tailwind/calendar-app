@@ -65,6 +65,7 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
   //   }
   // }, [selectedDay, selectedMonth])
 
+  // TODO: Review this - it works but there may be more elegant ways to do that
   const array_chunks = (array, chunk_size) =>
     Array(Math.ceil(array.length / chunk_size))
       .fill()
@@ -205,9 +206,9 @@ function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingA
 
   const statusClasses = {
     NOT_ELIGIBLE: 'text-slate-300',
-    NO_VACANCY: 'text-slate-900 hover:bg-slate-100',
-    TODAY_NO_VACANCY: 'text-indigo-700 font-semibold hover:bg-slate-100 hover:text-slate-900',
-    VACANCY: 'text-indigo-700 bg-indigo-100 font-semibold hover:bg-indigo-200',
+    NO_VACANCY: 'text-slate-800 hover:bg-slate-100',
+    TODAY_NO_VACANCY: 'text-indigo-700 font-bold hover:bg-slate-100 hover:text-slate-800',
+    VACANCY: 'text-indigo-700 bg-indigo-100 font-bold hover:bg-indigo-200',
   }
 
   const eligibilityStatus = getEligibilityStatus()

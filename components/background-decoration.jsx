@@ -19,8 +19,8 @@ export function BackgroundDecoration({ selectedDay }) {
         </div>
 
         {/* Decorative background circles */}
-        <div className="absolute -left-40 -bottom-40 hidden aspect-square w-[700px] rounded-full border-[80px] border-indigo-400 xl:block"></div>
-        <div className="absolute left-1/4 -top-32 hidden aspect-square w-[700px] rounded-full border-[80px] border-indigo-500 xl:block"></div>
+        <div className="absolute -left-40 -bottom-40 hidden aspect-square w-[700px] rounded-full border-[110px] border-indigo-400 xl:block"></div>
+        <div className="absolute left-1/4 -top-32 hidden aspect-square w-[700px] rounded-full border-[110px] border-indigo-500 xl:block"></div>
         {/* Selected day */}
 
         {/* TODO: 

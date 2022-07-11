@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -7,7 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // TODO: Set custom font (and also choose it first heh)
+      fontFamily: {
+        sans: ['Open Sans', 'sans-serif', ...defaultTheme.fontFamily.sans],
+      },
     },
   },
   plugins: [require('./plugins/bg-stripes')],

@@ -60,7 +60,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
           )}
         </div>
         {!hasAvailability && (
-          <p className="pb-4 text-center text-sm text-gray-500 sm:pb-8">
+          <p className="pb-4 text-center text-sm text-slate-500 sm:pb-8">
             No booking availabilities on this day.
           </p>
         )}
@@ -77,7 +77,7 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
   const router = useRouter()
   const isSelected = selectedTime === availability.startTime
   return (
-    <li className=" flex gap-1 overflow-hidden rounded-md bg-indigo-600 bg-stripes">
+    <li className=" flex gap-1 overflow-hidden rounded-lg bg-indigo-600 bg-stripes">
       <div
         className={cx(
           'shrink-0 transition-all',

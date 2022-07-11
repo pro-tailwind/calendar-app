@@ -10,7 +10,7 @@ export default function BookingDetailsPage() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { time } = router.query
-  console.log({ time })
+
   const formattedTime = time
     ? `${format(parseISO(time), 'eeee, do MMMM yyyy')} at ${format(parseISO(time), 'h:mm a')}`
     : ''
@@ -26,9 +26,7 @@ export default function BookingDetailsPage() {
 
   return (
     <div className="p-10">
-      <h1 className="text-center text-2xl font-semibold md:text-left">
-        Let's confirm your booking!
-      </h1>
+      <h1 className="text-center text-2xl font-bold md:text-left">Let's confirm your booking!</h1>
       <div className="mt-8 space-y-2">
         <p>
           You're about to book a one-hour meeting on{' '}
