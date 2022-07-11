@@ -77,7 +77,12 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
   const router = useRouter()
   const isSelected = selectedTime === availability.startTime
   return (
-    <li className=" flex gap-1 overflow-hidden rounded-lg bg-indigo-600 bg-stripes">
+    <li
+      className={cx(
+        'flex gap-1 overflow-hidden rounded-lg',
+        isSelected && 'bg-indigo-600 bg-stripes'
+      )}
+    >
       <div
         className={cx(
           'shrink-0 transition-all',

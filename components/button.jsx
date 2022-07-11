@@ -12,17 +12,16 @@ export function Button({
   ...props
 }) {
   const baseClasses = cx(
-    'group font-semibold flex items-stretch focus:outline-none focus:ring-2 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none',
+    'group font-semibold flex items-stretch focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none',
     block ? 'w-full' : 'w-auto',
     noIcon ? 'justify-center' : 'justify-between',
     focusInset ? 'focus:ring-inset' : 'focus:ring-offset-2'
   )
 
   const colorClasses = {
-    primary:
-      'bg-indigo-500 hover:bg-indigo-600 text-white shadow-md disabled:shadow-none focus:ring-indigo-500',
+    primary: 'bg-indigo-500 hover:bg-indigo-600 text-white shadow-md disabled:shadow-none',
     secondary: 'bg-indigo-100 hover:bg-indigo-200 text-indigo-700',
-    ghost: 'bg-transparent text-white',
+    ghost: 'bg-transparent text-white disabled:opacity-100',
   }
   const spacingClasses = {
     small: 'px-3 py-1',
