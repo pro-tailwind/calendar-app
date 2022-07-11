@@ -32,7 +32,7 @@ export function Button({
     large: 'rounded-lg',
   }
 
-  const iconClasses = {
+  const iconContainerClasses = {
     base: cx(
       'grid aspect-square place-items-center rounded-r group-disabled:bg-transparent overflow-hidden',
       size === 'small' ? 'px-1' : 'px-3'
@@ -59,7 +59,7 @@ export function Button({
   return (
     <button className={cx(baseClasses, colorClasses[look], radiusClasses[size])} {...props}>
       <span className={cx(spacingClasses[size])}>{children}</span>
-      <span className={cx(iconClasses.base, iconClasses[look])}>
+      <span className={cx(iconContainerClasses.base, iconContainerClasses[look])}>
         {isLoading ? <LoadingSpinner /> : <ChevronRightIcon className="h-5 w-5 text-inherit" />}
       </span>
     </button>
