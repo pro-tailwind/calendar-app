@@ -41,14 +41,14 @@ export default function BookingDetailsPage() {
         {/* TODO: Make better styles for form fields (focus state, invalid, etc) */}
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-6">
-            <Input name="name" id="name" label="Name" placeholder="Jina Dawkins" required />
+            <Input name="name" id="name" label="Name" required />
             <Input
               name="email"
               id="email"
               label="Email"
               type="email"
               required
-              placeholder="jina@dakwins.com"
+              errorText="Invalid email address"
             />
           </div>
           <div className="mt-8">
@@ -56,7 +56,7 @@ export default function BookingDetailsPage() {
               name="notes"
               label="Notes & Questions"
               id="notes"
-              placeholder="Any comments or suggestions to help prepare our discussion? Please share!"
+              // placeholder="Any comments or suggestions to help prepare our discussion? Please share!"
             />
           </div>
           {/* TODO: Loading spinner emulating an API call */}

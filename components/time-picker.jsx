@@ -11,8 +11,6 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
     isSameDay(parseISO(availability.startTime), selectedDay)
   )
   const hasAvailability = availabilities.length > 0
-
-  console.log({ availabilities, hasAvailability })
   return (
     <div className="relative grid h-full grid-rows-[auto,1fr] overflow-hidden px-4 sm:px-8 xl:px-10">
       {/* Scroll  mask */}

@@ -1,5 +1,6 @@
 import cx from 'classnames'
 
+// TODO: Work something out for validation/state of inputs
 export function Input({ name, id, label, type, required = false, ...props }) {
   return (
     <div>
@@ -15,7 +16,7 @@ export function Input({ name, id, label, type, required = false, ...props }) {
       </label>
       <input
         className={cx(
-          'mt-1 block w-full rounded-lg px-4 py-2 text-slate-800 shadow-sm ring-1 ring-inset ring-slate-300 invalid:ring-red-600 placeholder-shown:invalid:ring-slate-300 focus:ring-2 focus:ring-indigo-500'
+          'mt-1 block w-full rounded-lg px-4 py-2 text-slate-800 shadow-sm ring-1 ring-inset ring-slate-300 focus:ring-2 focus:ring-indigo-500'
         )}
         type={type}
         name={name}
