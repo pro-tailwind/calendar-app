@@ -27,6 +27,10 @@ export default function BookingDetailsPage() {
   )
 }
 
+// ------------------------------
+// Implementation components
+// ------------------------------
+
 function Signature() {
   return (
     <svg

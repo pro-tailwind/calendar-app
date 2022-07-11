@@ -70,7 +70,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
 }
 
 // ------------------------------
-//  Implememntation components
+// Implementation components
 // ------------------------------
 
 function TimeSlot({ availability, selectedTime, setSelectedTime }) {

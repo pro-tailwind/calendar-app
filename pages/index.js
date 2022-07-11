@@ -1,8 +1,8 @@
+import { bookingAvailabilities } from '../data'
+
 import { Calendar } from '../components/calendar'
 import { TimePicker } from '../components/time-picker'
 import { TimezonePicker } from '../components/timezone-picker'
-
-import { bookingAvailabilities } from '../data'
 
 export default function Homepage({ selectedDay, setSelectedDay }) {
   return (

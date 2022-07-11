@@ -66,6 +66,10 @@ export function Button({
   )
 }
 
+// ------------------------------
+// Implementation components
+// ------------------------------
+
 function LoadingSpinner() {
   return (
     <svg

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import cx from 'classnames'
 import {
   eachDayOfInterval,
@@ -178,6 +178,10 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
     </div>
   )
 }
+
+// ------------------------------
+// Implementation components
+// ------------------------------
 
 function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingAvailabilities }) {
   const today = startOfToday()

@@ -2,7 +2,9 @@ import { format } from 'date-fns'
 
 export function BackgroundDecoration({ selectedDay }) {
   return (
-    <div className="fixed inset-0 bg-indigo-500">
+    // TODO:
+    // All of this is decorative, good to put aria-hidden on the parentmost element?
+    <div aria-hidden="true" className="fixed inset-0 bg-indigo-500">
       <div className="relative h-full">
         {/* Split background */}
         <div className="absolute inset-0 hidden xl:flex">
