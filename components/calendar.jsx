@@ -79,13 +79,13 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
         <h2 className="text-lg font-semibold">{format(selectedMonth, 'MMMM yyyy')}</h2>
         <div className="flex gap-2">
           <button
-            className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-gray-300 text-gray-400 hover:text-indigo-600"
+            className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-slate-300 text-slate-400 hover:text-indigo-600"
             onClick={decrementMonth}
           >
             <ChevronLeftIcon className="-ml-0.5 h-6 w-6" />
           </button>
           <button
-            className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-gray-300 text-gray-400 hover:text-indigo-600"
+            className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-slate-300 text-slate-400 hover:text-indigo-600"
             onClick={incrementMonth}
           >
             <ChevronRightIcon className="ml-0.5 h-6 w-6" />
@@ -99,7 +99,7 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
             <tr>
               <th className="pb-4">
                 <abbr
-                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-gray-700 no-underline"
+                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-slate-700 no-underline"
                   title="Monday"
                 >
                   Mon
@@ -107,7 +107,7 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
               </th>
               <th className="pb-4">
                 <abbr
-                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-gray-700 no-underline"
+                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-slate-700 no-underline"
                   title="Tuesday"
                 >
                   Tue
@@ -115,7 +115,7 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
               </th>
               <th className="pb-4">
                 <abbr
-                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-gray-700 no-underline"
+                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-slate-700 no-underline"
                   title="Wednesday"
                 >
                   Wed
@@ -123,7 +123,7 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
               </th>
               <th className="pb-4">
                 <abbr
-                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-gray-700 no-underline"
+                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-slate-700 no-underline"
                   title="Thursday"
                 >
                   Thu
@@ -131,7 +131,7 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
               </th>
               <th className="pb-4">
                 <abbr
-                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-gray-700 no-underline"
+                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-slate-700 no-underline"
                   title="Friday"
                 >
                   Fri
@@ -139,7 +139,7 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
               </th>
               <th className="pb-4">
                 <abbr
-                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-gray-700 no-underline"
+                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-slate-700 no-underline"
                   title="Saturday"
                 >
                   Sat
@@ -147,7 +147,7 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
               </th>
               <th className="pb-4">
                 <abbr
-                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-gray-700 no-underline"
+                  className="cursor-help text-sm font-semibold uppercase tracking-wider text-slate-700 no-underline"
                   title="Sunday"
                 >
                   Sun
@@ -182,38 +182,39 @@ function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingA
   const today = startOfToday()
   const isPast = isBefore(day, today)
   const isCurrentMonth = isSameMonth(day, selectedMonth)
-  const isSelected = isSameDay(selectedDay, day)
   const hasAvailability = bookingAvailabilities.some((availability) =>
     isSameDay(parseISO(availability.startTime), day)
   )
+  const isSelected = isSameDay(selectedDay, day)
+  const isCurrentDay = isToday(day)
 
-  const styles = {
-    base: 'aspect-square w-12 max-w-full rounded-full relative',
-    disabled: 'text-gray-300 pointer-events-none',
-    today: 'text-indigo-600 font-bold',
-    selected: 'bg-indigo-600 text-white font-bold bg-stripes',
-    candidate: 'hover:bg-gray-100 text-gray-900',
-    hasAvailability: 'bg-indigo-100 text-indigo-700 font-semibold hover:bg-indigo-200',
+  /* 
+    Possible UI "states" of a calendar day: 
+    NOT_ELIGIBLE | NO_VACANCY | VACANCY | TODAY_NO_VACANCY
+  */
+  function getEligibilityStatus() {
+    if (isPast || !isCurrentMonth) return 'NOT_ELIGIBLE'
+    if (!hasAvailability) {
+      return isCurrentDay ? 'TODAY_NO_VACANCY' : 'NO_VACANCY'
+    }
+    return 'VACANCY'
   }
+
+  const baseClasses = 'aspect-square w-12 max-w-full rounded-full relative'
+  const selectedClasses = 'text-white bg-indigo-600 font-bold bg-stripes'
+
+  const statusClasses = {
+    NOT_ELIGIBLE: 'text-slate-300',
+    NO_VACANCY: 'text-slate-900 hover:bg-slate-100',
+    TODAY_NO_VACANCY: 'text-indigo-700 font-semibold hover:bg-slate-100 hover:text-slate-900',
+    VACANCY: 'text-indigo-700 bg-indigo-100 font-semibold hover:bg-indigo-200',
+  }
+
+  const eligibilityStatus = getEligibilityStatus()
 
   return (
     <button
-      className={cx(
-        // I probably need a state machine at this point :D
-        styles.base,
-        (isPast || !isCurrentMonth) && styles.disabled,
-        isCurrentMonth &&
-          !isPast &&
-          (isSelected
-            ? styles.selected
-            : hasAvailability
-            ? styles.hasAvailability
-            : isToday(day)
-            ? styles.today
-            : styles.candidate),
-        isToday(day) && !isSelected && styles.today,
-        isSelected && styles.selected
-      )}
+      className={cx(baseClasses, isSelected ? selectedClasses : statusClasses[eligibilityStatus])}
       onClick={() => setSelectedDay(day)}
     >
       {format(day, 'd')}
