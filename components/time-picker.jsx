@@ -22,7 +22,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
       <div className="-mx-4 overflow-y-auto p-4">
         <div className="relative">
           {/* 
-            TODO:
+            REVIEW:
             Review blur/desaturate transition overlay below.
             This works quite well, but I'm worried it's a bit hacky.
             The part I'm worried about is the "pointer-events: none" going wrong, 
@@ -82,7 +82,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
 // ------------------------------
 
 /*
-  TODO:
+  REVIEW:
   Review the below implementation.
   The `Button` component is not really complete yet, 
   but what you should focus on here is the transition from

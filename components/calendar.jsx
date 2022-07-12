@@ -34,45 +34,50 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
     setSelectedMonth(addMonths(selectedMonth, -1))
   }
 
-  // TODO: handle focus rather than changing selected day
-  // TODO: Scope keyboad navigation to when the calendar is in focus only
+  /* 
+    TODO: 
+    Look into adding keyboard navigation
+    The code below (commented out) changes the state, but instead arrow keys
+    should set focus to the element (and only change selectedDay state on enter/space).
+    Also, need to scope keyboad navigation to when the calendar is in focus only.
 
-  // Keyboard navigation
-  // useEffect(() => {
-  //   function keyboardNavigation(event) {
-  //     switch (event.key) {
-  //       case 'ArrowRight':
-  //         setSelectedDay(addDays(selectedDay, 1))
-  //         break
-  //       case 'ArrowLeft':
-  //         setSelectedDay(addDays(selectedDay, -1))
-  //         break
-  //       case 'ArrowDown':
-  //         setSelectedDay(addDays(selectedDay, 7))
-  //         break
-  //       case 'ArrowUp':
-  //         setSelectedDay(addDays(selectedDay, -7))
-  //         break
-  //     }
-  //   }
-  //   addEventListener('keydown', keyboardNavigation)
-  //   return () => removeEventListener('keydown', keyboardNavigation)
-  // }, [selectedDay, setSelectedDay])
+    useEffect(() => {
+      function keyboardNavigation(event) {
+        switch (event.key) {
+          case 'ArrowRight':
+            setSelectedDay(addDays(selectedDay, 1))
+            break
+          case 'ArrowLeft':
+            setSelectedDay(addDays(selectedDay, -1))
+            break
+          case 'ArrowDown':
+            setSelectedDay(addDays(selectedDay, 7))
+            break
+          case 'ArrowUp':
+            setSelectedDay(addDays(selectedDay, -7))
+            break
+        }
+      }
+      addEventListener('keydown', keyboardNavigation)
+      return () => removeEventListener('keydown', keyboardNavigation)
+    }, [selectedDay, setSelectedDay])
 
-  // useEffect(() => {
-  //   if (!isSameMonth(selectedMonth, startOfMonth(selectedDay))) {
-  //     setSelectedMonth(startOfMonth(selectedDay))
-  //   }
-  // }, [selectedDay, selectedMonth])
+    useEffect(() => {
+      if (!isSameMonth(selectedMonth, startOfMonth(selectedDay))) {
+        setSelectedMonth(startOfMonth(selectedDay))
+      }
+    }, [selectedDay, selectedMonth])
 
-  // TODO: Review this - it works but there may be more elegant ways to do that
-  const array_chunks = (array, chunk_size) =>
-    Array(Math.ceil(array.length / chunk_size))
+  */
+
+  // We need to split the month into weeks to display the days in a table.
+  const getWeekSplit = (array) =>
+    Array(Math.ceil(array.length / 7))
       .fill()
-      .map((_, index) => index * chunk_size)
-      .map((begin) => array.slice(begin, begin + chunk_size))
+      .map((_, index) => index * 7)
+      .map((start) => array.slice(start, start + 7))
 
-  const weekSplit = array_chunks(daysOfTheMonth, 7)
+  const weekSplit = getWeekSplit(daysOfTheMonth)
 
   return (
     <div className="px-6 sm:px-8 xl:px-10">
@@ -184,6 +189,14 @@ export function Calendar({ selectedDay, setSelectedDay, bookingAvailabilities })
 // ------------------------------
 
 function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingAvailabilities }) {
+  /*
+  REVIEW:
+  A general review of this component would be appreciated.
+  It needs better accessibility, but from a styling perspective,
+  I'd like your take on the approach of using `statusClasses` to handle the 
+  various possible "states".
+*/
+
   const today = startOfToday()
   const isPast = isBefore(day, today)
   const isCurrentMonth = isSameMonth(day, selectedMonth)
@@ -194,9 +207,10 @@ function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingA
   const isCurrentDay = isToday(day)
 
   /* 
-    Possible UI "states" of a calendar day: 
-    NOT_ELIGIBLE | NO_VACANCY | VACANCY | TODAY_NO_VACANCY
-  */
+  Possible UI "states" of a calendar day: 
+  NOT_ELIGIBLE | NO_VACANCY | VACANCY | TODAY_NO_VACANCY
+*/
+
   function getEligibilityStatus() {
     if (isPast || !isCurrentMonth) return 'NOT_ELIGIBLE'
     if (!hasAvailability) {

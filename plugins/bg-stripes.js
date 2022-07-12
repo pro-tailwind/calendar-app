@@ -3,7 +3,7 @@ const plugin = require('tailwindcss/plugin')
 module.exports = plugin.withOptions(function (options) {
   return function ({ addUtilities }) {
     /*
-      TODO: 
+      REVIEW: 
       Review general implementation of animated background stripes (in pseudo element).
       The main "nuisance" with the current implementation is that 
       a wrapper (span?) is needed for the child element to sit on top of the 

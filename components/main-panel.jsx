@@ -1,5 +1,5 @@
 /*
-  TODO:
+  REVIEW:
   This is pretty wild, but I think it works pretty well.
   It's using a <mask> in SVG to effectively "cut off" a portion of a white rectangle.
   Works similarly to how the "union" / "exclusion" tools work in Figma!

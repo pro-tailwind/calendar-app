@@ -1,5 +1,5 @@
 /* 
-  TODO:
+  REVIEW:
   I think this ribbon implementation is pretty cool. 
   Would love a review though.
   You could easily add props for the position ('top-left', 'bottom-right', ...), size, etc.

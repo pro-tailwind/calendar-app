@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 export function BackgroundDecoration({ selectedDay }) {
   return (
     /* 
-      TODO:
+      REVIEW:
       All elements in this component are decorative. 
       Is it therefore okay to put `aria-hidden` on the parentmost element?
     */
@@ -28,7 +28,7 @@ export function BackgroundDecoration({ selectedDay }) {
         <div className="absolute left-1/4 -top-32 hidden aspect-square w-[700px] rounded-full border-[110px] border-indigo-500 xl:block"></div>
         {/* Selected day */}
 
-        {/* TODO: 
+        {/* REVIEW: 
           Find out the cleanest way to align the digits to the bottom right edges.
           Do a calculation like what CapSize does? What about norizontal space.
           Is it even possible?
