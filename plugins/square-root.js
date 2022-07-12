@@ -1,6 +1,6 @@
 const plugin = require('tailwindcss/plugin')
 
-const diagonalPlugin = plugin(function () {}, {
+const squareRootPlugin = plugin(function () {}, {
   theme: {
     extend: {
       width: {
@@ -10,4 +10,4 @@ const diagonalPlugin = plugin(function () {}, {
   },
 })
 
-module.exports = diagonalPlugin
+module.exports = squareRootPlugin
