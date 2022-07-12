@@ -10,5 +10,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('./plugins/bg-stripes')],
+  plugins: [require('./plugins/bg-stripes'), require('./plugins/square-root')],
 }
