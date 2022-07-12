@@ -12,14 +12,14 @@ module.exports = plugin.withOptions(function (options) {
       will appear behind the stripes, since the stripes are 
       absolutely positioned.
     */
-    const name = options?.name || 'bg-stripes'
+    const name = options?.name ?? 'bg-stripes'
     return addUtilities({
       [`.${name}`]: {
-        '--stripes-color': options?.color || '0 0 0',
-        '--stripes-opacity': options?.opacity || '0.2',
-        '--stripes-size': options?.size || 12,
-        '--stripes-angle': options?.angle || '-45deg',
-        '--stripes-speed': options?.speed || '0.7s',
+        '--stripes-color': options?.color ?? '255 255 255',
+        '--stripes-opacity': options?.opacity ?? '0.2',
+        '--stripes-size': options?.size ?? 12,
+        '--stripes-angle': options?.angle ?? '-45deg',
+        '--stripes-speed': options?.speed ?? '0.7s',
         position: 'relative',
         overflow: 'hidden',
         '&>*': { isolation: 'isolate' },
