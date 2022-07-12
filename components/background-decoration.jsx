@@ -28,7 +28,8 @@ export function BackgroundDecoration({ selectedDay }) {
         <div className="absolute left-1/4 -top-32 hidden aspect-square w-[700px] rounded-full border-[110px] border-indigo-500 xl:block"></div>
         {/* Selected day */}
 
-        {/* REVIEW: 
+        {/* 
+          REVIEW: 
           Find out the cleanest way to align the digits to the bottom right edges.
           Do a calculation like what CapSize does? What about norizontal space.
           Is it even possible?
