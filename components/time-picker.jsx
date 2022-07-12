@@ -21,7 +21,15 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
       </div>
       <div className="-mx-4 overflow-y-auto p-4">
         <div className="relative">
-          {/* Blur overlay to handle animation */}
+          {/* 
+            TODO:
+            Review blur/desaturate transition overlay below.
+            This works quite well, but I'm worried it's a bit hacky.
+            The part I'm worried about is the "pointer-events: none" going wrong, 
+            since it would prevent users from booking a time!
+            It should be ok though, since the z-index should prevent it from being an issue.
+            Could transform scale to 0% instead, I guess.
+          */}
           <div
             className={cx(
               'absolute -inset-x-4 inset-y-0 backdrop-blur-sm backdrop-saturate-0 transition',
@@ -73,6 +81,15 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
 // Implementation components
 // ------------------------------
 
+/*
+  TODO:
+  Review the below implementation.
+  The `Button` component is not really complete yet, 
+  but what you should focus on here is the transition from
+  showing 1 to showing 2 buttons,
+  Specifically, how I handle the `tabIndex`,
+  and the `overflow-hidden` parent container to hide the confirm button.
+*/
 function TimeSlot({ availability, selectedTime, setSelectedTime }) {
   const router = useRouter()
   const isSelected = selectedTime === availability.startTime

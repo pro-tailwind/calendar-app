@@ -21,7 +21,7 @@ export function SidePanel() {
             <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-indigo-600">
               with Simon Vrachliotis
             </p>
-            <p className="mt-8">Tailwind CSS for production-grade web applications.</p>
+            <p className="mt-4 xl:mt-8">Tailwind CSS for production-grade web applications.</p>
           </div>
         </div>
         <dl className="mt-12 flex flex-col gap-y-2 gap-x-12 rounded-lg border border-slate-300 p-4 md:flex-row xl:flex-col">
