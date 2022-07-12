@@ -1,3 +1,15 @@
+/*
+  NOTE:
+  The starter-app may not include these components,
+  since one of the workshops is about extracting re-usable components
+  and create such input fields.
+  This was me experimenting with some styling approaches, but my guess is
+  the actual starter app will not use this, and rather have hardcoded form fields
+  throughout the app.
+  This will come critical though in the "Extracting Reusable UI Components" workshop,
+  which I'll focus on at a later stage (and for which I'll need plenty of Thinkmill insights!)
+*/
+
 import cx from 'classnames'
 
 // TODO: Work something out for validation/state of inputs
