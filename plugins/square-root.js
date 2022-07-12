@@ -1,13 +1,13 @@
 const plugin = require('tailwindcss/plugin')
 
-const squareRootPlugin = plugin(function () {}, {
+const squareDiagonalWidthPlugin = plugin(function () {}, {
   theme: {
     extend: {
       width: {
-        'sqrt-2': Math.sqrt(2) * 100 + '%',
+        'square-diagonal': Math.sqrt(2) * 100 + '%',
       },
     },
   },
 })
 
-module.exports = squareRootPlugin
+module.exports = squareDiagonalWidthPlugin
