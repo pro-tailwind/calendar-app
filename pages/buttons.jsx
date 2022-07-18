@@ -13,41 +13,51 @@ export default function ButtonsPage() {
           Only for primary variant:
             - with icon (default) | without icon
         */}
-        <Button>Primary button</Button>
-        <Button look="secondary">Edit</Button>
-        <Button noIcon>Without icon</Button>
-        <Button noIcon look="secondary">
-          Without icon
-        </Button>
-        <Button size="small">Primary small</Button>
+        <Button>Primary</Button>
+        <Button look="secondary">Secondary</Button>
+        <Button noIcon>without icon</Button>
+
+        <Button size="small">Small</Button>
         <Button size="small" look="secondary">
           Edit
         </Button>
         <Button size="small" noIcon>
-          Small without icon
-        </Button>
-        <Button size="small" noIcon look="secondary">
-          Small without icon
+          Small no icon
         </Button>
         <Button isLoading>Loading state</Button>
-        <Button isLoading look="secondary">
-          Loading state
-        </Button>
-        <Button disabled>Primary disabled</Button>
+        <Button disabled>Disabled</Button>
         <Button look="secondary" disabled>
-          Secondary disabled
+          Disabled
         </Button>
         <Button disabled noIcon>
           No icon disabled
         </Button>
-        <Button look="secondary" disabled noIcon>
-          No icon disabled
-        </Button>
+
         <Button disabled noIcon size="small">
           Small, no icon disabled
         </Button>
-        <Button look="secondary" disabled noIcon size="small">
-          Small, no icon disabled
+        <Button look="secondary" disabled size="small">
+          Small disabled
+        </Button>
+
+        <Button block>Block with icon</Button>
+        <Button look="secondary" block>
+          Block
+        </Button>
+        <Button block noIcon>
+          Block with no icon
+        </Button>
+        <Button block disabled>
+          Block disabled
+        </Button>
+        <Button look="secondary" block disabled>
+          Block disabled
+        </Button>
+        <Button isLoading block>
+          Block and loading
+        </Button>
+        <Button size="small" isLoading block>
+          Block and loading
         </Button>
       </div>
     </div>

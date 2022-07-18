@@ -8,6 +8,8 @@
   throughout the app.
   This will come critical though in the "Extracting Reusable UI Components" workshop,
   which I'll focus on at a later stage (and for which I'll need plenty of Thinkmill insights!)
+
+  There is a sneaky `/buttons` demo route in this app for these buttons!
 */
 
 import propTypes from 'prop-types'
@@ -22,31 +24,33 @@ Button.propTypes = {
   look: propTypes.oneOf(['primary', 'secondary', 'ghost']),
   size: propTypes.oneOf(['large', 'small']),
   noIcon: propTypes.bool /* only has effect for primary look */,
+  isLoading: propTypes.bool /* only has effect for primary look */,
   block: propTypes.bool,
   focusInset: propTypes.bool,
-  isLoading: propTypes.bool,
 }
 
 Button.defaultProps = {
   look: 'primary',
   size: 'large',
   noIcon: false,
+  isLoading: false,
   block: false,
   focusInset: false,
-  isLoading: false,
 }
 
 // ------------------------------
 // Component definition
 // ------------------------------
 
-export function Button({ size, look, noIcon, block, focusInset, isLoading, children, ...props }) {
+export function Button({ size, look, noIcon, isLoading, block, focusInset, children, ...props }) {
   const baseClasses = cx(
     'group font-semibold flex items-stretch focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none',
     block ? 'w-full' : 'w-auto',
-    noIcon ? 'justify-center' : 'justify-between',
     focusInset ? 'focus:ring-inset' : 'focus:ring-offset-2'
   )
+
+  // We use `let` here because we'll redefine this for buttons with icon
+  let alignClasses = 'justify-center'
 
   const colorClasses = {
     primary: 'bg-indigo-500 hover:bg-indigo-600 text-white shadow-md disabled:shadow-none',
@@ -70,7 +74,13 @@ export function Button({ size, look, noIcon, block, focusInset, isLoading, child
   if (look !== 'primary' || noIcon === true) {
     return (
       <button
-        className={cx(baseClasses, spacingClasses[size], radiusClasses[size], colorClasses[look])}
+        className={cx(
+          baseClasses,
+          alignClasses,
+          spacingClasses[size],
+          radiusClasses[size],
+          colorClasses[look]
+        )}
         {...props}
       >
         {children}
@@ -87,6 +97,8 @@ export function Button({ size, look, noIcon, block, focusInset, isLoading, child
     size === 'small' ? 'px-1' : 'px-3'
   )
 
+  alignClasses = 'justify-between'
+
   const iconContainerClasses = {
     primary: cx(
       'bg-indigo-400/50 group-hover:bg-indigo-500/50 focus:bg-indigo-400/50 group-disabled:pointer-events-none',
@@ -96,10 +108,17 @@ export function Button({ size, look, noIcon, block, focusInset, isLoading, child
   }
 
   return (
-    <button className={cx(baseClasses, colorClasses[look], radiusClasses[size])} {...props}>
+    <button
+      className={cx(baseClasses, alignClasses, colorClasses[look], radiusClasses[size])}
+      {...props}
+    >
       <span className={cx(spacingClasses[size])}>{children}</span>
       <span className={cx(iconContainerBaseClasses, iconContainerClasses[look])}>
-        {isLoading ? <LoadingSpinner /> : <ChevronRightIcon className="h-5 w-5 text-inherit" />}
+        {isLoading ? (
+          <LoadingSpinner size={size} />
+        ) : (
+          <ChevronRightIcon className="h-5 w-5 text-inherit" />
+        )}
       </span>
     </button>
   )
@@ -109,10 +128,10 @@ export function Button({ size, look, noIcon, block, focusInset, isLoading, child
 // Implementation components
 // ------------------------------
 
-function LoadingSpinner() {
+function LoadingSpinner({ size }) {
   return (
     <svg
-      className="h-5 w-5 animate-spin text-inherit"
+      className={cx('animate-spin text-inherit', size === 'large' ? 'h-5 w-5' : 'm-1 h-4 w-4')}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
