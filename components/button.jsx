@@ -95,7 +95,6 @@ export function Button({ size, look, noIcon, block, focusInset, isLoading, child
     secondary: 'bg-indigo-200/50 group-hover:bg-indigo-300/50 focus:bg-indigo-200/50 ',
   }
 
-  // Button with Icon
   return (
     <button className={cx(baseClasses, colorClasses[look], radiusClasses[size])} {...props}>
       <span className={cx(spacingClasses[size])}>{children}</span>
