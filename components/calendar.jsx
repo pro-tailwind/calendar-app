@@ -235,6 +235,7 @@ function CalendarDay({ day, selectedDay, setSelectedDay, selectedMonth, bookingA
     <button
       className={cx(baseClasses, isSelected ? selectedClasses : statusClasses[eligibilityStatus])}
       onClick={() => setSelectedDay(day)}
+      disabled={eligibilityStatus === 'NOT_ELIGIBLE'}
     >
       <span>{format(day, 'd')}</span>
       {isToday(day) && (
