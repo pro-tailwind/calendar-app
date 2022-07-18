@@ -5,15 +5,23 @@ export default function ButtonsPage() {
     <div className="p-10">
       <h1 className="text-center text-2xl font-bold md:text-left">Buttons playground page</h1>
       <div className="mt-8 flex flex-wrap items-center gap-3">
+        {/* 
+          Variants
+            - primary (default) | secondary
+            - large (default) | small
+
+          Only for primary variant:
+            - with icon (default) | without icon
+        */}
         <Button>Primary button</Button>
-        <Button look="secondary">Secondary large</Button>
+        <Button look="secondary">Edit</Button>
         <Button noIcon>Without icon</Button>
         <Button noIcon look="secondary">
           Without icon
         </Button>
         <Button size="small">Primary small</Button>
         <Button size="small" look="secondary">
-          Secondary
+          Edit
         </Button>
         <Button size="small" noIcon>
           Small without icon

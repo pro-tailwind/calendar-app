@@ -10,19 +10,37 @@
   which I'll focus on at a later stage (and for which I'll need plenty of Thinkmill insights!)
 */
 
+import propTypes from 'prop-types'
 import cx from 'classnames'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 
-export function Button({
-  size = 'large',
-  look = 'primary',
-  noIcon = false,
-  block = false,
-  focusInset = false,
-  isLoading = false,
-  children,
-  ...props
-}) {
+// ------------------------------
+// Prop types + defaults
+// ------------------------------
+
+Button.propTypes = {
+  look: propTypes.oneOf(['primary', 'secondary', 'ghost']),
+  size: propTypes.oneOf(['large', 'small']),
+  noIcon: propTypes.bool /* only has effect for primary look */,
+  block: propTypes.bool,
+  focusInset: propTypes.bool,
+  isLoading: propTypes.bool,
+}
+
+Button.defaultProps = {
+  look: 'primary',
+  size: 'large',
+  noIcon: false,
+  block: false,
+  focusInset: false,
+  isLoading: false,
+}
+
+// ------------------------------
+// Component definition
+// ------------------------------
+
+export function Button({ size, look, noIcon, block, focusInset, isLoading, children, ...props }) {
   const baseClasses = cx(
     'group font-semibold flex items-stretch focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none',
     block ? 'w-full' : 'w-auto',
@@ -35,6 +53,7 @@ export function Button({
     secondary: 'bg-indigo-100 hover:bg-indigo-200 text-indigo-700',
     ghost: 'bg-transparent text-white disabled:opacity-100',
   }
+
   const spacingClasses = {
     small: 'px-3 py-1',
     large: 'px-5 py-3',
@@ -44,19 +63,11 @@ export function Button({
     large: 'rounded-lg',
   }
 
-  const iconContainerClasses = {
-    base: cx(
-      'grid aspect-square place-items-center rounded-r-lg group-disabled:bg-transparent overflow-hidden',
-      size === 'small' ? 'px-1' : 'px-3'
-    ),
-    primary: cx(
-      'bg-indigo-400/50 group-hover:bg-indigo-500/50 focus:bg-indigo-400/50 group-disabled:pointer-events-none',
-      size === 'large' && !isLoading && 'group-hover:bg-stripes'
-    ),
-    secondary: 'bg-indigo-200/50 group-hover:bg-indigo-300/50 focus:bg-indigo-200/50 ',
-  }
+  // ------------------------------
+  // Button without icon (only `primary` buttons can have an icon)
+  // ------------------------------
 
-  if (noIcon === true) {
+  if (look !== 'primary' || noIcon === true) {
     return (
       <button
         className={cx(baseClasses, spacingClasses[size], radiusClasses[size], colorClasses[look])}
@@ -67,11 +78,28 @@ export function Button({
     )
   }
 
+  // ------------------------------
+  // Button with icon
+  // ------------------------------
+
+  const iconContainerBaseClasses = cx(
+    'grid aspect-square place-items-center rounded-r-lg group-disabled:bg-transparent overflow-hidden',
+    size === 'small' ? 'px-1' : 'px-3'
+  )
+
+  const iconContainerClasses = {
+    primary: cx(
+      'bg-indigo-400/50 group-hover:bg-indigo-500/50 focus:bg-indigo-400/50 group-disabled:pointer-events-none',
+      size === 'large' && !isLoading && 'group-hover:bg-stripes'
+    ),
+    secondary: 'bg-indigo-200/50 group-hover:bg-indigo-300/50 focus:bg-indigo-200/50 ',
+  }
+
   // Button with Icon
   return (
     <button className={cx(baseClasses, colorClasses[look], radiusClasses[size])} {...props}>
       <span className={cx(spacingClasses[size])}>{children}</span>
-      <span className={cx(iconContainerClasses.base, iconContainerClasses[look])}>
+      <span className={cx(iconContainerBaseClasses, iconContainerClasses[look])}>
         {isLoading ? <LoadingSpinner /> : <ChevronRightIcon className="h-5 w-5 text-inherit" />}
       </span>
     </button>
