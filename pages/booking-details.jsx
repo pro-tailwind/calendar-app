@@ -45,7 +45,7 @@ export default function BookingDetailsPage() {
             <Textarea name="notes" label="Notes & Questions" id="notes" />
           </div>
           <div className="mt-8">
-            <Button type="input" isLoading={isLoading}>
+            <Button type="input" isLoading={isLoading} hasIcon>
               Confirm booking
             </Button>
           </div>

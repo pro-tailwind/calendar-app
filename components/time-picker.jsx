@@ -108,7 +108,6 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
       >
         <Button
           block
-          noIcon
           focusInset
           look={isSelected ? 'ghost' : 'secondary'}
           disabled={isSelected}
@@ -121,6 +120,7 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
         <Button
           size="small"
           look="secondary"
+          hasIcon
           block
           tabIndex={isSelected ? 0 : -1}
           onClick={() => router.push(`/booking-details?time=${availability.startTime}`)}

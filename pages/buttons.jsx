@@ -13,51 +13,53 @@ export default function ButtonsPage() {
           Only for primary variant:
             - with icon (default) | without icon
         */}
-        <Button>Primary</Button>
+        <Button hasIcon>Primary</Button>
         <Button look="secondary">Secondary</Button>
-        <Button noIcon>without icon</Button>
+        <Button>without icon</Button>
 
-        <Button size="small">Small</Button>
+        <Button size="small" hasIcon>
+          Small
+        </Button>
         <Button size="small" look="secondary">
           Edit
         </Button>
-        <Button size="small" noIcon>
-          Small no icon
+        <Button size="small">Small no icon</Button>
+        <Button isLoading hasIcon>
+          Loading state
         </Button>
-        <Button isLoading>Loading state</Button>
-        <Button disabled>Disabled</Button>
+        <Button disabled hasIcon>
+          Disabled
+        </Button>
         <Button look="secondary" disabled>
           Disabled
         </Button>
-        <Button disabled noIcon>
-          No icon disabled
-        </Button>
+        <Button disabled>No icon disabled</Button>
 
-        <Button disabled noIcon size="small">
+        <Button disabled size="small">
           Small, no icon disabled
         </Button>
         <Button look="secondary" disabled size="small">
           Small disabled
         </Button>
 
-        <Button block>Block with icon</Button>
+        <Button block hasIcon>
+          Block with icon
+        </Button>
         <Button look="secondary" block>
           Block
         </Button>
-        <Button block noIcon>
-          Block with no icon
-        </Button>
+        <Button block>Block without icon</Button>
         <Button block disabled>
           Block disabled
         </Button>
         <Button look="secondary" block disabled>
           Block disabled
         </Button>
-        <Button isLoading block>
+        <Button isLoading block hasIcon>
           Block and loading
         </Button>
-        <Button size="small" isLoading block>
-          Block and loading
+        <Button size="small" isLoading block hasIcon>
+          Small Block and loading
         </Button>
       </div>
     </div>
