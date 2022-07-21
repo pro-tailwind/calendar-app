@@ -23,7 +23,7 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 Button.propTypes = {
   look: propTypes.oneOf(['primary', 'secondary', 'ghost']),
   size: propTypes.oneOf(['large', 'small']),
-  hasIcon: propTypes.bool,
+  hasIcon: propTypes.bool /* only has effect for primary look */,
   isLoading: propTypes.bool /* only has effect for primary look */,
   block: propTypes.bool,
   focusInset: propTypes.bool,
@@ -68,10 +68,10 @@ export function Button({ size, look, hasIcon, isLoading, block, focusInset, chil
   }
 
   // ------------------------------
-  // Button without icon
+  // Button without icon (only Primary buttons can have an icon)
   // ------------------------------
 
-  if (hasIcon === false) {
+  if (look !== 'primary' || hasIcon === false) {
     return (
       <button
         className={cx(

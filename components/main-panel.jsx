@@ -8,7 +8,7 @@
 
 export function MainPanel({ children }) {
   return (
-    <main className="relative shadow-[0px_-30px_50px_-50px_rgba(0,0,0,0.2)] md:h-[700px] xl:shadow-[-60px_0_50px_-50px_rgba(0,0,0,0.2)]">
+    <main className="relative rounded-b-2xl bg-white shadow-[0px_-30px_50px_-50px_rgba(0,0,0,0.2)] md:h-[700px] xl:rounded-r-2xl xl:rounded-bl-none xl:shadow-[-60px_0_50px_-50px_rgba(0,0,0,0.2)]">
       <svg className="absolute top-0 -left-4 hidden h-full w-4 xl:block">
         <mask id="cutoff">
           <rect className="h-full w-full fill-white"></rect>
