@@ -8,6 +8,17 @@ module.exports = {
       fontFamily: {
         sans: ['Open Sans', 'sans-serif', ...defaultTheme.fontFamily.sans],
       },
+      width: {
+        100: '25rem',
+      },
+      gridTemplateColumns: ({ theme }) => ({
+        'background-split': `1fr 
+            ${theme('width.100')} 
+            calc(
+              ${theme('maxWidth.7xl')} - ${theme('width.100')} - ${theme('padding.8')}
+            ) 
+            1fr`,
+      }),
     },
   },
   plugins: [require('./plugins/bg-stripes'), require('./plugins/square-diagonal')],
