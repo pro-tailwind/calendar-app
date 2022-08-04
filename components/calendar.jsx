@@ -139,7 +139,8 @@ function CalendarCell({ state, date }) {
     return 'VACANCY'
   }
 
-  const baseClasses = 'relative w-12 max-w-full aspect-square rounded-full grid place-items-center'
+  const baseClasses =
+    'relative w-12 max-w-full aspect-square rounded-full grid place-items-center focus:outline-none focus:ring focus:ring-offset-1 focus:ring-indigo-400'
   const selectedClasses = 'text-white bg-indigo-600 font-bold bg-stripes'
 
   const statusClasses = {

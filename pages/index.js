@@ -6,6 +6,7 @@ import { TimezonePicker } from '../components/timezone-picker'
 import { getLocalTimeZone, today } from '@internationalized/date'
 
 export default function Homepage({ selectedDate, setSelectedDate }) {
+  const currentDay = today(getLocalTimeZone())
   return (
     <div className="mx-auto grid h-full max-w-lg grid-rows-[auto,1fr] gap-8 md:max-w-none">
       <div className="mt-10 px-4 sm:px-8 xl:px-10">
@@ -20,8 +21,8 @@ export default function Homepage({ selectedDate, setSelectedDate }) {
               setSelectedDate={setSelectedDate}
               bookingAvailabilities={bookingAvailabilities}
               value={selectedDate}
-              minValue={today(getLocalTimeZone())}
-              maxValue={today(getLocalTimeZone()).add({ months: 6 })}
+              minValue={currentDay}
+              maxValue={currentDay.add({ months: 6 })}
               onChange={setSelectedDate}
             />
           </div>
