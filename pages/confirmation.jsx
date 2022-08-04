@@ -1,12 +1,16 @@
 import { useRouter } from 'next/router'
 
-import { parseISO, format } from 'date-fns'
+import { useDateFormatter } from 'react-aria'
 
 export default function BookingDetailsPage() {
   const router = useRouter()
+  const dateFormatter = useDateFormatter({ dateStyle: 'full' })
+  const timeFormatter = useDateFormatter({ timeStyle: 'short' })
+
   const { time } = router.query
+
   const formattedTime = time
-    ? `${format(parseISO(time), 'eeee, do MMMM yyyy')} at ${format(parseISO(time), 'h:mm a')}`
+    ? `${dateFormatter.format(new Date(time))} at ${timeFormatter.format(new Date(time))}`
     : ''
 
   return (

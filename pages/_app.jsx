@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { startOfToday } from 'date-fns'
+import { today } from '@internationalized/date'
 
 import '../styles/tailwind.css'
 
@@ -9,12 +9,11 @@ import { Ribbon } from '../components/ribbon'
 import { BackgroundDecoration } from '../components/background-decoration'
 
 function MyApp({ Component, pageProps }) {
-  const today = startOfToday()
-  const [selectedDay, setSelectedDay] = useState(today)
+  const [selectedDate, setSelectedDate] = useState(today())
   return (
     <>
       <div className="grid min-h-screen place-items-center">
-        <BackgroundDecoration selectedDay={selectedDay} />
+        <BackgroundDecoration selectedDate={selectedDate} />
         <div className="mx-auto w-full max-w-5xl px-2 py-10 sm:px-6 lg:px-8 xl:max-w-7xl">
           <div className="relative">
             <Ribbon />
@@ -23,8 +22,8 @@ function MyApp({ Component, pageProps }) {
               <MainPanel>
                 <Component
                   {...pageProps}
-                  selectedDay={selectedDay}
-                  setSelectedDay={setSelectedDay}
+                  selectedDate={selectedDate}
+                  setSelectedDate={setSelectedDate}
                 />
               </MainPanel>
             </div>
