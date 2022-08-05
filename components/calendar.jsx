@@ -46,7 +46,7 @@ export function Calendar(props) {
           <CalendarButton {...prevButtonProps}>
             <ChevronLeftIcon className="-ml-0.5 h-6 w-6" />
           </CalendarButton>
-          <CalendarButton {...nextButtonProps} state={state}>
+          <CalendarButton {...nextButtonProps}>
             <ChevronRightIcon className="ml-0.5 h-6 w-6" />
           </CalendarButton>
         </div>
