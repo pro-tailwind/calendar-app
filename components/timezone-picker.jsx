@@ -2,33 +2,40 @@ import { useState, useEffect, Fragment } from 'react'
 import cx from 'classnames'
 import { formatInTimeZone } from 'date-fns-tz'
 
+import { now, getLocalTimeZone } from '@internationalized/date'
+
 import { Dialog, Combobox, Transition } from '@headlessui/react'
 import { SearchIcon, GlobeIcon, ChevronDownIcon } from '@heroicons/react/solid'
 
-import { timezones } from '../data'
+import { useLocale } from 'react-aria'
+import { DateFormatter } from '@internationalized/date'
 
-export function TimezonePicker({ activeTheme }) {
+export function TimezonePicker() {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
+  const [timezones, setTimezones] = useState([])
+  const locale = useLocale()
 
   const filteredTimezones =
     query === ''
       ? timezones
-      : timezones.filter((time) =>
-          time.text
-            .toLowerCase()
-            .replace(/\s+/g, '')
-            .includes(query.toLowerCase().replace(/\s+/g, ''))
+      : timezones.filter((zone) =>
+          zone.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''))
         )
 
-  const [selectedTimezone, setSelectedTimezone] = useState(null)
+  const [selectedTimezone, setSelectedTimezone] = useState(getLocalTimeZone())
+
+  const formatter = new DateFormatter(locale, { timeStyle: 'short' })
+
+  async function getTimezones() {
+    const response = await fetch('http://worldtimeapi.org/api/timezone')
+    const json = await response.json()
+    setTimezones(json)
+  }
   useEffect(() => {
-    const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-    const currentTimezone = timezones.find((time) => time.utc.includes(localTimezone))
-    setSelectedTimezone(currentTimezone)
+    getTimezones()
   }, [])
 
-  if (!selectedTimezone) return 'loading...'
   return (
     <>
       <div className="text-center md:text-left">
@@ -39,9 +46,9 @@ export function TimezonePicker({ activeTheme }) {
           <span className="flex items-center justify-between gap-2">
             <span className="flex min-w-0 items-center gap-2">
               <GlobeIcon className="h-5 w-5 shrink-0 text-slate-500" />
-              <span className="min-w-0 truncate text-sm">{selectedTimezone.value}</span>
+              <span className="min-w-0 truncate text-sm">{selectedTimezone}</span>
               <span className=" shrink-0 text-sm">
-                ({formatInTimeZone(new Date(), selectedTimezone.utc[0], 'h:mm a')})
+                ({formatter.format(now(selectedTimezone).toDate())})
               </span>
             </span>
             <ChevronDownIcon className="h-5 w-5 text-slate-500" />
@@ -50,11 +57,7 @@ export function TimezonePicker({ activeTheme }) {
       </div>
 
       <Transition.Root show={isOpen} as={Fragment}>
-        <Dialog
-          data-theme={activeTheme}
-          onClose={setIsOpen}
-          className="fixed inset-0 z-10 overflow-y-auto px-4 pt-[30vh]"
-        >
+        <Dialog onClose={setIsOpen} className="fixed inset-0 z-10 overflow-y-auto px-4 pt-[30vh]">
           <Transition.Child
             enter="transition ease-out duration-300"
             enterFrom="opacity-0"
@@ -93,22 +96,27 @@ export function TimezonePicker({ activeTheme }) {
                 ></Combobox.Input>
               </div>
               <Combobox.Options static className="max-h-96 overflow-y-auto border-t py-4 text-sm">
-                {filteredTimezones.map((item) => (
-                  <Combobox.Option key={item.value} value={item}>
-                    {({ active }) => (
-                      <div className={cx('px-8 py-2', active ? 'bg-indigo-500' : 'bg-white')}>
-                        <div className="flex gap-2">
-                          <span className={cx(active ? ' text-white' : 'text-slate-900')}>
-                            {item.text}
-                          </span>
-                          <span className={cx(active ? 'text-indigo-200' : 'text-slate-400')}>
-                            {formatInTimeZone(new Date(), item.utc[0], 'h:mm a')}
-                          </span>
+                {filteredTimezones.map((item) => {
+                  formatter
+                  return (
+                    <Combobox.Option key={item} value={item}>
+                      {({ active }) => (
+                        <div className={cx('px-8 py-2', active ? 'bg-indigo-500' : 'bg-white')}>
+                          <div className="flex gap-2">
+                            <span className={cx(active ? ' text-white' : 'text-slate-900')}>
+                              {item}
+                            </span>
+                            <span className={cx(active ? 'text-indigo-200' : 'text-slate-400')}>
+                              {new DateFormatter(locale, { timeStyle: 'short' }).format(
+                                now(item).toDate()
+                              )}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </Combobox.Option>
-                ))}
+                      )}
+                    </Combobox.Option>
+                  )
+                })}
                 {query && filteredTimezones.length === 0 && (
                   <p className="px-4 text-slate-900">No results found.</p>
                 )}

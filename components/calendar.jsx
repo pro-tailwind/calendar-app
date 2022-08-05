@@ -185,7 +185,6 @@ function CalendarButton(props) {
   return (
     <button
       ref={ref}
-      {...props}
       {...buttonProps}
       className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-slate-300 text-slate-400 hover:text-indigo-600 disabled:border-slate-200 disabled:text-slate-300 disabled:hover:text-slate-300"
     />
