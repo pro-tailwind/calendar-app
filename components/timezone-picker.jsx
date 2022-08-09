@@ -1,6 +1,5 @@
 import { useState, useEffect, Fragment } from 'react'
 import cx from 'classnames'
-import { formatInTimeZone } from 'date-fns-tz'
 
 import { now, getLocalTimeZone } from '@internationalized/date'
 
@@ -11,10 +10,12 @@ import { useLocale } from 'react-aria'
 import { DateFormatter } from '@internationalized/date'
 
 export function TimezonePicker() {
+  const locale = useLocale()
+
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [timezones, setTimezones] = useState([])
-  const locale = useLocale()
+  const [selectedTimezone, setSelectedTimezone] = useState(getLocalTimeZone())
 
   const filteredTimezones =
     query === ''
@@ -22,10 +23,6 @@ export function TimezonePicker() {
       : timezones.filter((zone) =>
           zone.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''))
         )
-
-  const [selectedTimezone, setSelectedTimezone] = useState(getLocalTimeZone())
-
-  const formatter = new DateFormatter(locale, { timeStyle: 'short' })
 
   async function getTimezones() {
     const response = await fetch('http://worldtimeapi.org/api/timezone')
@@ -48,7 +45,13 @@ export function TimezonePicker() {
               <GlobeIcon className="h-5 w-5 shrink-0 text-slate-500" />
               <span className="min-w-0 truncate text-sm">{selectedTimezone}</span>
               <span className=" shrink-0 text-sm">
-                ({formatter.format(now(selectedTimezone).toDate())})
+                (
+                {new DateFormatter(locale, {
+                  timeStyle: 'short',
+                  hourCycle: 'h12',
+                  timeZone: selectedTimezone,
+                }).format(now(selectedTimezone).toDate())}
+                )
               </span>
             </span>
             <ChevronDownIcon className="h-5 w-5 text-slate-500" />
@@ -96,27 +99,30 @@ export function TimezonePicker() {
                 ></Combobox.Input>
               </div>
               <Combobox.Options static className="max-h-96 overflow-y-auto border-t py-4 text-sm">
-                {filteredTimezones.map((item) => {
-                  formatter
-                  return (
-                    <Combobox.Option key={item} value={item}>
-                      {({ active }) => (
-                        <div className={cx('px-8 py-2', active ? 'bg-indigo-500' : 'bg-white')}>
-                          <div className="flex gap-2">
-                            <span className={cx(active ? ' text-white' : 'text-slate-900')}>
-                              {item}
-                            </span>
-                            <span className={cx(active ? 'text-indigo-200' : 'text-slate-400')}>
-                              {new DateFormatter(locale, { timeStyle: 'short' }).format(
-                                now(item).toDate()
-                              )}
-                            </span>
-                          </div>
+                {filteredTimezones.map((item) => (
+                  <Combobox.Option key={item} value={item}>
+                    {({ active }) => (
+                      <div className={cx('px-8 py-2', active ? 'bg-indigo-500' : 'bg-white')}>
+                        <div className="flex gap-2">
+                          <span className={cx(active ? ' text-white' : 'text-slate-900')}>
+                            {item}
+                          </span>
+                          <span
+                            className={cx(
+                              active ? 'text-indigo-200' : 'font-semibold text-slate-400'
+                            )}
+                          >
+                            {new DateFormatter(locale, {
+                              timeZone: item,
+                              timeStyle: 'short',
+                              hourCycle: 'h12',
+                            }).format(now(item).toDate())}
+                          </span>
                         </div>
-                      )}
-                    </Combobox.Option>
-                  )
-                })}
+                      </div>
+                    )}
+                  </Combobox.Option>
+                ))}
                 {query && filteredTimezones.length === 0 && (
                   <p className="px-4 text-slate-900">No results found.</p>
                 )}
