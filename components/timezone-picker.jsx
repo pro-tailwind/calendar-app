@@ -60,7 +60,7 @@ export function TimezonePicker() {
       </div>
 
       <Transition.Root show={isOpen} as={Fragment}>
-        <Dialog onClose={setIsOpen} className="fixed inset-0 z-10 overflow-y-auto px-4 pt-[30vh]">
+        <Dialog onClose={setIsOpen} className="fixed inset-0 z-10 overflow-y-auto px-4 pt-[20vh]">
           <Transition.Child
             enter="transition ease-out duration-300"
             enterFrom="opacity-0"
