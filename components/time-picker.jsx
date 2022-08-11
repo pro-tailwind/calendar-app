@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import cx from 'classnames'
-import { format, isSameDay, parseISO } from 'date-fns'
+import { useDateFormatter } from 'react-aria'
+import { getLocalTimeZone, isSameDay, parseDateTime } from '@internationalized/date'
 
 import { Button } from '../components/button'
 
-export function TimePicker({ selectedDay, bookingAvailabilities }) {
+export function TimePicker({ selectedDate, bookingAvailabilities }) {
   const [selectedTime, setSelectedTime] = useState(null)
+  const formatter = useDateFormatter({ dateStyle: 'full' })
   const availabilities = bookingAvailabilities.filter((availability) =>
-    isSameDay(parseISO(availability.startTime), selectedDay)
+    isSameDay(parseDateTime(availability.startTime), selectedDate)
   )
   const hasAvailability = availabilities.length > 0
   return (
@@ -17,7 +19,9 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
       <div className="pointer-events-none absolute inset-x-8 bottom-0 z-10 hidden h-40 bg-gradient-to-t from-white md:block xl:inset-x-10"></div>
 
       <div className="flex h-12 items-center justify-center md:justify-start">
-        <h2 className="text-lg font-semibold">{format(selectedDay, 'EEEE, do MMMM yyyy')}</h2>
+        <h2 className="text-lg font-semibold">
+          {formatter.format(selectedDate.toDate(getLocalTimeZone()))}
+        </h2>
       </div>
       <div className="-mx-4 overflow-y-auto p-4">
         <div className="relative">
@@ -92,6 +96,7 @@ export function TimePicker({ selectedDay, bookingAvailabilities }) {
 */
 function TimeSlot({ availability, selectedTime, setSelectedTime }) {
   const router = useRouter()
+  const timeFormatter = useDateFormatter({ timeStyle: 'short' })
   const isSelected = selectedTime === availability.startTime
   return (
     <li
@@ -113,7 +118,7 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
           disabled={isSelected}
           onClick={() => setSelectedTime(availability.startTime)}
         >
-          {format(parseISO(availability.startTime), 'h:mm a')}
+          {timeFormatter.format(new Date(availability.startTime))}
         </Button>
       </div>
       <div className="m-2 basis-1/2">

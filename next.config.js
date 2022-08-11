@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true
+  // There is currently a bug with `react-aria` which is fixed by removing strict mode :/
+  // reactStrictMode: true,
 }
 
 module.exports = nextConfig
