@@ -47,8 +47,9 @@ export function TimezonePicker() {
               <span className=" shrink-0 text-sm">
                 (
                 {new DateFormatter(locale, {
-                  timeStyle: 'short',
-                  hourCycle: 'h12',
+                  hourCycle: 'h11',
+                  hour: 'numeric',
+                  minute: 'numeric',
                   timeZone: selectedTimezone,
                 }).format(now(selectedTimezone).toDate())}
                 )
@@ -114,8 +115,9 @@ export function TimezonePicker() {
                           >
                             {new DateFormatter(locale, {
                               timeZone: item,
-                              timeStyle: 'short',
-                              hourCycle: 'h12',
+                              hourCycle: 'h11',
+                              hour: 'numeric',
+                              minute: 'numeric',
                             }).format(now(item).toDate())}
                           </span>
                         </div>
