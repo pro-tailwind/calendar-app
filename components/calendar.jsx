@@ -136,14 +136,14 @@ function CalendarCell({ state, date }) {
   }
 
   const baseClasses =
-    'relative w-12 max-w-full aspect-square rounded-full grid place-items-center focus:outline-none focus:ring focus:ring-offset-1 focus:ring-indigo-400'
-  const selectedClasses = 'text-white bg-indigo-600 font-bold bg-stripes'
+    'relative w-12 max-w-full aspect-square rounded-full grid place-items-center focus:outline-none focus:ring focus:ring-offset-1 focus:ring-primary-400'
+  const selectedClasses = 'text-white bg-primary-600 font-bold bg-stripes'
 
   const statusClasses = {
     NOT_ELIGIBLE: 'text-slate-300 pointer-events-none',
     NO_VACANCY: 'text-slate-800 hover:bg-slate-100',
-    TODAY_NO_VACANCY: 'text-indigo-700 font-bold hover:bg-slate-100 hover:text-slate-800',
-    VACANCY: 'text-indigo-700 bg-indigo-100 font-bold hover:bg-indigo-200',
+    TODAY_NO_VACANCY: 'text-primary-700 font-bold hover:bg-slate-100 hover:text-slate-800',
+    VACANCY: 'text-primary-700 bg-primary-100 font-bold hover:bg-primary-200',
   }
 
   const eligibilityStatus = getEligibilityStatus()
@@ -161,7 +161,7 @@ function CalendarCell({ state, date }) {
           <span
             className={cx(
               'absolute bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full',
-              isSelected ? 'bg-white' : 'bg-indigo-600'
+              isSelected ? 'bg-white' : 'bg-primary-600'
             )}
           ></span>
         )}
@@ -184,7 +184,7 @@ function CalendarButton(props) {
     <button
       ref={ref}
       {...buttonProps}
-      className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-slate-300 text-slate-400 hover:text-indigo-600 disabled:border-slate-200 disabled:text-slate-300 disabled:hover:text-slate-300"
+      className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-slate-300 text-slate-400 hover:text-primary-600 disabled:border-slate-200 disabled:text-slate-300 disabled:hover:text-slate-300"
     >
       {direction === 'Previous' ? (
         <ChevronLeftIcon className="-ml-0.5 h-6 w-6" />

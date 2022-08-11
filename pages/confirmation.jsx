@@ -20,7 +20,7 @@ export default function BookingDetailsPage() {
         <h1 className="text-3xl font-bold">All set!</h1>
         <div className="mt-4 space-y-2 text-center">
           <p>
-            We're scheduled on <strong className="text-indigo-600">{formattedTime}</strong>.
+            We're scheduled on <strong className="text-primary-600">{formattedTime}</strong>.
           </p>
           <p>You'll find an invite in your inbox.</p>
           <p>See you then!</p>
@@ -38,7 +38,7 @@ export default function BookingDetailsPage() {
 function Signature() {
   return (
     <svg
-      className="group mt-6 w-40 text-indigo-600"
+      className="group mt-6 w-40 text-primary-600"
       viewBox="0 0 102 55"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

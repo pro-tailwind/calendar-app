@@ -18,7 +18,7 @@ export function SidePanel() {
           </Link>
           <div className="text-center md:text-left">
             <h2 className="text-3xl font-extrabold">Online Workshop</h2>
-            <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-indigo-600">
+            <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-primary-600">
               with Simon Vrachliotis
             </p>
             <p className="mt-4 xl:mt-8">Tailwind CSS for production-grade web applications.</p>

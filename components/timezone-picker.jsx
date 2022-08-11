@@ -38,7 +38,7 @@ export function TimezonePicker() {
       <div className="text-center md:text-left">
         <button
           onClick={() => setIsOpen(true)}
-          className="rounded-full border-2 border-indigo-50 px-4 py-2 text-slate-900 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2"
+          className="rounded-full border-2 border-primary-50 px-4 py-2 text-slate-900 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:ring-offset-2"
         >
           <span className="flex items-center justify-between gap-2">
             <span className="flex min-w-0 items-center gap-2">
@@ -70,7 +70,7 @@ export function TimezonePicker() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-indigo-900/80" />
+            <Dialog.Overlay className="fixed inset-0 bg-primary-900/80" />
           </Transition.Child>
           <Transition.Child
             enter="transition ease-out duration-300"
@@ -103,14 +103,14 @@ export function TimezonePicker() {
                 {filteredTimezones.map((item) => (
                   <Combobox.Option key={item} value={item}>
                     {({ active }) => (
-                      <div className={cx('px-8 py-2', active ? 'bg-indigo-500' : 'bg-white')}>
+                      <div className={cx('px-8 py-2', active ? 'bg-primary-500' : 'bg-white')}>
                         <div className="flex gap-2">
                           <span className={cx(active ? ' text-white' : 'text-slate-900')}>
                             {item}
                           </span>
                           <span
                             className={cx(
-                              active ? 'text-indigo-200' : 'font-semibold text-slate-400'
+                              active ? 'text-primary-200' : 'font-semibold text-slate-400'
                             )}
                           >
                             {new DateFormatter(locale, {
