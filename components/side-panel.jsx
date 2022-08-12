@@ -13,6 +13,7 @@ export function SidePanel() {
             <a className="group relative aspect-square h-32 overflow-hidden rounded-xl shadow-xl sm:aspect-video sm:h-40">
               <Image
                 src={heroImage}
+                priority
                 alt=""
                 className="absolute h-full w-full object-cover transition duration-300 ease-in-out group-hover:rotate-1 group-hover:scale-105"
               />
