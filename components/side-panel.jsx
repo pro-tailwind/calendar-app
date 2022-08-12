@@ -14,6 +14,7 @@ export function SidePanel() {
               <Image
                 src={heroImage}
                 priority
+                sizes="(min-width: 640px) 400px, 200px"
                 alt=""
                 className="absolute h-full w-full object-cover transition duration-300 ease-in-out group-hover:rotate-1 group-hover:scale-105"
               />
