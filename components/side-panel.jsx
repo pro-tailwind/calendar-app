@@ -1,5 +1,8 @@
 import Link from 'next/link'
+import Image from 'next/future/image'
 import { ClockIcon, VideoCameraIcon } from '@heroicons/react/outline'
+
+import heroImage from '../public/img/social-large.jpg'
 
 export function SidePanel() {
   return (
@@ -8,8 +11,8 @@ export function SidePanel() {
         <div className="flex flex-col items-center gap-6 md:flex-row xl:flex-col xl:items-start">
           <Link href="/">
             <a className="group relative aspect-square h-32 overflow-hidden rounded-xl shadow-xl sm:aspect-video sm:h-40">
-              <img
-                src="/img/social-large.jpg"
+              <Image
+                src={heroImage}
                 alt=""
                 className="absolute h-full w-full object-cover transition duration-300 ease-in-out group-hover:rotate-1 group-hover:scale-105"
               />

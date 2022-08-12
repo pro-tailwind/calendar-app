@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
-
+import Image from 'next/future/image'
 import { useDateFormatter } from 'react-aria'
+
+import calendarImage from '../public/img/calendar.svg'
 
 export default function BookingDetailsPage() {
   const router = useRouter()
@@ -16,7 +18,7 @@ export default function BookingDetailsPage() {
   return (
     <div className="grid h-full place-items-center p-10">
       <div className="grid justify-items-center">
-        <img src="/img/calendar.svg" alt="" className="mx-auto w-48 drop-shadow-xl" />
+        <Image src={calendarImage} alt="" className="mx-auto w-48 drop-shadow-xl" />
         <h1 className="text-3xl font-bold">All set!</h1>
         <div className="mt-4 space-y-2 text-center">
           <p>
