@@ -25,7 +25,7 @@ export function TimezonePicker() {
         )
 
   async function getTimezones() {
-    const response = await fetch('http://worldtimeapi.org/api/timezone')
+    const response = await fetch('https://worldtimeapi.org/api/timezone')
     const json = await response.json()
     setTimezones(json)
   }
