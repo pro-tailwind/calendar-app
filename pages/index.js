@@ -18,13 +18,11 @@ export default function Homepage({ selectedDate, setSelectedDate }) {
           <div className="px-6 sm:px-8 xl:px-10">
             <Calendar
               aria-label="Availability calendar"
-              selectedDate={selectedDate}
-              setSelectedDate={setSelectedDate}
-              bookingAvailabilities={bookingAvailabilities}
               value={selectedDate}
               minValue={currentDay}
               maxValue={currentDay.add({ months: 6 })}
               onChange={setSelectedDate}
+              bookingAvailabilities={bookingAvailabilities}
             />
           </div>
           <div className="p-4 sm:p-8 xl:p-10">

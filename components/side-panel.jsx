@@ -30,11 +30,11 @@ export function SidePanel() {
           </div>
         </div>
         <dl className="mt-12 flex flex-col gap-y-2 gap-x-12 rounded-lg border border-slate-300 p-4 md:flex-row xl:flex-col">
-          <div className="flex gap-x-4">
+          <div className="flex items-center gap-x-4">
             <dt>
               <ClockIcon className="h-5 w-5 text-slate-500" />
             </dt>
-            <dd>1 hour</dd>
+            <dd>2 hours</dd>
           </div>
           <div className="flex gap-x-4">
             <dt>
