@@ -1,48 +1,33 @@
-/*
-  NOTE:
-  The starter-app may not include this Button component,
-  since one of the workshops is about extracting re-usable components
-  and create such a button.
-  This was me experimenting with some styling approaches, but my guess is
-  the actual starter app will not use this, and rather have hardcoded buttons
-  throughout the app.
-  This will come critical though in the "Extracting Reusable UI Components" workshop,
-  which I'll focus on at a later stage (and for which I'll need plenty of Thinkmill insights!)
-
-  There is a sneaky `/buttons` demo route in this app for these buttons!
-*/
-
-import propTypes from 'prop-types'
 import cx from 'classnames'
 import { ChevronRightIcon } from '@heroicons/react/solid'
+import React from 'react'
 
 // ------------------------------
-// Prop types + defaults
+// Prop types
 // ------------------------------
-
-Button.propTypes = {
-  look: propTypes.oneOf(['primary', 'secondary', 'ghost']),
-  size: propTypes.oneOf(['large', 'small']),
-  hasIcon: propTypes.bool /* only has effect for primary look */,
-  isLoading: propTypes.bool /* only has effect for primary look */,
-  block: propTypes.bool,
-  focusInset: propTypes.bool,
-}
-
-Button.defaultProps = {
-  look: 'primary',
-  size: 'large',
-  hasIcon: false,
-  isLoading: false,
-  block: false,
-  focusInset: false,
+type ButtonProps = {
+  look?: 'primary' | 'secondary' | 'ghost'
+  size?: 'large' | 'small'
+  hasIcon?: boolean
+  isLoading?: boolean
+  block?: boolean
+  focusInset?: boolean
 }
 
 // ------------------------------
 // Component definition
 // ------------------------------
 
-export function Button({ size, look, hasIcon, isLoading, block, focusInset, children, ...props }) {
+export function Button({
+  size = 'large',
+  look = 'primary',
+  hasIcon = false,
+  isLoading = false,
+  block = false,
+  focusInset = false,
+  children,
+  ...restProps
+}: ButtonProps & React.ComponentProps<'button'>) {
   const baseClasses = cx(
     'group font-semibold flex items-stretch focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none',
     block ? 'w-full' : 'w-auto',
@@ -52,17 +37,17 @@ export function Button({ size, look, hasIcon, isLoading, block, focusInset, chil
   // We use `let` here because we'll redefine this for buttons with icon
   let alignClasses = 'justify-center'
 
-  const colorClasses = {
+  const colorClasses: Record<ButtonProps['look'], string> = {
     primary: 'bg-primary-500 hover:bg-primary-600 text-white shadow-md disabled:shadow-none',
     secondary: 'bg-primary-100 hover:bg-primary-200 text-primary-700',
     ghost: 'bg-transparent text-white disabled:opacity-100',
   }
 
-  const spacingClasses = {
+  const spacingClasses: Record<ButtonProps['size'], string> = {
     small: 'px-3 py-1',
     large: 'px-5 py-3',
   }
-  const radiusClasses = {
+  const radiusClasses: Record<ButtonProps['size'], string> = {
     small: 'rounded',
     large: 'rounded-lg',
   }
@@ -70,7 +55,6 @@ export function Button({ size, look, hasIcon, isLoading, block, focusInset, chil
   // ------------------------------
   // Button without icon (only Primary buttons can have an icon)
   // ------------------------------
-
   if (look !== 'primary' || hasIcon === false) {
     return (
       <button
@@ -81,7 +65,7 @@ export function Button({ size, look, hasIcon, isLoading, block, focusInset, chil
           radiusClasses[size],
           colorClasses[look]
         )}
-        {...props}
+        {...restProps}
       >
         {children}
       </button>
@@ -91,7 +75,6 @@ export function Button({ size, look, hasIcon, isLoading, block, focusInset, chil
   // ------------------------------
   // Button with icon
   // ------------------------------
-
   const iconContainerBaseClasses = cx(
     'grid aspect-square place-items-center rounded-r-lg group-disabled:bg-transparent overflow-hidden',
     size === 'small' ? 'px-1' : 'px-3'
@@ -99,7 +82,7 @@ export function Button({ size, look, hasIcon, isLoading, block, focusInset, chil
 
   alignClasses = 'justify-between'
 
-  const iconContainerClasses = {
+  const iconContainerClasses: Omit<Record<ButtonProps['look'], string>, 'ghost'> = {
     primary: cx(
       'bg-primary-400/50 group-hover:bg-primary-500/50 focus:bg-primary-400/50 group-disabled:pointer-events-none',
       size === 'large' && !isLoading && 'group-hover:bg-stripes'
@@ -110,7 +93,7 @@ export function Button({ size, look, hasIcon, isLoading, block, focusInset, chil
   return (
     <button
       className={cx(baseClasses, alignClasses, colorClasses[look], radiusClasses[size])}
-      {...props}
+      {...restProps}
     >
       <span className={cx(spacingClasses[size])}>{children}</span>
       <span className={cx(iconContainerBaseClasses, iconContainerClasses[look])}>
@@ -127,7 +110,6 @@ export function Button({ size, look, hasIcon, isLoading, block, focusInset, chil
 // ------------------------------
 // Implementation components
 // ------------------------------
-
 function LoadingSpinner({ size }) {
   return (
     <svg
