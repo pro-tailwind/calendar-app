@@ -4,7 +4,7 @@ import cx from 'classnames'
 import { useDateFormatter } from 'react-aria'
 import { getLocalTimeZone, isSameDay, parseDateTime } from '@internationalized/date'
 
-import { Button } from '../components/button'
+import { Button } from './button'
 
 export function TimePicker({ selectedDate, bookingAvailabilities }) {
   const [selectedTime, setSelectedTime] = useState(null)

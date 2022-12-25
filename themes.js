@@ -3,16 +3,16 @@ const themes = {
   // With this implementation, other themes should match that shape for things to work properly.
   base: {
     primary: {
-      50: '#eef2ff',
-      100: '#e0e7ff',
-      200: '#ced6ff',
-      300: '#aab9ff',
-      400: '#8994ff',
-      500: '#6c71fd',
-      600: '#5440ff',
-      700: '#472de1',
-      800: '#3824b4',
-      900: '#271c7a',
+      50: '#ecfeff',
+      100: '#cffafe',
+      200: '#a5f3fc',
+      300: '#67e8f9',
+      400: '#22d3ee',
+      500: '#06b6d4',
+      600: '#0891b2',
+      700: '#0e7490',
+      800: '#155e75',
+      900: '#164e63',
     },
   },
   rainforest: {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { today } from '@internationalized/date'
+import { today, getLocalTimeZone } from '@internationalized/date'
 import { SSRProvider } from 'react-aria'
 
 import '../styles/tailwind.css'
@@ -11,7 +11,7 @@ import { BackgroundDecoration } from '../components/background-decoration'
 import { ThemeSwitcher } from '../components/theme-switcher'
 
 function MyApp({ Component, pageProps }) {
-  const [selectedDate, setSelectedDate] = useState(today())
+  const [selectedDate, setSelectedDate] = useState(today(getLocalTimeZone()))
   const [activeTheme, setActiveTheme] = useState('base')
   return (
     <SSRProvider>

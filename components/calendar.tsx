@@ -11,6 +11,7 @@ import { useCalendarState } from 'react-stately'
 import {
   createCalendar,
   getWeeksInMonth,
+  getLocalTimeZone,
   isSameDay,
   parseDateTime,
   isToday,
@@ -36,7 +37,7 @@ export function Calendar(props) {
   })
 
   let ref = React.useRef()
-  let { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar(props, state, ref)
+  let { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar(props, state)
 
   return (
     <div {...calendarProps} ref={ref} className="calendar">
@@ -120,7 +121,7 @@ function CalendarCell({ state, date }) {
     isSameDay(parseDateTime(availability.startTime), date)
   )
 
-  const isCurrentDay = isToday(date)
+  const isCurrentDay = isToday(date, getLocalTimeZone())
 
   /* 
   Possible UI "states" of a calendar day: 
@@ -157,7 +158,7 @@ function CalendarCell({ state, date }) {
         className={cx(baseClasses, isSelected ? selectedClasses : statusClasses[eligibilityStatus])}
       >
         <span>{formattedDate}</span>
-        {isToday(date) && (
+        {isToday(date, getLocalTimeZone()) && (
           <span
             className={cx(
               'absolute bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full',

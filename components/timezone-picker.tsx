@@ -1,20 +1,19 @@
 import { useState, useEffect, Fragment } from 'react'
+import { useLocale } from 'react-aria'
 import cx from 'classnames'
 
-import { now, getLocalTimeZone } from '@internationalized/date'
+import { now, getLocalTimeZone, DateFormatter } from '@internationalized/date'
 
 import { Dialog, Combobox, Transition } from '@headlessui/react'
 import { SearchIcon, GlobeIcon, ChevronDownIcon } from '@heroicons/react/solid'
 
-import { useLocale } from 'react-aria'
-import { DateFormatter } from '@internationalized/date'
-
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 export function TimezonePicker() {
-  const locale = useLocale()
-
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [timezones, setTimezones] = useState([])
+  const locale = useLocale()
   const [selectedTimezone, setSelectedTimezone] = useState(getLocalTimeZone())
 
   const filteredTimezones =
@@ -24,6 +23,7 @@ export function TimezonePicker() {
           zone.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''))
         )
 
+  // Get a list of world timezones
   async function getTimezones() {
     const response = await fetch('https://worldtimeapi.org/api/timezone')
     const json = await response.json()
@@ -33,6 +33,8 @@ export function TimezonePicker() {
     getTimezones()
   }, [])
 
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   return (
     <>
       <div className="text-center md:text-left">
@@ -46,7 +48,7 @@ export function TimezonePicker() {
               <span className="min-w-0 truncate text-sm">{selectedTimezone}</span>
               <span className=" shrink-0 text-sm">
                 (
-                {new DateFormatter(locale, {
+                {new DateFormatter(locale.locale, {
                   hourCycle: 'h11',
                   hour: 'numeric',
                   minute: 'numeric',
@@ -113,7 +115,7 @@ export function TimezonePicker() {
                               active ? 'text-primary-200' : 'font-semibold text-slate-400'
                             )}
                           >
-                            {new DateFormatter(locale, {
+                            {new DateFormatter(locale.locale, {
                               timeZone: item,
                               hourCycle: 'h11',
                               hour: 'numeric',

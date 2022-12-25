@@ -13,7 +13,7 @@
 import cx from 'classnames'
 
 // TODO: Work something out for validation/state of inputs
-export function Input({ name, id, label, type, required = false, ...props }) {
+export function Input({ name, id, label, type = 'text', required = false, ...props }) {
   return (
     <div>
       <label
