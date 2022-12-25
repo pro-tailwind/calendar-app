@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import Image from 'next/future/image'
+import Image from 'next/image'
 import { useDateFormatter } from 'react-aria'
 
 import calendarImage from '../public/img/calendar.svg'
@@ -10,9 +10,13 @@ export default function BookingDetailsPage() {
   const timeFormatter = useDateFormatter({ timeStyle: 'short' })
 
   const { time } = router.query
+  // TypeScript hints that time is `string | string[]` but we want on only one string...
+  const timeString = Array.isArray(time) ? time[0] : time
 
   const formattedTime = time
-    ? `${dateFormatter.format(new Date(time))} at ${timeFormatter.format(new Date(time))}`
+    ? `${dateFormatter.format(new Date(timeString))} at ${timeFormatter.format(
+        new Date(timeString)
+      )}`
     : ''
 
   return (
