@@ -1,19 +1,16 @@
-/*
-  NOTE:
-  The starter-app may not include these components,
-  since one of the workshops is about extracting re-usable components
-  and create such input fields.
-  This was me experimenting with some styling approaches, but my guess is
-  the actual starter app will not use this, and rather have hardcoded form fields
-  throughout the app.
-  This will come critical though in the "Extracting Reusable UI Components" workshop,
-  which I'll focus on at a later stage (and for which I'll need plenty of Thinkmill insights!)
-*/
-
+import { HTMLInputTypeAttribute, InputHTMLAttributes } from 'react'
 import cx from 'classnames'
 
+type InputProps = {
+  name: string
+  id: string
+  label: string
+  type?: HTMLInputTypeAttribute
+  required?: boolean
+} & InputHTMLAttributes<HTMLInputElement>
+
 // TODO: Work something out for validation/state of inputs
-export function Input({ name, id, label, type = 'text', required = false, ...props }) {
+export function Input({ name, id, label, type = 'text', required = false, ...props }: InputProps) {
   return (
     <div>
       <label
