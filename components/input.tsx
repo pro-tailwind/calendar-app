@@ -1,16 +1,26 @@
 import cx from 'classnames'
 import type { HTMLInputTypeAttribute, InputHTMLAttributes } from 'react'
 
+// ------------------------------
+// Input
+// ------------------------------
 type InputProps = {
   name: string
   id: string
   label: string
   type?: HTMLInputTypeAttribute
   required?: boolean
-} & InputHTMLAttributes<HTMLInputElement>
+}
 
 // TODO: Work something out for validation/state of inputs
-export function Input({ name, id, label, type = 'text', required = false, ...props }: InputProps) {
+export function Input({
+  name,
+  id,
+  label,
+  type = 'text',
+  required = false,
+  ...props
+}: InputProps & InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div>
       <label
@@ -37,7 +47,25 @@ export function Input({ name, id, label, type = 'text', required = false, ...pro
   )
 }
 
-export function Textarea({ name, id, label, rows = 6, required = false, ...props }) {
+// ------------------------------
+// Textarea
+// ------------------------------
+type TextareaProps = {
+  name: string
+  id: string
+  label: string
+  required?: boolean
+  rows?: number
+}
+
+export function Textarea({
+  name,
+  id,
+  label,
+  rows = 6,
+  required = false,
+  ...props
+}: TextareaProps & InputHTMLAttributes<HTMLTextAreaElement>) {
   return (
     <div>
       <label

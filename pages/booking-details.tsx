@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useDateFormatter } from 'react-aria'
 
 import { Button } from '../components/button'
 import { Input, Textarea } from '../components/input'
 
-import { useDateFormatter } from 'react-aria'
-
 export default function BookingDetailsPage() {
-  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
 
   const dateFormatter = useDateFormatter({ dateStyle: 'full' })
   const timeFormatter = useDateFormatter({ timeStyle: 'short' })

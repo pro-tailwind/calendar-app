@@ -1,6 +1,6 @@
+import React from 'react'
 import cx from 'classnames'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
-import React from 'react'
 
 // ------------------------------
 // Prop types

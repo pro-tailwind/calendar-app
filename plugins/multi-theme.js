@@ -50,7 +50,7 @@ const multiThemePlugin = plugin.withOptions(
       )
     return function ({ addBase }) {
       addBase({
-        ':root': getCssVarsDeclarations(themes.base),
+        ':root': getCssVarsDeclarations(Object.values(themes)[0]),
       })
 
       Object.entries(themes).forEach(([key, value]) => {
@@ -65,7 +65,7 @@ const multiThemePlugin = plugin.withOptions(
     return {
       theme: {
         extend: {
-          colors: getColorUtilitiesWithCssVarsReference(themes.base),
+          colors: getColorUtilitiesWithCssVarsReference(Object.values(themes)[0]),
         },
       },
     }
