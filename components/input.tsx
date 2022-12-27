@@ -1,5 +1,5 @@
-import { HTMLInputTypeAttribute, InputHTMLAttributes } from 'react'
 import cx from 'classnames'
+import type { HTMLInputTypeAttribute, InputHTMLAttributes } from 'react'
 
 type InputProps = {
   name: string

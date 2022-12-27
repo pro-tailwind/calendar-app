@@ -13,7 +13,7 @@ import { ThemeSwitcher } from '../components/theme-switcher'
 function MyApp({ Component, pageProps }) {
   const { locale, direction } = useLocale()
   const [selectedDate, setSelectedDate] = useState(today(getLocalTimeZone()))
-  const [activeTheme, setActiveTheme] = useState('base')
+  const [activeTheme, setActiveTheme] = useState('ocean')
   return (
     <SSRProvider>
       <I18nProvider locale={locale}>

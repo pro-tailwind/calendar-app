@@ -1,4 +1,9 @@
-export const bookingAvailabilities = [
+export type Availability = {
+  startTime: string
+  endTime: string
+}
+
+export const bookingAvailabilities: Availability[] = [
   // December
   { startTime: '2022-12-02T05:00', endTime: '2022-12-02T07:00' },
   { startTime: '2022-12-02T10:00', endTime: '2022-12-02T12:00' },

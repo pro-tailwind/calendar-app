@@ -5,7 +5,11 @@ import cx from 'classnames'
 import { now, getLocalTimeZone, DateFormatter } from '@internationalized/date'
 
 import { Dialog, Combobox, Transition } from '@headlessui/react'
-import { SearchIcon, GlobeIcon, ChevronDownIcon } from '@heroicons/react/solid'
+import {
+  MagnifyingGlassIcon,
+  GlobeAsiaAustraliaIcon,
+  ChevronDownIcon,
+} from '@heroicons/react/20/solid'
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -25,9 +29,13 @@ export function TimezonePicker() {
 
   // Get a list of world timezones
   async function getTimezones() {
-    const response = await fetch('https://worldtimeapi.org/api/timezone')
-    const json = await response.json()
-    setTimezones(json)
+    try {
+      const response = await fetch('https://worldtimeapi.org/api/timezone')
+      const json = await response.json()
+      setTimezones(json)
+    } catch (error) {
+      console.error('Unable to fetch timezones! ', error)
+    }
   }
   useEffect(() => {
     getTimezones()
@@ -44,7 +52,7 @@ export function TimezonePicker() {
         >
           <span className="flex items-center justify-between gap-2">
             <span className="flex min-w-0 items-center gap-2">
-              <GlobeIcon className="h-5 w-5 shrink-0 text-slate-500" />
+              <GlobeAsiaAustraliaIcon className="h-5 w-5 shrink-0 text-slate-500" />
               <span className="min-w-0 truncate text-sm">{selectedTimezone}</span>
               <span className=" shrink-0 text-sm">
                 (
@@ -93,7 +101,7 @@ export function TimezonePicker() {
               className="relative mx-auto max-w-xl overflow-hidden rounded-lg bg-white shadow-2xl"
             >
               <div className="flex items-center px-4">
-                <SearchIcon className="h-5 w-5 text-slate-600" />
+                <MagnifyingGlassIcon className="h-5 w-5 text-slate-600" />
                 <Combobox.Input
                   placeholder="Search..."
                   className="w-full border-0 px-4 py-3 focus:outline-none"

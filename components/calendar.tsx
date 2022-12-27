@@ -20,7 +20,7 @@ import {
 } from '@internationalized/date'
 
 import cx from 'classnames'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
 import { bookingAvailabilities } from '../data'
 
@@ -54,9 +54,8 @@ export function Calendar(props) {
 }
 
 // ----------------------------
-// Grid
+// Calendar grid
 // ----------------------------
-
 function CalendarGrid({ state, ...props }) {
   let { locale } = useLocale()
   let { gridProps, headerProps } = useCalendarGrid(props, state)
@@ -109,9 +108,8 @@ function CalendarGrid({ state, ...props }) {
 }
 
 // ----------------------------
-// Cell
+// Calendar cell
 // ----------------------------
-
 function CalendarCell({ state, date }) {
   let ref = React.useRef()
   let { cellProps, buttonProps, isSelected, isOutsideVisibleRange, isDisabled, formattedDate } =
@@ -120,42 +118,42 @@ function CalendarCell({ state, date }) {
   const hasAvailability = bookingAvailabilities.some((availability) =>
     isSameDay(parseDateTime(availability.startTime), date)
   )
-
   const isCurrentDay = isToday(date, getLocalTimeZone())
 
-  /* 
-  Possible UI "states" of a calendar day: 
-  NOT_ELIGIBLE | NO_VACANCY | VACANCY | TODAY_NO_VACANCY
-  */
-
-  function getEligibilityStatus() {
-    if (isDisabled) return 'NOT_ELIGIBLE'
-    if (!hasAvailability) {
-      return isCurrentDay ? 'TODAY_NO_VACANCY' : 'NO_VACANCY'
-    }
-    return 'VACANCY'
-  }
-
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Styles lookup
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const baseClasses =
     'relative w-12 max-w-full aspect-square rounded-full grid place-items-center focus:outline-none focus:ring focus:ring-offset-1 focus:ring-primary-400'
-  const selectedClasses = 'text-white bg-primary-600 font-bold bg-stripes'
 
-  const statusClasses = {
-    NOT_ELIGIBLE: 'text-slate-300 pointer-events-none',
-    NO_VACANCY: 'text-slate-800 hover:bg-slate-100',
-    TODAY_NO_VACANCY: 'text-primary-700 font-bold hover:bg-slate-100 hover:text-slate-800',
-    VACANCY: 'text-primary-700 bg-primary-100 font-bold hover:bg-primary-200',
+  // Possible UI "states" of a calendar day:
+  type Status = 'SELECTED' | 'DISABLED' | 'VACANCY' | 'NO_VACANCY' | 'TODAY_NO_VACANCY'
+
+  const getStatus: () => Status = () => {
+    if (isSelected) return 'SELECTED'
+    if (isDisabled) return 'DISABLED'
+    if (hasAvailability) return 'VACANCY'
+    return isCurrentDay ? 'TODAY_NO_VACANCY' : 'NO_VACANCY'
   }
 
-  const eligibilityStatus = getEligibilityStatus()
+  const statusClasses: Record<Status, string> = {
+    SELECTED: 'text-white bg-primary-600 font-bold bg-stripes',
+    DISABLED: 'text-slate-300 pointer-events-none',
+    VACANCY: 'text-primary-700 bg-primary-100 font-bold hover:bg-primary-200',
+    NO_VACANCY: 'text-slate-800 hover:bg-slate-100',
+    TODAY_NO_VACANCY: 'text-primary-700 font-bold hover:bg-slate-100 hover:text-slate-800',
+  }
 
+  // ------------------------------
+  // Component render
+  // ------------------------------
   return (
     <td {...cellProps}>
       <div
         {...buttonProps}
         ref={ref}
         hidden={isOutsideVisibleRange}
-        className={cx(baseClasses, isSelected ? selectedClasses : statusClasses[eligibilityStatus])}
+        className={cx(baseClasses, statusClasses[getStatus()])}
       >
         <span>{formattedDate}</span>
         {isToday(date, getLocalTimeZone()) && (
@@ -172,9 +170,8 @@ function CalendarCell({ state, date }) {
 }
 
 // ----------------------------
-// Button
+// Month switcher buttons
 // ----------------------------
-
 function CalendarButton(props) {
   let ref = React.useRef()
   let { buttonProps } = useButton(props, ref)

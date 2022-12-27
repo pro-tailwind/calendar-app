@@ -1,5 +1,5 @@
 import cx from 'classnames'
-import { ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import React from 'react'
 
 // ------------------------------
@@ -17,7 +17,6 @@ type ButtonProps = {
 // ------------------------------
 // Component definition
 // ------------------------------
-
 export function Button({
   size = 'large',
   look = 'primary',

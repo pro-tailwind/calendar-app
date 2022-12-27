@@ -1,14 +1,18 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
-const colorThemes = require('./themes')
 
-// Plugins
-const bgStripesPlugin = require('./plugins/bg-stripes')
-const squareDiagonalPlugin = require('./plugins/square-diagonal')
+// Multi-theme strategy
+const colorThemes = require('./themes')
 const multiThemePlugin = require('./plugins/multi-theme')
 
+// Animated background stripes
+const bgStripesPlugin = require('./plugins/bg-stripes')
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Tailwind config
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./pages/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
+  content: ['./{pages,components}/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -16,7 +20,9 @@ module.exports = {
       },
       width: {
         100: '25rem',
+        'square-diagonal': (Math.sqrt(2) * 100).toFixed(2) + '%',
       },
+      // Theme-based custom grid for the `BackgroundSplit` component
       gridTemplateColumns: ({ theme }) => ({
         'background-split': `1fr 
             ${theme('width.100')} 
@@ -27,5 +33,5 @@ module.exports = {
       }),
     },
   },
-  plugins: [bgStripesPlugin, squareDiagonalPlugin, multiThemePlugin({ themes: colorThemes })],
+  plugins: [bgStripesPlugin, multiThemePlugin({ themes: colorThemes })],
 }

@@ -1,22 +1,22 @@
 import { Fragment, useEffect } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
-import { ChevronDownIcon, CheckIcon } from '@heroicons/react/solid'
 import cx from 'classnames'
-import { ColorSwatchIcon } from '@heroicons/react/outline'
+
+import { Listbox, Transition } from '@headlessui/react'
+import { ChevronDownIcon, CheckIcon, SwatchIcon } from '@heroicons/react/20/solid'
 
 export function ThemeSwitcher({ activeTheme, setActiveTheme }) {
   useEffect(() => {
     document.querySelector('body').setAttribute('data-theme', activeTheme)
   }, [activeTheme])
 
-  const themesList = ['base', 'rainforest', 'candy']
+  const themesList = ['ocean', 'rainforest', 'candy']
 
   return (
     <div className="fixed top-2 right-2 z-20 text-right">
       <Listbox value={activeTheme} onChange={setActiveTheme}>
         <div className="relative mt-1">
           <Listbox.Button className="inline-flex w-full justify-center rounded-md bg-primary-700/30 px-4 py-2 hover:bg-primary-700/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50">
-            <ColorSwatchIcon className="h-5 w-5 text-primary-100" />
+            <SwatchIcon className="h-5 w-5 text-primary-100" />
             <ChevronDownIcon
               className="ml-2 -mr-1 h-5 w-5 text-primary-100 hover:text-primary-50"
               aria-hidden="true"

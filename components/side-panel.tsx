@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ClockIcon, VideoCameraIcon } from '@heroicons/react/outline'
+import { ClockIcon, VideoCameraIcon } from '@heroicons/react/24/outline'
 
 import heroImage from '../public/img/social-large.jpg'
 
@@ -37,7 +37,7 @@ export function SidePanel() {
             </dt>
             <dd>2 hours</dd>
           </div>
-          <div className="flex gap-x-4">
+          <div className="flex gap-x-4 md:items-center xl:items-start">
             <dt>
               <VideoCameraIcon className="h-5 w-5 text-slate-500" />
             </dt>
