@@ -16,18 +16,27 @@ import {
   isToday,
   startOfWeek,
   today,
+  CalendarDate,
 } from '@internationalized/date'
 import { useCalendarState } from 'react-stately'
 
 import cx from 'classnames'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
-
-import { bookingAvailabilities } from '../data'
+import { Availability } from '../data'
 
 // ----------------------------
 // Main component
 // ----------------------------
-export function Calendar(props) {
+type CalendarProps = {
+  'aria-label': string
+  value: CalendarDate
+  minValue: CalendarDate
+  maxValue: CalendarDate
+  onChange: () => void
+  bookingAvailabilities: Availability[]
+}
+
+export function Calendar({ bookingAvailabilities, ...props }: CalendarProps) {
   const { locale } = useLocale()
   const state = useCalendarState({
     ...props,
@@ -46,7 +55,7 @@ export function Calendar(props) {
           <CalendarButton {...nextButtonProps} />
         </div>
       </div>
-      <CalendarGrid state={state} />
+      <CalendarGrid state={state} bookingAvailabilities={bookingAvailabilities} />
     </div>
   )
 }
@@ -54,23 +63,23 @@ export function Calendar(props) {
 // ----------------------------
 // Calendar grid
 // ----------------------------
-function CalendarGrid({ state, ...props }) {
-  let { locale } = useLocale()
-  let { gridProps, headerProps } = useCalendarGrid(props, state)
+function CalendarGrid({ bookingAvailabilities, state, ...props }) {
+  const { locale } = useLocale()
+  const { gridProps, headerProps } = useCalendarGrid(props, state)
   const formatter = useDateFormatter({ weekday: 'long' })
 
   // Get the full day strings for the calendar heading
-  let daysOfWeek = React.useMemo(() => {
-    let weekStart = startOfWeek(today(state.timeZone), locale)
+  const daysOfWeek = React.useMemo(() => {
+    const weekStart = startOfWeek(today(state.timeZone), locale)
     return [...new Array(7).keys()].map((index) => {
-      let date = weekStart.add({ days: index })
-      let dateDay = date.toDate(state.timeZone)
+      const date = weekStart.add({ days: index })
+      const dateDay = date.toDate(state.timeZone)
       return formatter.format(dateDay)
     })
   }, [locale, state.timeZone, formatter])
 
   // Get the number of weeks in the month so we can render the proper number of rows.
-  let weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale)
+  const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale)
 
   return (
     <div className="-mx-4">
@@ -95,7 +104,16 @@ function CalendarGrid({ state, ...props }) {
               {state
                 .getDatesInWeek(weekIndex)
                 .map((date, i) =>
-                  date ? <CalendarCell key={i} state={state} date={date} /> : <td key={i} />
+                  date ? (
+                    <CalendarCell
+                      key={i}
+                      state={state}
+                      date={date}
+                      bookingAvailabilities={bookingAvailabilities}
+                    />
+                  ) : (
+                    <td key={i} />
+                  )
                 )}
             </tr>
           ))}
@@ -108,9 +126,9 @@ function CalendarGrid({ state, ...props }) {
 // ----------------------------
 // Calendar cell
 // ----------------------------
-function CalendarCell({ state, date }) {
-  let ref = React.useRef()
-  let { cellProps, buttonProps, isSelected, isOutsideVisibleRange, isDisabled, formattedDate } =
+function CalendarCell({ state, date, bookingAvailabilities }) {
+  const ref = React.useRef()
+  const { cellProps, buttonProps, isSelected, isOutsideVisibleRange, isDisabled, formattedDate } =
     useCalendarCell({ date }, state, ref)
 
   const hasAvailability = bookingAvailabilities.some((availability) =>
@@ -171,8 +189,8 @@ function CalendarCell({ state, date }) {
 // Month switcher buttons
 // ----------------------------
 function CalendarButton(props) {
-  let ref = React.useRef()
-  let { buttonProps } = useButton(props, ref)
+  const ref = React.useRef()
+  const { buttonProps } = useButton(props, ref)
 
   const direction = buttonProps['aria-label']
 

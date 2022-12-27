@@ -1,9 +1,9 @@
-import { bookingAvailabilities } from '../data'
-
 import { Calendar } from '../components/calendar'
 import { TimePicker } from '../components/time-picker'
 import { TimezonePicker } from '../components/timezone-picker'
 import { getLocalTimeZone, today } from '@internationalized/date'
+
+import { bookingAvailabilities } from '../data'
 
 export default function Homepage({ selectedDate, setSelectedDate }) {
   const currentDay = today(getLocalTimeZone())
@@ -13,7 +13,11 @@ export default function Homepage({ selectedDate, setSelectedDate }) {
         <h1 className="text-center text-2xl font-bold md:text-left">Select a Date & Time</h1>
       </div>
       <div className="grid min-h-0 md:grid-cols-[1fr,360px] md:divide-x xl:grid-cols-[1fr,360px]">
-        {/* Calendar section */}
+        {/* 
+          ------------------------------
+          Calendar section 
+          ------------------------------
+        */}
         <div>
           <div className="px-6 sm:px-8 xl:px-10">
             <Calendar
@@ -29,7 +33,12 @@ export default function Homepage({ selectedDate, setSelectedDate }) {
             <TimezonePicker />
           </div>
         </div>
-        {/* Time picker section */}
+
+        {/* 
+          ------------------------------
+          Timepicker
+          ------------------------------
+        */}
         <div className="min-h-0">
           <TimePicker selectedDate={selectedDate} bookingAvailabilities={bookingAvailabilities} />
         </div>

@@ -4,33 +4,6 @@ export type Availability = {
 }
 
 export const bookingAvailabilities: Availability[] = [
-  // December
-  { startTime: '2022-12-02T05:00', endTime: '2022-12-02T07:00' },
-  { startTime: '2022-12-02T10:00', endTime: '2022-12-02T12:00' },
-  { startTime: '2022-12-02T13:00', endTime: '2022-12-02T15:00' },
-  { startTime: '2022-12-02T16:00', endTime: '2022-12-02T18:00' },
-
-  { startTime: '2022-12-05T11:00', endTime: '2022-12-05T16:00' },
-  { startTime: '2022-12-05T14:00', endTime: '2022-12-05T19:00' },
-
-  { startTime: '2022-12-07T06:00', endTime: '2022-12-07T08:00' },
-  { startTime: '2022-12-07T10:00', endTime: '2022-12-07T12:00' },
-  { startTime: '2022-12-07T16:00', endTime: '2022-12-07T18:00' },
-
-  { startTime: '2022-12-09T08:00', endTime: '2022-12-09T10:00' },
-  { startTime: '2022-12-09T11:00', endTime: '2022-12-09T13:00' },
-  { startTime: '2022-12-09T14:00', endTime: '2022-12-09T16:00' },
-
-  { startTime: '2022-12-12T06:00', endTime: '2022-12-12T08:00' },
-  { startTime: '2022-12-12T10:00', endTime: '2022-12-12T12:00' },
-  { startTime: '2022-12-12T13:00', endTime: '2022-12-12T15:00' },
-  { startTime: '2022-12-12T16:00', endTime: '2022-12-12T18:00' },
-  { startTime: '2022-12-12T18:00', endTime: '2022-12-12T20:00' },
-
-  { startTime: '2022-12-15T08:00', endTime: '2022-12-15T10:00' },
-  { startTime: '2022-12-15T11:00', endTime: '2022-12-15T13:00' },
-  { startTime: '2022-12-15T14:00', endTime: '2022-12-15T16:00' },
-
   // January
   { startTime: '2023-01-17T06:00', endTime: '2023-01-17T08:00' },
   { startTime: '2023-01-17T10:00', endTime: '2023-01-17T12:00' },
@@ -309,4 +282,31 @@ export const bookingAvailabilities: Availability[] = [
   { startTime: '2023-06-25T08:00', endTime: '2023-06-25T10:00' },
   { startTime: '2023-06-25T11:00', endTime: '2023-06-25T13:00' },
   { startTime: '2023-06-25T14:00', endTime: '2023-06-25T16:00' },
+
+  // July
+  { startTime: '2023-07-02T05:00', endTime: '2023-07-02T07:00' },
+  { startTime: '2023-07-02T10:00', endTime: '2023-07-02T12:00' },
+  { startTime: '2023-07-02T13:00', endTime: '2023-07-02T15:00' },
+  { startTime: '2023-07-02T16:00', endTime: '2023-07-02T18:00' },
+
+  { startTime: '2023-07-05T11:00', endTime: '2023-07-05T16:00' },
+  { startTime: '2023-07-05T14:00', endTime: '2023-07-05T19:00' },
+
+  { startTime: '2023-07-07T06:00', endTime: '2023-07-07T08:00' },
+  { startTime: '2023-07-07T10:00', endTime: '2023-07-07T12:00' },
+  { startTime: '2023-07-07T16:00', endTime: '2023-07-07T18:00' },
+
+  { startTime: '2023-07-09T08:00', endTime: '2023-07-09T10:00' },
+  { startTime: '2023-07-09T11:00', endTime: '2023-07-09T13:00' },
+  { startTime: '2023-07-09T14:00', endTime: '2023-07-09T16:00' },
+
+  { startTime: '2023-07-12T06:00', endTime: '2023-07-12T08:00' },
+  { startTime: '2023-07-12T10:00', endTime: '2023-07-12T12:00' },
+  { startTime: '2023-07-12T13:00', endTime: '2023-07-12T15:00' },
+  { startTime: '2023-07-12T16:00', endTime: '2023-07-12T18:00' },
+  { startTime: '2023-07-12T18:00', endTime: '2023-07-12T20:00' },
+
+  { startTime: '2023-07-15T08:00', endTime: '2023-07-15T10:00' },
+  { startTime: '2023-07-15T11:00', endTime: '2023-07-15T13:00' },
+  { startTime: '2023-07-15T14:00', endTime: '2023-07-15T16:00' },
 ]
