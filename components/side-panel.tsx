@@ -20,7 +20,7 @@ export function SidePanel() {
               alt=""
               className="absolute h-full w-full object-cover transition duration-300 ease-in-out group-hover:rotate-1 group-hover:scale-105"
             />
-            <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/25"></div>
+            <div className="absolute inset-0 rounded-xl ring-2 ring-inset ring-white/40 transition duration-500 group-hover:ring-primary-200/80"></div>
           </Link>
           <div className="text-center md:text-left">
             <h2 className="text-3xl font-extrabold">Online Workshop</h2>
