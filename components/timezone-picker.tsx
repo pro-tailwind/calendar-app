@@ -15,11 +15,14 @@ import {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 export function TimezonePicker() {
   const [isOpen, setIsOpen] = useState(false)
+
+  // ------------------------------
+  // Timezone management
+  // ------------------------------
+  const { locale } = useLocale()
   const [query, setQuery] = useState('')
   const [timezones, setTimezones] = useState([])
-  const { locale } = useLocale()
   const [selectedTimezone, setSelectedTimezone] = useState(getLocalTimeZone())
-
   const filteredTimezones =
     query === ''
       ? timezones
@@ -27,7 +30,9 @@ export function TimezonePicker() {
           zone.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''))
         )
 
-  // Get a list of world timezones
+  // ------------------------------
+  // Get a list of world timezones (clientside fetch)
+  // ------------------------------
   async function getTimezones() {
     try {
       const response = await fetch('https://worldtimeapi.org/api/timezone')
@@ -41,8 +46,24 @@ export function TimezonePicker() {
     getTimezones()
   }, [])
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // ------------------------------
+  // To avoid server/client hydration mismatch, we need to re-establish
+  // the times on the client, inside a useEffect.
+  // ------------------------------
+  const [formattedLocalTime, setFormattedLocalTime] = useState('loading...')
+  useEffect(() => {
+    const time = new DateFormatter(locale, {
+      hourCycle: 'h11',
+      hour: 'numeric',
+      minute: 'numeric',
+      timeZone: selectedTimezone,
+    }).format(now(selectedTimezone).toDate())
+    setFormattedLocalTime(time)
+  }, [locale, selectedTimezone])
+
+  // ------------------------------
+  // Component render
+  // ------------------------------
   return (
     <>
       <div className="text-center md:text-left">
@@ -54,16 +75,7 @@ export function TimezonePicker() {
             <span className="flex min-w-0 items-center gap-2">
               <GlobeAsiaAustraliaIcon className="h-5 w-5 shrink-0 text-slate-500" />
               <span className="min-w-0 truncate text-sm">{selectedTimezone}</span>
-              <span className=" shrink-0 text-sm">
-                (
-                {new DateFormatter(locale, {
-                  hourCycle: 'h11',
-                  hour: 'numeric',
-                  minute: 'numeric',
-                  timeZone: selectedTimezone,
-                }).format(now(selectedTimezone).toDate())}
-                )
-              </span>
+              <span className=" shrink-0 text-sm">({formattedLocalTime})</span>
             </span>
             <ChevronDownIcon className="h-5 w-5 text-slate-500" />
           </span>

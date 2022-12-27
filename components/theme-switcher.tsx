@@ -15,7 +15,7 @@ export function ThemeSwitcher({ activeTheme, setActiveTheme }) {
     <div className="fixed top-2 right-2 z-20 text-right">
       <Listbox value={activeTheme} onChange={setActiveTheme}>
         <div className="relative mt-1">
-          <Listbox.Button className="inline-flex w-full justify-center rounded-md bg-primary-700/30 px-4 py-2 hover:bg-primary-700/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50">
+          <Listbox.Button className="inline-flex w-full justify-center rounded-md bg-primary-600 px-4 py-2 hover:bg-primary-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50">
             <SwatchIcon className="h-5 w-5 text-primary-100" />
             <ChevronDownIcon
               className="ml-2 -mr-1 h-5 w-5 text-primary-100 hover:text-primary-50"
