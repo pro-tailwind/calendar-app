@@ -7,7 +7,6 @@ import {
   useLocale,
   useDateFormatter,
 } from 'react-aria'
-import { useCalendarState } from 'react-stately'
 import {
   createCalendar,
   getWeeksInMonth,
@@ -18,6 +17,7 @@ import {
   startOfWeek,
   today,
 } from '@internationalized/date'
+import { useCalendarState } from 'react-stately'
 
 import cx from 'classnames'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
@@ -25,19 +25,17 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { bookingAvailabilities } from '../data'
 
 // ----------------------------
-// Calendar
+// Main component
 // ----------------------------
 export function Calendar(props) {
-  let { locale } = useLocale()
-
-  let state = useCalendarState({
+  const { locale } = useLocale()
+  const state = useCalendarState({
     ...props,
     locale,
     createCalendar,
   })
-
-  let ref = React.useRef()
-  let { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar(props, state)
+  const ref = React.useRef()
+  const { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar(props, state)
 
   return (
     <div {...calendarProps} ref={ref} className="calendar">

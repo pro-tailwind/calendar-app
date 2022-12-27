@@ -17,7 +17,7 @@ export function TimezonePicker() {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [timezones, setTimezones] = useState([])
-  const locale = useLocale()
+  const { locale } = useLocale()
   const [selectedTimezone, setSelectedTimezone] = useState(getLocalTimeZone())
 
   const filteredTimezones =
@@ -56,7 +56,7 @@ export function TimezonePicker() {
               <span className="min-w-0 truncate text-sm">{selectedTimezone}</span>
               <span className=" shrink-0 text-sm">
                 (
-                {new DateFormatter(locale.locale, {
+                {new DateFormatter(locale, {
                   hourCycle: 'h11',
                   hour: 'numeric',
                   minute: 'numeric',
@@ -123,7 +123,7 @@ export function TimezonePicker() {
                               active ? 'text-primary-200' : 'font-semibold text-slate-400'
                             )}
                           >
-                            {new DateFormatter(locale.locale, {
+                            {new DateFormatter(locale, {
                               timeZone: item,
                               hourCycle: 'h11',
                               hour: 'numeric',
