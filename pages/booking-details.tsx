@@ -25,8 +25,16 @@ export default function BookingDetailsPage() {
   function handleSubmit(event) {
     event.preventDefault()
     setIsLoading(true)
+
+    // Pretend to do some async tasks for 2.5 seconds :)
     setTimeout(() => {
-      router.push(`/confirmation?time=${time}`)
+      /*
+        TODO: 
+        Redirect user to the `/confirmation` route, 
+        with the `time` value in a `time` 
+        query paramter.
+      */
+
       setIsLoading(false)
     }, 2500)
   }
