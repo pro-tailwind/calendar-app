@@ -29,9 +29,6 @@ export default function Homepage({ selectedDate, setSelectedDate }) {
               bookingAvailabilities={bookingAvailabilities}
             />
           </div>
-          <div className="p-4 sm:p-8 xl:p-10">
-            <TimezonePicker />
-          </div>
         </div>
 
         {/* 
