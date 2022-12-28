@@ -198,7 +198,7 @@ function CalendarButton(props) {
     <button
       ref={ref}
       {...buttonProps}
-      className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-slate-300 text-slate-400 hover:text-primary-600 disabled:border-slate-200 disabled:text-slate-300 disabled:hover:text-slate-300"
+      className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-slate-300 text-slate-400 hover:text-primary-600 focus:outline-none focus:ring focus:ring-primary-400 focus:ring-offset-1 disabled:border-slate-200 disabled:text-slate-300 disabled:hover:text-slate-300"
     >
       {direction === 'Previous' ? (
         <ChevronLeftIcon className="-ml-0.5 h-6 w-6" />
