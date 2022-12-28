@@ -116,7 +116,12 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
           hasIcon
           block
           tabIndex={isSelected ? 0 : -1}
-          onClick={() => router.push(`/booking-details?time=${availability.startTime}`)}
+          onClick={() => {
+            /* 
+              TODO: Redirect user to the `/booking-details` route with
+              the selected day/time in a `time` query parameter.
+            */
+          }}
         >
           Confirm
         </Button>
