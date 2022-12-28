@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
+        {/* Google font - Open Sans */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link
