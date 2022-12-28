@@ -1,9 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
-// Multi-theme strategy
-const colorThemes = require('./themes')
-const multiThemePlugin = require('./plugins/multi-theme')
-
 // Animated background stripes
 const bgStripesPlugin = require('./plugins/bg-stripes')
 
@@ -33,5 +29,5 @@ module.exports = {
       }),
     },
   },
-  plugins: [bgStripesPlugin, multiThemePlugin({ themes: colorThemes })],
+  plugins: [bgStripesPlugin],
 }
