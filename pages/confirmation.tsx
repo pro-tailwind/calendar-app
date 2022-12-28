@@ -25,12 +25,12 @@ export default function BookingDetailsPage() {
         <h1 className="mt-4 text-3xl font-bold">All set!</h1>
         <div className="mt-4 space-y-2 text-center">
           <p>
-            We're scheduled on <strong className="text-primary-600">{formattedTime}</strong>.
+            We're scheduled on <strong className="text-cyan-600">{formattedTime}</strong>.
           </p>
           <p>You'll find an invite in your inbox.</p>
           <p>See you then!</p>
         </div>
-        <Signature className="mt-6 w-40 text-primary-600" />
+        <Signature className="mt-6 w-40 text-cyan-600" />
       </div>
     </div>
   )
@@ -58,7 +58,7 @@ function ConfirmCorgi({ className: classNameAttribute, ...props }) {
       />
       <path
         fill="currentColor"
-        className="fill-primary-400"
+        className="fill-cyan-400"
         d="M257.658 445.279c86.161 0 103.691-38.79 103.691-38.79-2.82-16.45-5.6-18.2-7.14-28.09 0 0 17.08-8.06 30.67-13.43l-32.94-74.06H150.668l-18.88 75.39c13.59 5.37 29.33 12.11 29.33 12.11-1.55 9.89-4.32 11.64-7.14 28.09 0 0 17.54 38.79 103.69 38.79"
       />
       <path
@@ -108,7 +108,7 @@ function ConfirmCorgi({ className: classNameAttribute, ...props }) {
       />
       <path
         fill="currentColor"
-        className="fill-primary-500"
+        className="fill-cyan-500"
         d="m397.029 332.939-42.61 20.42s7.87 20.62 30.46 11.62c18.6-7.41 12.16-32.04 12.16-32.04h-.01ZM117.387 332.939l42.61 20.42s-7.87 20.62-30.46 11.62c-18.6-7.41-12.16-32.04-12.16-32.04h.01ZM353.159 382.159c-.24 0-.48-.02-.72-.08-13.57-2.85-21.45-13.81-21.78-14.28a3.498 3.498 0 0 1 .84-4.88c1.58-1.11 3.76-.74 4.87.83.12.17 6.73 9.21 17.5 11.47 1.89.4 3.1 2.25 2.71 4.14a3.5 3.5 0 0 1-3.42 2.78v.02ZM162.158 382.159c-1.62 0-3.08-1.13-3.42-2.78-.4-1.89.82-3.75 2.71-4.14 10.91-2.29 17.43-11.37 17.5-11.46a3.507 3.507 0 0 1 4.88-.84c1.58 1.12 1.95 3.3.84 4.88-.33.46-8.21 11.43-21.78 14.28-.24.05-.48.08-.72.08l-.01-.02Z"
       />
       <path

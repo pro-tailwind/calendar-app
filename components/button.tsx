@@ -28,7 +28,7 @@ export function Button({
   ...restProps
 }: ButtonProps & React.ComponentProps<'button'>) {
   const baseClasses = cx(
-    'group font-semibold flex items-stretch focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none',
+    'group font-semibold flex items-stretch focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none',
     block ? 'w-full' : 'w-auto',
     focusInset ? 'focus:ring-inset' : 'focus:ring-offset-2'
   )
@@ -37,8 +37,8 @@ export function Button({
   let alignClasses = 'justify-center'
 
   const colorClasses: Record<ButtonProps['look'], string> = {
-    primary: 'bg-primary-500 hover:bg-primary-600 text-white shadow-md disabled:shadow-none',
-    secondary: 'bg-primary-100 hover:bg-primary-200 text-primary-700',
+    primary: 'bg-cyan-500 hover:bg-cyan-600 text-white shadow-md disabled:shadow-none',
+    secondary: 'bg-cyan-100 hover:bg-cyan-200 text-cyan-700',
     ghost: 'bg-transparent text-white disabled:opacity-100',
   }
 
@@ -83,10 +83,10 @@ export function Button({
 
   const iconContainerClasses: Omit<Record<ButtonProps['look'], string>, 'ghost'> = {
     primary: cx(
-      'bg-primary-400/50 group-hover:bg-primary-500/50 focus:bg-primary-400/50 group-disabled:pointer-events-none',
+      'bg-cyan-400/50 group-hover:bg-cyan-500/50 focus:bg-cyan-400/50 group-disabled:pointer-events-none',
       size === 'large' && !isLoading && 'group-hover:bg-stripes'
     ),
-    secondary: 'bg-primary-200/50 group-hover:bg-primary-300/50 focus:bg-primary-200/50 ',
+    secondary: 'bg-cyan-200/50 group-hover:bg-cyan-300/50 focus:bg-cyan-200/50 ',
   }
 
   return (

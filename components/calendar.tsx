@@ -140,7 +140,7 @@ function CalendarCell({ state, date, bookingAvailabilities }) {
   // Styles lookup
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const baseClasses =
-    'relative w-12 max-w-full aspect-square rounded-full grid place-items-center focus:outline-none focus:ring focus:ring-offset-1 focus:ring-primary-400'
+    'relative w-12 max-w-full aspect-square rounded-full grid place-items-center focus:outline-none focus:ring focus:ring-offset-1 focus:ring-cyan-400'
 
   // Possible UI "states" of a calendar day:
   type Status = 'SELECTED' | 'DISABLED' | 'VACANCY' | 'NO_VACANCY' | 'TODAY_NO_VACANCY'
@@ -153,11 +153,11 @@ function CalendarCell({ state, date, bookingAvailabilities }) {
   }
 
   const statusClasses: Record<Status, string> = {
-    SELECTED: 'text-white bg-primary-600 font-bold bg-stripes',
+    SELECTED: 'text-white bg-cyan-600 font-bold bg-stripes',
     DISABLED: 'text-slate-300 pointer-events-none',
-    VACANCY: 'text-primary-700 bg-primary-100 font-bold hover:bg-primary-200',
+    VACANCY: 'text-cyan-700 bg-cyan-100 font-bold hover:bg-cyan-200',
     NO_VACANCY: 'text-slate-800 hover:bg-slate-100',
-    TODAY_NO_VACANCY: 'text-primary-700 font-bold hover:bg-slate-100 hover:text-slate-800',
+    TODAY_NO_VACANCY: 'text-cyan-700 font-bold hover:bg-slate-100 hover:text-slate-800',
   }
 
   // ------------------------------
@@ -176,7 +176,7 @@ function CalendarCell({ state, date, bookingAvailabilities }) {
           <span
             className={cx(
               'absolute bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full',
-              isSelected ? 'bg-white' : 'bg-primary-600'
+              isSelected ? 'bg-white' : 'bg-cyan-600'
             )}
           ></span>
         )}
@@ -198,7 +198,7 @@ function CalendarButton(props) {
     <button
       ref={ref}
       {...buttonProps}
-      className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-slate-300 text-slate-400 hover:text-primary-600 focus:outline-none focus:ring focus:ring-primary-400 focus:ring-offset-1 disabled:border-slate-200 disabled:text-slate-300 disabled:hover:text-slate-300"
+      className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-slate-300 text-slate-400 hover:text-cyan-600 focus:outline-none focus:ring focus:ring-cyan-400 focus:ring-offset-1 disabled:border-slate-200 disabled:text-slate-300 disabled:hover:text-slate-300"
     >
       {direction === 'Previous' ? (
         <ChevronLeftIcon className="-ml-0.5 h-6 w-6" />

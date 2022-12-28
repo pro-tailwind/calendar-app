@@ -8,17 +8,19 @@ import { SidePanel } from '../components/side-panel'
 import { MainPanel } from '../components/main-panel'
 import { Ribbon } from '../components/ribbon'
 import { BackgroundDecoration } from '../components/background-decoration'
+
+// We have the scaffolding for a new `ThemeSwitcher` component
 import { ThemeSwitcher } from '../components/theme-switcher'
 
 function MyApp({ Component, pageProps }) {
   const { locale, direction } = useLocale()
-  const [activeTheme, setActiveTheme] = useState('ocean')
   const [selectedDate, setSelectedDate] = useState(today(getLocalTimeZone()))
   return (
     <SSRProvider>
       <I18nProvider locale={locale}>
         <div lang={locale} dir={direction}>
-          <ThemeSwitcher activeTheme={activeTheme} setActiveTheme={setActiveTheme} />
+          {/* The component is used here, time to go implement it! */}
+          <ThemeSwitcher />
           <div className="grid min-h-screen place-items-center">
             <BackgroundDecoration selectedDate={selectedDate} />
             <div className="mx-auto w-full max-w-5xl px-2 py-16 sm:px-6 lg:px-8 xl:max-w-7xl">

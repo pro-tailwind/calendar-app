@@ -35,7 +35,7 @@ export function Input({
       </label>
       <input
         className={cx(
-          'mt-1 block w-full rounded-lg px-4 py-2 text-slate-800 shadow-sm ring-1 ring-inset ring-slate-300 focus:outline-none focus:ring-2 focus:ring-primary-500'
+          'mt-1 block w-full rounded-lg px-4 py-2 text-slate-800 shadow-sm ring-1 ring-inset ring-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500'
         )}
         type={type}
         name={name}
@@ -80,7 +80,7 @@ export function Textarea({
       </label>
       <textarea
         rows={rows}
-        className="mt-1 block w-full rounded-lg px-4 py-2 text-slate-800 shadow-sm ring-1 ring-inset ring-slate-300 invalid:ring-red-600 placeholder-shown:invalid:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+        className="mt-1 block w-full rounded-lg px-4 py-2 text-slate-800 shadow-sm ring-1 ring-inset ring-slate-300 invalid:ring-red-600 placeholder-shown:invalid:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500"
         name={name}
         id={id}
         {...props}

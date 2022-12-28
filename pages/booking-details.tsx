@@ -37,7 +37,7 @@ export default function BookingDetailsPage() {
       <div className="mt-8 space-y-2">
         <p>
           You're about to book a one-hour meeting on{' '}
-          <strong className="text-primary-600">{formattedTime}</strong>.
+          <strong className="text-cyan-600">{formattedTime}</strong>.
         </p>
         <p>Please fill in the form below to confirm.</p>
       </div>
