@@ -20,7 +20,7 @@ export function TimePicker({ selectedDate, bookingAvailabilities }: TimePickerPr
   )
   const hasAvailability = availabilities.length > 0
   return (
-    <div className="relative grid h-full grid-rows-[auto,1fr] overflow-hidden px-4 sm:px-8 xl:px-10">
+    <div className="relative grid h-full overflow-hidden px-4 sm:px-8 xl:px-10">
       {/* Scroll  mask */}
       <div className="pointer-events-none absolute inset-x-8 bottom-0 z-10 hidden h-40 bg-gradient-to-t from-white md:block xl:inset-x-10"></div>
 
