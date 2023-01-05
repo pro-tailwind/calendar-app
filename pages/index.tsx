@@ -8,7 +8,7 @@ import { bookingAvailabilities } from '../data'
 export default function Homepage({ selectedDate, setSelectedDate }) {
   const currentDay = today(getLocalTimeZone())
   return (
-    <div className="mx-auto grid h-full max-w-lg gap-8 md:max-w-none">
+    <div className="mx-auto grid h-full max-w-lg grid-rows-[auto,1fr] gap-8 md:max-w-none">
       <div className="mt-10 px-4 sm:px-8 xl:px-10">
         <h1 className="text-center text-2xl font-bold md:text-left">Select a Date & Time</h1>
       </div>
