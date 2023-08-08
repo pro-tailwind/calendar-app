@@ -23,11 +23,11 @@ export function SidePanel() {
             <div className="absolute inset-0 rounded-xl ring-2 ring-inset ring-white/40 transition duration-500 group-hover:ring-primary-200/80"></div>
           </Link>
           <div className="min-[400px]:text-center md:text-left">
-            <h2 className="text-3xl font-extrabold">Online Workshop</h2>
+            <h2 className="text-3xl font-extrabold">Tailwind Coaching</h2>
             <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-primary-600">
               with Simon Vrachliotis
             </p>
-            <p className="mt-4 xl:mt-8">Tailwind CSS for production-grade web applications.</p>
+            <p className="mt-4 xl:mt-8">Let's nerd out on advanced Tailwind CSS concepts and patterns.</p>
           </div>
         </div>
         <dl className="mt-12 flex flex-col gap-y-2 gap-x-12 rounded-lg border border-slate-300 p-4 md:flex-row xl:flex-col">
