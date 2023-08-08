@@ -1,18 +1,18 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+import { Config } from 'tailwindcss'
+import defaultTheme from 'tailwindcss/defaultTheme'
 
 // Multi-theme strategy
-const colorThemes = require('./themes')
-const multiThemePlugin = require('./plugins/multi-theme')
+import colorThemes from './themes.json'
+import multiThemePlugin from './src/plugins/multi-theme'
 
 // Animated background stripes
-const bgStripesPlugin = require('./plugins/bg-stripes')
+import bgStripesPlugin from './src/plugins/bg-stripes'
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Tailwind config
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./{pages,components}/**/*.{js,jsx,ts,tsx}'],
+const config = {
+  content: ['./src/{pages,components}/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -34,4 +34,6 @@ module.exports = {
     },
   },
   plugins: [bgStripesPlugin, multiThemePlugin({ themes: colorThemes })],
-}
+} satisfies Config
+
+export default config

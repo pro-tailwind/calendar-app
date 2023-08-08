@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ClockIcon, VideoCameraIcon } from '@heroicons/react/24/outline'
 
-import heroImage from '../public/img/social-large.jpg'
+import heroImage from '@/../public/img/social-large.jpg'
 
 export function SidePanel() {
   return (
