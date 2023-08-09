@@ -1,11 +1,13 @@
-import { today, getDayOfWeek, getLocalTimeZone } from '@internationalized/date'
+// NOTE: This is currently not used. Must generate randomized time slots to be useful!
+
+import { today, getDayOfWeek, getLocalTimeZone } from "@internationalized/date"
 
 const localTimezone = getLocalTimeZone()
 const currentDay = today(localTimezone)
 
 // Mocking calendar dates
 export function makeCalendarAvailabilities(weeks, options) {
-  const weekDay = getDayOfWeek(currentDay, 'en-US')
+  const weekDay = getDayOfWeek(currentDay, "en-US")
   const offset = 1 - weekDay
   const nextMonday =
     weekDay === 1
@@ -15,7 +17,10 @@ export function makeCalendarAvailabilities(weeks, options) {
   const output = []
 
   if (options?.includeToday) {
-    output.push({ startTime: currentDay.toString(), endTime: currentDay.toString() })
+    output.push({
+      startTime: currentDay.toString(),
+      endTime: currentDay.toString(),
+    })
   }
 
   let i = 0
@@ -25,7 +30,7 @@ export function makeCalendarAvailabilities(weeks, options) {
       ...[0, 2, 3].map((d) => ({
         startTime: nextMonday.add({ days: weekOffset + d }).toString(),
         endTime: nextMonday.add({ days: weekOffset + d }).toString(),
-      }))
+      })),
     )
     i++
   }

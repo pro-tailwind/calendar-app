@@ -2,7 +2,10 @@ export function Ribbon() {
   return (
     <div className="absolute -right-2 -top-2 z-10 aspect-square w-32 overflow-hidden rounded-sm">
       <div aria-hidden="true" className="absolute h-2 w-2 bg-violet-500"></div>
-      <div aria-hidden="true" className="absolute bottom-0 right-0 h-2 w-2 bg-violet-500"></div>
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 right-0 h-2 w-2 bg-violet-500"
+      ></div>
       <div className="absolute bottom-0 right-0 w-square-diagonal origin-bottom-right rotate-45">
         <a
           href="#"
@@ -11,7 +14,9 @@ export function Ribbon() {
           <span className="text-[10px] font-semibold uppercase leading-none tracking-wide text-violet-900/60">
             Powered by
           </span>
-          <span className="font-bold leading-none text-violet-900">Pro Tailwind</span>
+          <span className="font-bold leading-none text-violet-900">
+            Pro Tailwind
+          </span>
         </a>
       </div>
     </div>

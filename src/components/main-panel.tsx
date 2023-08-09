@@ -18,5 +18,5 @@ export function MainPanel({ children }) {
       </svg>
       <div className="relative h-full overflow-y-auto lg:-ml-4">{children}</div>
     </main>
-  );
+  )
 }

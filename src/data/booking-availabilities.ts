@@ -1,7 +1,7 @@
 export type Availability = {
-  startTime: string;
-  endTime: string;
-};
+  startTime: string
+  endTime: string
+}
 
 export const bookingAvailabilities: Availability[] = [
   // August
@@ -309,4 +309,4 @@ export const bookingAvailabilities: Availability[] = [
   { startTime: "2024-02-15T08:00", endTime: "2024-02-15T10:00" },
   { startTime: "2024-02-15T11:00", endTime: "2024-02-15T13:00" },
   { startTime: "2024-02-15T14:00", endTime: "2024-02-15T16:00" },
-];
+]

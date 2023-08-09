@@ -1,4 +1,4 @@
-import cx from 'classnames'
+import cx from "classnames"
 
 type Props = {
   className?: string
@@ -7,7 +7,7 @@ type Props = {
 export function Signature({ className: classNameAttribute }: Props) {
   return (
     <svg
-      className={cx('group', classNameAttribute)}
+      className={cx("group", classNameAttribute)}
       viewBox="0 0 102 55"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

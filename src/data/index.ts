@@ -1,1 +1,1 @@
-export * from "./booking-availabilities";
+export * from "./booking-availabilities"

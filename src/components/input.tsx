@@ -1,5 +1,5 @@
-import cx from 'classnames'
-import type { HTMLInputTypeAttribute, InputHTMLAttributes } from 'react'
+import cx from "classnames"
+import type { HTMLInputTypeAttribute, InputHTMLAttributes } from "react"
 
 // ------------------------------
 // Input
@@ -17,7 +17,7 @@ export function Input({
   name,
   id,
   label,
-  type = 'text',
+  type = "text",
   required = false,
   ...props
 }: InputProps & InputHTMLAttributes<HTMLInputElement>) {
@@ -26,16 +26,16 @@ export function Input({
       <label
         htmlFor={id}
         className={cx(
-          'relative',
+          "relative",
           required &&
-            'after:-right- after:absolute after:-top-1 after:h-2 after:w-2 after:content-["*"]'
+            'after:-right- after:absolute after:-top-1 after:h-2 after:w-2 after:content-["*"]',
         )}
       >
         {label}
       </label>
       <input
         className={cx(
-          'mt-1 block w-full rounded-lg px-4 py-2 text-slate-800 shadow-sm ring-1 ring-inset ring-slate-300 focus:outline-none focus:ring-2 focus:ring-primary-500'
+          "mt-1 block w-full rounded-lg px-4 py-2 text-slate-800 shadow-sm ring-1 ring-inset ring-slate-300 focus:outline-none focus:ring-2 focus:ring-primary-500",
         )}
         type={type}
         name={name}
@@ -71,9 +71,9 @@ export function Textarea({
       <label
         htmlFor={id}
         className={cx(
-          'relative',
+          "relative",
           required &&
-            'after:-right- after:absolute after:-top-1 after:h-2 after:w-2 after:content-["*"]'
+            'after:-right- after:absolute after:-top-1 after:h-2 after:w-2 after:content-["*"]',
         )}
       >
         {label}
