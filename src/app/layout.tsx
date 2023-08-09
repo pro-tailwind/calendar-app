@@ -2,14 +2,10 @@
 
 import { I18nProvider, useLocale } from 'react-aria'
 
-import { useTheme } from '@/context/theme'
-import { ThemeProvider } from '@/context/theme'
+import { ThemeProvider, useTheme } from '@/context/theme'
 import { SelectedDateProvider } from '@/context/selected-date'
 
-import { SidePanel } from '../components/side-panel'
-import { MainPanel } from '../components/main-panel'
-import { Ribbon } from '../components/ribbon'
-import { BackgroundDecoration } from '../components/background-decoration'
+import { Shell } from '@/components/shell'
 import { ThemeSwitcher } from '../components/theme-switcher'
 
 import '../styles/tailwind.css'
@@ -38,23 +34,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   )
 }
 
+// Body with active theme applied
 function Body({ children }) {
   const { theme } = useTheme()
   return (
     <body className="antialiased" data-theme={theme}>
       <ThemeSwitcher />
-      <div className="grid min-h-screen place-items-center">
-        <BackgroundDecoration />
-        <div className="mx-auto w-full max-w-5xl px-2 py-16 sm:px-6 lg:px-8 xl:max-w-7xl">
-          <div className="relative">
-            <Ribbon />
-            <div className="grid h-full rounded-2xl shadow-lg xl:grid-cols-[theme(width.100),1fr]">
-              <SidePanel />
-              <MainPanel>{children}</MainPanel>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Shell>{children}</Shell>
     </body>
   )
 }

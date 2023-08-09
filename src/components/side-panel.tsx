@@ -1,17 +1,17 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { ClockIcon, VideoCameraIcon } from '@heroicons/react/24/outline'
+import Link from "next/link";
+import Image from "next/image";
+import { ClockIcon, VideoCameraIcon } from "@heroicons/react/24/outline";
 
-import heroImage from '@/../public/img/social-large.jpg'
+import heroImage from "@/../public/img/social-large.jpg";
 
 export function SidePanel() {
   return (
-    <aside className="rounded-t-2xl border-8 border-b-0 border-white bg-white bg-opacity-90 backdrop-blur-md xl:rounded-l-2xl xl:rounded-tr-none xl:border-b-8 xl:border-r-0 xl:pr-4 [@supports(backdrop-filter:blur(0))]:bg-opacity-80">
-      <div className="-mt-16 py-8 px-4 sm:px-8 md:mt-0 xl:-mt-16 xl:px-10">
-        <div className="flex flex-col items-start gap-6 min-[400px]:items-center md:flex-row xl:flex-col xl:items-start">
+    <aside className="rounded-t-2xl border-8 border-b-0 border-white bg-white bg-opacity-90 backdrop-blur-md lg:rounded-l-2xl lg:rounded-tr-none lg:border-b-8 lg:border-r-0 lg:pr-4 [@supports(backdrop-filter:blur(0))]:bg-opacity-80">
+      <div className="-mt-16 px-4 py-8 sm:px-8 md:mt-0 lg:-mt-16 lg:px-6 xl:px-8">
+        <div className="flex flex-col items-start gap-6 min-[400px]:items-center md:flex-row lg:flex-col lg:items-start">
           <Link
             href="/"
-            className="group relative aspect-square h-32 overflow-hidden rounded-xl shadow-xl focus:outline-none focus:ring focus:ring-primary-400 focus:ring-offset-1 sm:aspect-video sm:h-40"
+            className="group relative aspect-square h-32 overflow-hidden rounded-xl shadow-xl focus:outline-none focus:ring focus:ring-primary-400 focus:ring-offset-1 sm:aspect-video sm:h-40 lg:h-32 xl:h-40"
           >
             <Image
               src={heroImage}
@@ -23,28 +23,32 @@ export function SidePanel() {
             <div className="absolute inset-0 rounded-xl ring-2 ring-inset ring-white/40 transition duration-500 group-hover:ring-primary-200/80"></div>
           </Link>
           <div className="min-[400px]:text-center md:text-left">
-            <h2 className="text-3xl font-extrabold">Tailwind Coaching</h2>
+            <h2 className="text-3xl font-extrabold lg:text-2xl xl:text-3xl">
+              Tailwind Coaching
+            </h2>
             <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-primary-600">
               with Simon Vrachliotis
             </p>
-            <p className="mt-4 xl:mt-8">Let's nerd out on advanced Tailwind CSS concepts and patterns.</p>
+            <p className="mt-4 xl:mt-6">
+              Let's nerd out on advanced Tailwind CSS concepts and patterns.
+            </p>
           </div>
         </div>
-        <dl className="mt-12 flex flex-col gap-y-2 gap-x-12 rounded-lg border border-slate-300 p-4 md:flex-row xl:flex-col">
-          <div className="flex items-center gap-x-4">
+        <dl className="mt-12 flex flex-col gap-x-12 gap-y-2 rounded-lg border border-slate-300 p-4 md:flex-row lg:flex-col lg:gap-y-6 xl:gap-y-2">
+          <div className="flex items-center gap-x-4 gap-y-2 lg:flex-col lg:items-start xl:flex-row">
             <dt>
               <ClockIcon className="h-5 w-5 text-slate-500" />
             </dt>
             <dd>2 hours</dd>
           </div>
-          <div className="flex gap-x-4 md:items-center xl:items-start">
+          <div className="flex gap-x-4 gap-y-2 md:items-center lg:flex-col lg:items-start xl:flex-row">
             <dt>
               <VideoCameraIcon className="h-5 w-5 text-slate-500" />
             </dt>
-            <dd>Link to videoconference to be provided upon confirmation</dd>
+            <dd>Link to video conference to be provided upon confirmation</dd>
           </div>
         </dl>
       </div>
     </aside>
-  )
+  );
 }
