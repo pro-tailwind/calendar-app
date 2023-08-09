@@ -1,4 +1,6 @@
-import { useRef, useMemo } from "react";
+"use client"
+
+import { useRef, useMemo } from "react"
 import {
   useCalendar,
   useCalendarGrid,
@@ -6,7 +8,7 @@ import {
   useButton,
   useLocale,
   useDateFormatter,
-} from "react-aria";
+} from "react-aria"
 import {
   createCalendar,
   getWeeksInMonth,
@@ -17,35 +19,40 @@ import {
   startOfWeek,
   today,
   CalendarDate,
-} from "@internationalized/date";
-import { useCalendarState } from "react-stately";
+} from "@internationalized/date"
+import { useCalendarState } from "react-stately"
 
-import cx from "classnames";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import { Availability } from "../data";
+import cx from "classnames"
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
+
+import { useBookingAvailabilities } from "@/context/booking-availabilities"
+import { useSelectedDate } from "@/context/selected-date"
 
 // ----------------------------
 // Main component
 // ----------------------------
-type CalendarProps = {
-  "aria-label": string;
-  value: CalendarDate;
-  minValue: CalendarDate;
-  maxValue: CalendarDate;
-  onChange: (value: CalendarDate) => void;
-  bookingAvailabilities: Availability[];
-};
 
-export function Calendar({ bookingAvailabilities, ...props }: CalendarProps) {
-  const { locale } = useLocale();
-  const state = useCalendarState({
+export function Calendar(props) {
+  const { locale } = useLocale()
+  const { selectedDate, setSelectedDate } = useSelectedDate()
+  const currentDay = today(getLocalTimeZone())
+
+  const propsWithDateState = {
     ...props,
+    value: selectedDate,
+    onChange: setSelectedDate,
+    minValue: currentDay,
+    maxValue: currentDay.add({ months: 6 }),
+  }
+
+  const state = useCalendarState({
+    ...propsWithDateState,
     locale,
     createCalendar,
-  });
-  const ref = useRef<HTMLDivElement>(null);
+  })
+  const ref = useRef<HTMLDivElement>(null)
   const { calendarProps, prevButtonProps, nextButtonProps, title } =
-    useCalendar(props, state);
+    useCalendar(propsWithDateState, state)
 
   return (
     <div {...calendarProps} ref={ref} className="calendar">
@@ -56,34 +63,31 @@ export function Calendar({ bookingAvailabilities, ...props }: CalendarProps) {
           <CalendarButton {...nextButtonProps} />
         </div>
       </div>
-      <CalendarGrid
-        state={state}
-        bookingAvailabilities={bookingAvailabilities}
-      />
+      <CalendarGrid state={state} />
     </div>
-  );
+  )
 }
 
 // ----------------------------
 // Calendar grid
 // ----------------------------
-function CalendarGrid({ bookingAvailabilities, state, ...props }) {
-  const { locale } = useLocale();
-  const { gridProps, headerProps } = useCalendarGrid(props, state);
-  const formatter = useDateFormatter({ weekday: "long" });
+function CalendarGrid({ state, ...props }) {
+  const { locale } = useLocale()
+  const { gridProps, headerProps } = useCalendarGrid(props, state)
+  const formatter = useDateFormatter({ weekday: "long" })
 
   // Get the full day strings for the calendar heading
   const daysOfWeek = useMemo(() => {
-    const weekStart = startOfWeek(today(state.timeZone), locale);
+    const weekStart = startOfWeek(today(state.timeZone), locale)
     return [...new Array(7).keys()].map((index) => {
-      const date = weekStart.add({ days: index });
-      const dateDay = date.toDate(state.timeZone);
-      return formatter.format(dateDay);
-    });
-  }, [locale, state.timeZone, formatter]);
+      const date = weekStart.add({ days: index })
+      const dateDay = date.toDate(state.timeZone)
+      return formatter.format(dateDay)
+    })
+  }, [locale, state.timeZone, formatter])
 
   // Get the number of weeks in the month so we can render the proper number of rows.
-  const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
+  const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale)
 
   return (
     <div className="-mx-4">
@@ -112,12 +116,7 @@ function CalendarGrid({ bookingAvailabilities, state, ...props }) {
                 .getDatesInWeek(weekIndex)
                 .map((date, i) =>
                   date ? (
-                    <CalendarCell
-                      key={i}
-                      state={state}
-                      date={date}
-                      bookingAvailabilities={bookingAvailabilities}
-                    />
+                    <CalendarCell key={i} state={state} date={date} />
                   ) : (
                     <td key={i} />
                   ),
@@ -127,14 +126,15 @@ function CalendarGrid({ bookingAvailabilities, state, ...props }) {
         </tbody>
       </table>
     </div>
-  );
+  )
 }
 
 // ----------------------------
 // Calendar cell
 // ----------------------------
-function CalendarCell({ state, date, bookingAvailabilities }) {
-  const ref = useRef<HTMLDivElement>(null);
+function CalendarCell({ state, date }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { bookingAvailabilities } = useBookingAvailabilities()
   const {
     cellProps,
     buttonProps,
@@ -142,18 +142,18 @@ function CalendarCell({ state, date, bookingAvailabilities }) {
     isOutsideVisibleRange,
     isDisabled,
     formattedDate,
-  } = useCalendarCell({ date }, state, ref);
+  } = useCalendarCell({ date }, state, ref)
 
   const hasAvailability = bookingAvailabilities.some((availability) =>
     isSameDay(parseDateTime(availability.startTime), date),
-  );
-  const isCurrentDay = isToday(date, getLocalTimeZone());
+  )
+  const isCurrentDay = isToday(date, getLocalTimeZone())
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Styles lookup
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const baseClasses =
-    "relative w-12 max-w-full aspect-square rounded-full grid place-items-center focus:outline-none focus:ring focus:ring-offset-1 focus:ring-primary-400";
+    "relative w-12 max-w-full aspect-square rounded-full grid place-items-center focus:outline-none focus:ring focus:ring-offset-1 focus:ring-primary-400"
 
   // Possible UI "states" of a calendar day:
   type Status =
@@ -161,14 +161,14 @@ function CalendarCell({ state, date, bookingAvailabilities }) {
     | "DISABLED"
     | "VACANCY"
     | "NO_VACANCY"
-    | "TODAY_NO_VACANCY";
+    | "TODAY_NO_VACANCY"
 
   const getStatus: () => Status = () => {
-    if (isSelected) return "SELECTED";
-    if (isDisabled) return "DISABLED";
-    if (hasAvailability) return "VACANCY";
-    return isCurrentDay ? "TODAY_NO_VACANCY" : "NO_VACANCY";
-  };
+    if (isSelected) return "SELECTED"
+    if (isDisabled) return "DISABLED"
+    if (hasAvailability) return "VACANCY"
+    return isCurrentDay ? "TODAY_NO_VACANCY" : "NO_VACANCY"
+  }
 
   const statusClasses: Record<Status, string> = {
     SELECTED: "text-white bg-primary-600 font-bold bg-stripes",
@@ -177,7 +177,7 @@ function CalendarCell({ state, date, bookingAvailabilities }) {
     NO_VACANCY: "text-slate-800 hover:bg-slate-100",
     TODAY_NO_VACANCY:
       "text-primary-700 font-bold hover:bg-slate-100 hover:text-slate-800",
-  };
+  }
 
   // ------------------------------
   // Component render
@@ -201,17 +201,17 @@ function CalendarCell({ state, date, bookingAvailabilities }) {
         )}
       </div>
     </td>
-  );
+  )
 }
 
 // ----------------------------
 // Month switcher buttons
 // ----------------------------
 function CalendarButton(props) {
-  const ref = useRef<HTMLButtonElement>(null);
-  const { buttonProps } = useButton(props, ref);
+  const ref = useRef<HTMLButtonElement>(null)
+  const { buttonProps } = useButton(props, ref)
 
-  const direction = buttonProps["aria-label"];
+  const direction = buttonProps["aria-label"]
 
   return (
     <button
@@ -225,5 +225,5 @@ function CalendarButton(props) {
         <ChevronRightIcon className="ml-0.5 h-6 w-6" />
       )}
     </button>
-  );
+  )
 }

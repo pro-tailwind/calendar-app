@@ -1,7 +1,7 @@
-import { SidePanel } from "./side-panel";
-import { MainPanel } from "./main-panel";
-import { BackgroundDecoration } from "./background-decoration";
-import { Ribbon } from "./ribbon";
+import { SidePanel } from "./side-panel"
+import { MainPanel } from "./main-panel"
+import { BackgroundDecoration } from "./background-decoration"
+import { Ribbon } from "./ribbon"
 
 export function Shell({ children }) {
   return (
@@ -17,5 +17,5 @@ export function Shell({ children }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

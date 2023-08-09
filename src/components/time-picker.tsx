@@ -1,30 +1,30 @@
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import cx from "classnames";
-import { useDateFormatter } from "react-aria";
+"use client"
+
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import cx from "classnames"
+import { useDateFormatter } from "react-aria"
 import {
   getLocalTimeZone,
   isSameDay,
   parseDateTime,
-} from "@internationalized/date";
+} from "@internationalized/date"
 
-import { Button } from "./button";
-import { Availability } from "../data";
+import { Button } from "./button"
+import { Availability } from "../data"
 
-import { useSelectedDate } from "@/context/selected-date";
+import { useSelectedDate } from "@/context/selected-date"
+import { useBookingAvailabilities } from "@/context/booking-availabilities"
 
-type TimePickerProps = {
-  bookingAvailabilities: Availability[];
-};
-
-export function TimePicker({ bookingAvailabilities }: TimePickerProps) {
-  const { selectedDate } = useSelectedDate();
-  const [selectedTime, setSelectedTime] = useState(null);
-  const formatter = useDateFormatter({ dateStyle: "full" });
+export function TimePicker() {
+  const { selectedDate } = useSelectedDate()
+  const { bookingAvailabilities } = useBookingAvailabilities()
+  const [selectedTime, setSelectedTime] = useState(null)
+  const formatter = useDateFormatter({ dateStyle: "full" })
   const availabilities = bookingAvailabilities.filter((availability) =>
     isSameDay(parseDateTime(availability.startTime), selectedDate),
-  );
-  const hasAvailability = availabilities.length > 0;
+  )
+  const hasAvailability = availabilities.length > 0
   return (
     <div className="relative grid h-full grid-rows-[auto,1fr] overflow-hidden px-4 sm:px-8 lg:px-6 xl:px-10">
       {/* Scroll  mask */}
@@ -69,7 +69,7 @@ export function TimePicker({ bookingAvailabilities }: TimePickerProps) {
                   >
                     {time}
                   </li>
-                );
+                )
               })}
             </ul>
           )}
@@ -81,7 +81,7 @@ export function TimePicker({ bookingAvailabilities }: TimePickerProps) {
         )}
       </div>
     </div>
-  );
+  )
 }
 
 // ------------------------------
@@ -89,9 +89,9 @@ export function TimePicker({ bookingAvailabilities }: TimePickerProps) {
 // ------------------------------
 
 function TimeSlot({ availability, selectedTime, setSelectedTime }) {
-  const router = useRouter();
-  const timeFormatter = useDateFormatter({ timeStyle: "short" });
-  const isSelected = selectedTime === availability.startTime;
+  const router = useRouter()
+  const timeFormatter = useDateFormatter({ timeStyle: "short" })
+  const isSelected = selectedTime === availability.startTime
   return (
     <li
       className={cx(
@@ -132,5 +132,5 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
         </Button>
       </div>
     </li>
-  );
+  )
 }
