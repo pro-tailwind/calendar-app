@@ -106,11 +106,12 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
         )}
       >
         <Button
-          block
-          focusInset
           look={isSelected ? "ghost" : "secondary"}
           disabled={isSelected}
-          className={cx(isSelected && "text-white")}
+          className={cx(
+            "w-full focus:ring-inset focus:ring-offset-0",
+            isSelected && "text-white",
+          )}
           onClick={() => setSelectedTime(availability.startTime)}
         >
           {timeFormatter.format(new Date(availability.startTime))}
@@ -121,8 +122,8 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
           size="small"
           look="secondary"
           hasIcon
-          block
           tabIndex={isSelected ? 0 : -1}
+          className="w-full focus:ring-inset focus:ring-offset-0"
           onClick={() =>
             router.push(`/booking-details?time=${availability.startTime}`)
           }
