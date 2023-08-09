@@ -110,7 +110,7 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
           focusInset
           look={isSelected ? "ghost" : "secondary"}
           disabled={isSelected}
-          className={isSelected && "text-white"}
+          className={cx(isSelected && "text-white")}
           onClick={() => setSelectedTime(availability.startTime)}
         >
           {timeFormatter.format(new Date(availability.startTime))}

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useRef, useMemo } from "react";
 import {
   useCalendar,
   useCalendarGrid,
@@ -6,7 +6,7 @@ import {
   useButton,
   useLocale,
   useDateFormatter,
-} from 'react-aria'
+} from "react-aria";
 import {
   createCalendar,
   getWeeksInMonth,
@@ -17,34 +17,35 @@ import {
   startOfWeek,
   today,
   CalendarDate,
-} from '@internationalized/date'
-import { useCalendarState } from 'react-stately'
+} from "@internationalized/date";
+import { useCalendarState } from "react-stately";
 
-import cx from 'classnames'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
-import { Availability } from '../data'
+import cx from "classnames";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { Availability } from "../data";
 
 // ----------------------------
 // Main component
 // ----------------------------
 type CalendarProps = {
-  'aria-label': string
-  value: CalendarDate
-  minValue: CalendarDate
-  maxValue: CalendarDate
-  onChange: () => void
-  bookingAvailabilities: Availability[]
-}
+  "aria-label": string;
+  value: CalendarDate;
+  minValue: CalendarDate;
+  maxValue: CalendarDate;
+  onChange: (value: CalendarDate) => void;
+  bookingAvailabilities: Availability[];
+};
 
 export function Calendar({ bookingAvailabilities, ...props }: CalendarProps) {
-  const { locale } = useLocale()
+  const { locale } = useLocale();
   const state = useCalendarState({
     ...props,
     locale,
     createCalendar,
-  })
-  const ref = React.useRef()
-  const { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar(props, state)
+  });
+  const ref = useRef<HTMLDivElement>(null);
+  const { calendarProps, prevButtonProps, nextButtonProps, title } =
+    useCalendar(props, state);
 
   return (
     <div {...calendarProps} ref={ref} className="calendar">
@@ -55,35 +56,41 @@ export function Calendar({ bookingAvailabilities, ...props }: CalendarProps) {
           <CalendarButton {...nextButtonProps} />
         </div>
       </div>
-      <CalendarGrid state={state} bookingAvailabilities={bookingAvailabilities} />
+      <CalendarGrid
+        state={state}
+        bookingAvailabilities={bookingAvailabilities}
+      />
     </div>
-  )
+  );
 }
 
 // ----------------------------
 // Calendar grid
 // ----------------------------
 function CalendarGrid({ bookingAvailabilities, state, ...props }) {
-  const { locale } = useLocale()
-  const { gridProps, headerProps } = useCalendarGrid(props, state)
-  const formatter = useDateFormatter({ weekday: 'long' })
+  const { locale } = useLocale();
+  const { gridProps, headerProps } = useCalendarGrid(props, state);
+  const formatter = useDateFormatter({ weekday: "long" });
 
   // Get the full day strings for the calendar heading
-  const daysOfWeek = React.useMemo(() => {
-    const weekStart = startOfWeek(today(state.timeZone), locale)
+  const daysOfWeek = useMemo(() => {
+    const weekStart = startOfWeek(today(state.timeZone), locale);
     return [...new Array(7).keys()].map((index) => {
-      const date = weekStart.add({ days: index })
-      const dateDay = date.toDate(state.timeZone)
-      return formatter.format(dateDay)
-    })
-  }, [locale, state.timeZone, formatter])
+      const date = weekStart.add({ days: index });
+      const dateDay = date.toDate(state.timeZone);
+      return formatter.format(dateDay);
+    });
+  }, [locale, state.timeZone, formatter]);
 
   // Get the number of weeks in the month so we can render the proper number of rows.
-  const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale)
+  const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
 
   return (
     <div className="-mx-4">
-      <table {...gridProps} className="mt-4 w-full table-fixed border-separate border-spacing-2">
+      <table
+        {...gridProps}
+        className="mt-4 w-full table-fixed border-separate border-spacing-2"
+      >
         <thead {...headerProps}>
           <tr>
             {daysOfWeek.map((day, index) => (
@@ -113,52 +120,64 @@ function CalendarGrid({ bookingAvailabilities, state, ...props }) {
                     />
                   ) : (
                     <td key={i} />
-                  )
+                  ),
                 )}
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
 // ----------------------------
 // Calendar cell
 // ----------------------------
 function CalendarCell({ state, date, bookingAvailabilities }) {
-  const ref = React.useRef()
-  const { cellProps, buttonProps, isSelected, isOutsideVisibleRange, isDisabled, formattedDate } =
-    useCalendarCell({ date }, state, ref)
+  const ref = useRef<HTMLDivElement>(null);
+  const {
+    cellProps,
+    buttonProps,
+    isSelected,
+    isOutsideVisibleRange,
+    isDisabled,
+    formattedDate,
+  } = useCalendarCell({ date }, state, ref);
 
   const hasAvailability = bookingAvailabilities.some((availability) =>
-    isSameDay(parseDateTime(availability.startTime), date)
-  )
-  const isCurrentDay = isToday(date, getLocalTimeZone())
+    isSameDay(parseDateTime(availability.startTime), date),
+  );
+  const isCurrentDay = isToday(date, getLocalTimeZone());
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Styles lookup
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const baseClasses =
-    'relative w-12 max-w-full aspect-square rounded-full grid place-items-center focus:outline-none focus:ring focus:ring-offset-1 focus:ring-primary-400'
+    "relative w-12 max-w-full aspect-square rounded-full grid place-items-center focus:outline-none focus:ring focus:ring-offset-1 focus:ring-primary-400";
 
   // Possible UI "states" of a calendar day:
-  type Status = 'SELECTED' | 'DISABLED' | 'VACANCY' | 'NO_VACANCY' | 'TODAY_NO_VACANCY'
+  type Status =
+    | "SELECTED"
+    | "DISABLED"
+    | "VACANCY"
+    | "NO_VACANCY"
+    | "TODAY_NO_VACANCY";
 
   const getStatus: () => Status = () => {
-    if (isSelected) return 'SELECTED'
-    if (isDisabled) return 'DISABLED'
-    if (hasAvailability) return 'VACANCY'
-    return isCurrentDay ? 'TODAY_NO_VACANCY' : 'NO_VACANCY'
-  }
+    if (isSelected) return "SELECTED";
+    if (isDisabled) return "DISABLED";
+    if (hasAvailability) return "VACANCY";
+    return isCurrentDay ? "TODAY_NO_VACANCY" : "NO_VACANCY";
+  };
 
   const statusClasses: Record<Status, string> = {
-    SELECTED: 'text-white bg-primary-600 font-bold bg-stripes',
-    DISABLED: 'text-slate-300 pointer-events-none',
-    VACANCY: 'text-primary-700 bg-primary-100 font-bold hover:bg-primary-200',
-    NO_VACANCY: 'text-slate-800 hover:bg-slate-100',
-    TODAY_NO_VACANCY: 'text-primary-700 font-bold hover:bg-slate-100 hover:text-slate-800',
-  }
+    SELECTED: "text-white bg-primary-600 font-bold bg-stripes",
+    DISABLED: "text-slate-300 pointer-events-none",
+    VACANCY: "text-primary-700 bg-primary-100 font-bold hover:bg-primary-200",
+    NO_VACANCY: "text-slate-800 hover:bg-slate-100",
+    TODAY_NO_VACANCY:
+      "text-primary-700 font-bold hover:bg-slate-100 hover:text-slate-800",
+  };
 
   // ------------------------------
   // Component render
@@ -175,24 +194,24 @@ function CalendarCell({ state, date, bookingAvailabilities }) {
         {isToday(date, getLocalTimeZone()) && (
           <span
             className={cx(
-              'absolute bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full',
-              isSelected ? 'bg-white' : 'bg-primary-600'
+              "absolute bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full",
+              isSelected ? "bg-white" : "bg-primary-600",
             )}
           ></span>
         )}
       </div>
     </td>
-  )
+  );
 }
 
 // ----------------------------
 // Month switcher buttons
 // ----------------------------
 function CalendarButton(props) {
-  const ref = React.useRef()
-  const { buttonProps } = useButton(props, ref)
+  const ref = useRef<HTMLButtonElement>(null);
+  const { buttonProps } = useButton(props, ref);
 
-  const direction = buttonProps['aria-label']
+  const direction = buttonProps["aria-label"];
 
   return (
     <button
@@ -200,11 +219,11 @@ function CalendarButton(props) {
       {...buttonProps}
       className="grid aspect-square w-12 max-w-full place-items-center rounded-full border border-slate-300 text-slate-400 hover:text-primary-600 focus:outline-none focus:ring focus:ring-primary-400 focus:ring-offset-1 disabled:border-slate-200 disabled:text-slate-300 disabled:hover:text-slate-300"
     >
-      {direction === 'Previous' ? (
+      {direction === "Previous" ? (
         <ChevronLeftIcon className="-ml-0.5 h-6 w-6" />
       ) : (
         <ChevronRightIcon className="ml-0.5 h-6 w-6" />
       )}
     </button>
-  )
+  );
 }
