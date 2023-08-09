@@ -1,5 +1,5 @@
 import React from 'react'
-import cx from 'classnames'
+import { twMerge } from 'tailwind-merge'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 
 // ------------------------------
@@ -8,6 +8,7 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid'
 type ButtonProps = {
   look?: 'primary' | 'secondary' | 'ghost'
   size?: 'large' | 'small'
+  className?: string
   hasIcon?: boolean
   isLoading?: boolean
   block?: boolean
@@ -24,10 +25,11 @@ export function Button({
   isLoading = false,
   block = false,
   focusInset = false,
+  className,
   children,
   ...restProps
 }: ButtonProps & React.ComponentProps<'button'>) {
-  const baseClasses = cx(
+  const baseClasses = twMerge(
     'group font-semibold flex items-stretch focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none',
     block ? 'w-full' : 'w-auto',
     focusInset ? 'focus:ring-inset' : 'focus:ring-offset-2'
@@ -57,12 +59,13 @@ export function Button({
   if (look !== 'primary' || hasIcon === false) {
     return (
       <button
-        className={cx(
+        className={twMerge(
           baseClasses,
           alignClasses,
           spacingClasses[size],
           radiusClasses[size],
-          colorClasses[look]
+          colorClasses[look],
+          className
         )}
         {...restProps}
       >
@@ -74,7 +77,7 @@ export function Button({
   // ------------------------------
   // Button with icon
   // ------------------------------
-  const iconContainerBaseClasses = cx(
+  const iconContainerBaseClasses = twMerge(
     'grid aspect-square place-items-center rounded-r-lg group-disabled:bg-transparent overflow-hidden',
     size === 'small' ? 'px-1' : 'px-3'
   )
@@ -82,7 +85,7 @@ export function Button({
   alignClasses = 'justify-between'
 
   const iconContainerClasses: Omit<Record<ButtonProps['look'], string>, 'ghost'> = {
-    primary: cx(
+    primary: twMerge(
       'bg-primary-400/50 group-hover:bg-primary-500/50 focus:bg-primary-400/50 group-disabled:pointer-events-none',
       size === 'large' && !isLoading && 'group-hover:bg-stripes'
     ),
@@ -91,11 +94,11 @@ export function Button({
 
   return (
     <button
-      className={cx(baseClasses, alignClasses, colorClasses[look], radiusClasses[size])}
+      className={twMerge(baseClasses, alignClasses, colorClasses[look], radiusClasses[size])}
       {...restProps}
     >
-      <span className={cx(spacingClasses[size])}>{children}</span>
-      <span className={cx(iconContainerBaseClasses, iconContainerClasses[look])}>
+      <span className={twMerge(spacingClasses[size])}>{children}</span>
+      <span className={twMerge(iconContainerBaseClasses, iconContainerClasses[look])}>
         {isLoading ? (
           <LoadingSpinner size={size} />
         ) : (
@@ -112,7 +115,7 @@ export function Button({
 function LoadingSpinner({ size }) {
   return (
     <svg
-      className={cx('animate-spin text-inherit', size === 'large' ? 'h-5 w-5' : 'm-1 h-4 w-4')}
+      className={twMerge('animate-spin text-inherit', size === 'large' ? 'h-5 w-5' : 'm-1 h-4 w-4')}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
