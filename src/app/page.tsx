@@ -1,12 +1,19 @@
+'use client'
+
 import { Calendar } from '../components/calendar'
 import { TimePicker } from '../components/time-picker'
 import { TimezonePicker } from '../components/timezone-picker'
 import { getLocalTimeZone, today } from '@internationalized/date'
 
+import { useSelectedDate } from '@/context/selected-date'
+
 import { bookingAvailabilities } from '../data'
 
-export default function Homepage({ selectedDate, setSelectedDate }) {
+export default function Homepage() {
   const currentDay = today(getLocalTimeZone())
+
+  const { selectedDate, setSelectedDate } = useSelectedDate()
+
   return (
     <div className="mx-auto grid h-full max-w-lg grid-rows-[auto,1fr] gap-8 md:max-w-none">
       <div className="mt-10 px-4 sm:px-8 xl:px-10">
@@ -40,7 +47,7 @@ export default function Homepage({ selectedDate, setSelectedDate }) {
           ------------------------------
         */}
         <div className="min-h-0">
-          <TimePicker selectedDate={selectedDate} bookingAvailabilities={bookingAvailabilities} />
+          <TimePicker bookingAvailabilities={bookingAvailabilities} />
         </div>
       </div>
     </div>

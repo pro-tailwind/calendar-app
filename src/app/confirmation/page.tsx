@@ -1,14 +1,18 @@
-import { useRouter } from 'next/router'
+'use client'
+
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useDateFormatter } from 'react-aria'
 
-import { Signature } from '../components/signature'
+import { Signature } from '@/components/signature'
 
 export default function BookingDetailsPage() {
   const router = useRouter()
   const dateFormatter = useDateFormatter({ dateStyle: 'full' })
   const timeFormatter = useDateFormatter({ timeStyle: 'short' })
 
-  const { time } = router.query
+  const searchParams = useSearchParams()
+  const time = searchParams?.get('time')
+
   // TypeScript hints that time is `string | string[]` but we want on only one string...
   const timeString = Array.isArray(time) ? time[0] : time
 

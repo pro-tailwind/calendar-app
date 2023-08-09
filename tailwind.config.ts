@@ -12,7 +12,7 @@ import bgStripesPlugin from './src/plugins/bg-stripes'
 // Tailwind config
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const config = {
-  content: ['./src/{pages,components}/**/*.{js,jsx,ts,tsx}'],
+  content: ['./src/{app,pages,components}/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {

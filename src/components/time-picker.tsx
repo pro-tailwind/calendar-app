@@ -1,18 +1,20 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import cx from 'classnames'
 import { useDateFormatter } from 'react-aria'
-import { CalendarDate, getLocalTimeZone, isSameDay, parseDateTime } from '@internationalized/date'
+import { getLocalTimeZone, isSameDay, parseDateTime } from '@internationalized/date'
 
 import { Button } from './button'
 import { Availability } from '../data'
 
+import { useSelectedDate } from '@/context/selected-date'
+
 type TimePickerProps = {
-  selectedDate: CalendarDate
   bookingAvailabilities: Availability[]
 }
 
-export function TimePicker({ selectedDate, bookingAvailabilities }: TimePickerProps) {
+export function TimePicker({ bookingAvailabilities }: TimePickerProps) {
+  const { selectedDate } = useSelectedDate()
   const [selectedTime, setSelectedTime] = useState(null)
   const formatter = useDateFormatter({ dateStyle: 'full' })
   const availabilities = bookingAvailabilities.filter((availability) =>

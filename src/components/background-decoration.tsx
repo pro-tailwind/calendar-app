@@ -1,4 +1,7 @@
-export function BackgroundDecoration({ selectedDate }) {
+import { useSelectedDate } from "@/context/selected-date"
+
+export function BackgroundDecoration() {
+  const { selectedDate } = useSelectedDate()
   return (
     <div
       aria-hidden="true"

@@ -9,13 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.7",
-    "@heroicons/react": "^2.0.13",
-    "@internationalized/date": "^3.0.2",
+    "@headlessui/react": "^1.7.16",
+    "@heroicons/react": "^2.0.18",
+    "@internationalized/date": "^3.3.0",
     "classnames": "^2.3.1",
     "next": "^13.4.13",
     "react": "^18.2.0",
-    "react-aria": "^3.18.0",
+    "react-aria": "^3.26.0",
     "react-dom": "^18.2.0",
     "react-stately": "^3.16.0",
     "tailwind-merge": "^1.14.0"

@@ -1,19 +1,19 @@
-import { Fragment, useEffect } from 'react'
-import cx from 'classnames'
+'use client'
 
+import { Fragment } from 'react'
+import cx from 'classnames'
 import { Listbox, Transition } from '@headlessui/react'
 import { ChevronDownIcon, CheckIcon, SwatchIcon } from '@heroicons/react/20/solid'
 
-export function ThemeSwitcher({ activeTheme, setActiveTheme }) {
-  useEffect(() => {
-    document.querySelector('body').setAttribute('data-theme', activeTheme)
-  }, [activeTheme])
+import { useTheme } from '@/context/theme'
 
+export function ThemeSwitcher() {
+  const { theme, setTheme } = useTheme()
   const themesList = ['ocean', 'rainforest', 'candy']
 
   return (
     <div className="fixed top-2 right-2 z-20 text-right">
-      <Listbox value={activeTheme} onChange={setActiveTheme}>
+      <Listbox value={theme} onChange={setTheme}>
         <div className="relative mt-1">
           <Listbox.Button className="inline-flex w-full justify-center rounded-md bg-primary-600 px-4 py-2 hover:bg-primary-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50">
             <SwatchIcon className="h-5 w-5 text-primary-100" />
