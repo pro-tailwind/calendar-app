@@ -7,11 +7,12 @@ import {
   Dispatch,
   SetStateAction,
 } from "react"
-import { today, getLocalTimeZone, CalendarDate } from "@internationalized/date"
+import { today, getLocalTimeZone } from "@internationalized/date"
+import { DateValue } from "react-aria"
 
 export const SelectedDateContext = createContext<{
-  selectedDate: CalendarDate
-  setSelectedDate: Dispatch<SetStateAction<CalendarDate>>
+  selectedDate: DateValue
+  setSelectedDate: Dispatch<SetStateAction<DateValue>>
 }>({
   selectedDate: today(getLocalTimeZone()),
   setSelectedDate: () => {},
