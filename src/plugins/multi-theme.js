@@ -1,5 +1,5 @@
-const plugin = require('tailwindcss/plugin')
-const hexRgb = require('hex-rgb')
+const plugin = require("tailwindcss/plugin")
+const hexRgb = require("hex-rgb")
 
 // ------------------------------
 // Helper functions
@@ -15,10 +15,10 @@ function getRgbChannels(hex) {
 function getCssVarsDeclarations(input, path = [], output = {}) {
   Object.entries(input).forEach(([key, value]) => {
     const newPath = path.concat(key)
-    if (typeof value !== 'string') {
+    if (typeof value !== "string") {
       getCssVarsDeclarations(value, newPath, output)
     } else {
-      output[`--${newPath.join('-')}`] = getRgbChannels(value)
+      output[`--${newPath.join("-")}`] = getRgbChannels(value)
     }
   })
   return output
@@ -28,10 +28,12 @@ function getCssVarsDeclarations(input, path = [], output = {}) {
 function getColorUtilitiesWithCssVarsReference(input, path = [], output = {}) {
   Object.entries(input).forEach(([key, value]) => {
     const newPath = path.concat(key)
-    if (typeof value !== 'string') {
+    if (typeof value !== "string") {
       getColorUtilitiesWithCssVarsReference(value, newPath, output)
     } else {
-      output[newPath.join('-')] = `rgb(var(--${newPath.join('-')}) / <alpha-value>)`
+      output[newPath.join("-")] = `rgb(var(--${newPath.join(
+        "-",
+      )}) / <alpha-value>)`
     }
   })
   return output
@@ -46,11 +48,11 @@ const multiThemePlugin = plugin.withOptions(
     const themes = options?.themes
     if (!themes)
       throw new Error(
-        'Please pass a `themes` object as an option when registering the multiTheme plugin.'
+        "Please pass a `themes` object as an option when registering the multiTheme plugin.",
       )
     return function ({ addBase }) {
       addBase({
-        ':root': getCssVarsDeclarations(Object.values(themes)[0]),
+        ":root": getCssVarsDeclarations(Object.values(themes)[0]),
       })
 
       Object.entries(themes).forEach(([key, value]) => {
@@ -65,11 +67,13 @@ const multiThemePlugin = plugin.withOptions(
     return {
       theme: {
         extend: {
-          colors: getColorUtilitiesWithCssVarsReference(Object.values(themes)[0]),
+          colors: getColorUtilitiesWithCssVarsReference(
+            Object.values(themes)[0],
+          ),
         },
       },
     }
-  }
+  },
 )
 
 module.exports = multiThemePlugin

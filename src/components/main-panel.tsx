@@ -1,12 +1,12 @@
 export function MainPanel({ children }) {
   return (
-    <main className="relative rounded-b-2xl bg-white shadow-[0px_-30px_50px_-50px_rgba(0,0,0,0.2)] md:h-[700px] xl:rounded-r-2xl xl:rounded-bl-none xl:shadow-[-60px_0_50px_-50px_rgba(0,0,0,0.2)]">
+    <main className="relative rounded-b-2xl bg-white shadow-[0px_-30px_50px_-50px_rgba(0,0,0,0.2)] md:h-[700px] lg:rounded-r-2xl lg:rounded-bl-none lg:shadow-[-60px_0_50px_-50px_rgba(0,0,0,0.2)]">
       {/*  
         This is pretty wild, but I think it works pretty well.
         It's using a <mask> in SVG to effectively "cut off" a portion of a white rectangle.
         Works similarly to how the "union" / "exclusion" tools work in Figma!
       */}
-      <svg className="absolute top-0 -left-4 hidden h-full w-4 xl:block">
+      <svg className="absolute -left-4 top-0 hidden h-full w-4 lg:block">
         <mask id="cutoff">
           <rect className="h-full w-full fill-white"></rect>
           <path
@@ -16,7 +16,7 @@ export function MainPanel({ children }) {
         </mask>
         <rect className="h-full w-full fill-white" mask="url(#cutoff)"></rect>
       </svg>
-      <div className="relative h-full overflow-y-auto xl:-ml-4">{children}</div>
+      <div className="relative h-full overflow-y-auto lg:-ml-4">{children}</div>
     </main>
   )
 }
