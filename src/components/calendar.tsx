@@ -19,7 +19,6 @@ import {
 } from "@internationalized/date"
 import cx from "classnames"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
-import { tv } from "tailwind-variants"
 
 import { useBookingAvailabilities } from "@/context/booking-availabilities"
 import { useSelectedDate } from "@/context/selected-date"
