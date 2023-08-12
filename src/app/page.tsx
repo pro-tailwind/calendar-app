@@ -11,11 +11,6 @@ export default function Homepage() {
         </h1>
       </div>
       <div className="grid min-h-0 md:grid-cols-[1fr,360px] md:divide-x lg:grid-cols-[1fr,40%] xl:grid-cols-[1fr,360px]">
-        {/* 
-          ------------------------------
-          Calendar section 
-          ------------------------------
-        */}
         <div>
           <div className="px-6 sm:px-8 xl:px-10">
             <Calendar />
@@ -24,12 +19,6 @@ export default function Homepage() {
             <TimezonePicker />
           </div>
         </div>
-
-        {/* 
-          ------------------------------
-          Timepicker
-          ------------------------------
-        */}
         <div className="min-h-0">
           <TimePicker />
         </div>
