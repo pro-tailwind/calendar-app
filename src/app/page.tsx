@@ -1,5 +1,4 @@
 import { Calendar } from "../components/calendar"
-import { CalendarDemo } from "../components/new-calendar"
 import { TimePicker } from "../components/time-picker"
 import { TimezonePicker } from "../components/timezone-picker"
 
@@ -19,8 +18,7 @@ export default function Homepage() {
         */}
         <div>
           <div className="px-6 sm:px-8 xl:px-10">
-            <CalendarDemo />
-            {/* <Calendar aria-label="Availability calendar" /> */}
+            <Calendar />
           </div>
           <div className="p-4 sm:p-8 xl:p-10">
             <TimezonePicker />
