@@ -11,25 +11,14 @@ export default function Homepage() {
         </h1>
       </div>
       <div className="grid min-h-0 md:grid-cols-[1fr,360px] md:divide-x lg:grid-cols-[1fr,40%] xl:grid-cols-[1fr,360px]">
-        {/* 
-          ------------------------------
-          Calendar section 
-          ------------------------------
-        */}
         <div>
           <div className="px-6 sm:px-8 xl:px-10">
-            <Calendar aria-label="Availability calendar" />
+            <Calendar />
           </div>
           <div className="p-4 sm:p-8 xl:p-10">
             <TimezonePicker />
           </div>
         </div>
-
-        {/* 
-          ------------------------------
-          Timepicker
-          ------------------------------
-        */}
         <div className="min-h-0">
           <TimePicker />
         </div>

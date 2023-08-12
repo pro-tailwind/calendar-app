@@ -34,20 +34,25 @@ export function SidePanel() {
             </p>
           </div>
         </div>
-        <dl className="mt-12 flex flex-col gap-x-12 gap-y-2 rounded-lg border border-slate-300 p-4 md:flex-row lg:flex-col lg:gap-y-6 xl:gap-y-2">
-          <div className="flex items-center gap-x-4 gap-y-2 lg:flex-col lg:items-start xl:flex-row">
-            <dt>
-              <ClockIcon className="h-5 w-5 text-slate-500" />
-            </dt>
-            <dd>2 hours</dd>
-          </div>
-          <div className="flex gap-x-4 gap-y-2 md:items-center lg:flex-col lg:items-start xl:flex-row">
-            <dt>
-              <VideoCameraIcon className="h-5 w-5 text-slate-500" />
-            </dt>
-            <dd>Link to video conference to be provided upon confirmation</dd>
-          </div>
-        </dl>
+        <div className="relative mt-12">
+          {/* Mix blend mode "fake" border */}
+          <div className="absolute inset-0 rounded-lg border-2 border-primary-400 mix-blend-color"></div>
+
+          <dl className="m-px flex flex-col gap-x-12 gap-y-2 p-4 md:flex-row lg:flex-col lg:gap-y-6 xl:gap-y-2">
+            <div className="flex items-center gap-x-4 gap-y-2 lg:flex-col lg:items-start xl:flex-row">
+              <dt>
+                <ClockIcon className="h-5 w-5 text-slate-500" />
+              </dt>
+              <dd>2 hours</dd>
+            </div>
+            <div className="flex gap-x-4 gap-y-2 md:items-center lg:flex-col lg:items-start xl:flex-row">
+              <dt>
+                <VideoCameraIcon className="h-5 w-5 text-slate-500" />
+              </dt>
+              <dd>Link to video conference to be provided upon confirmation</dd>
+            </div>
+          </dl>
+        </div>
       </div>
     </aside>
   )
