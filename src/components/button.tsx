@@ -1,5 +1,6 @@
 import React from "react"
 import { twMerge } from "tailwind-merge"
+import { tv } from "tailwind-variants"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 
 // ------------------------------
@@ -9,9 +10,42 @@ type ButtonProps = {
   look?: "primary" | "secondary" | "ghost"
   size?: "large" | "small"
   className?: string
-  hasIcon?: boolean
-  isLoading?: boolean
 }
+
+const baseClasses =
+  "group font-semibold flex items-stretch justify-center focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none"
+
+const lookClasses: Record<NonNullable<ButtonProps["look"]>, string> = {
+  primary:
+    "bg-primary-500 hover:bg-primary-600 text-white shadow-md disabled:shadow-none",
+  secondary: "bg-primary-100 hover:bg-primary-200 text-primary-700",
+  ghost: "bg-transparent text-white disabled:opacity-100",
+}
+
+const sizeClasses: Record<NonNullable<ButtonProps["size"]>, string> = {
+  small: "px-3 py-1 rounded",
+  large: "px-5 py-3 rounded-lg",
+}
+
+// const buttonStyles = tv({
+//   base: "group font-semibold flex items-stretch focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none",
+//   variants: {
+//     size: {
+//       small: "px-3 py-1 rounded",
+//       large: "px-5 py-3 rounded-lg",
+//     },
+//     look: {
+//       primary:
+//         "bg-primary-500 hover:bg-primary-600 text-white shadow-md disabled:shadow-none",
+//       secondary: "bg-primary-100 hover:bg-primary-200 text-primary-700",
+//       ghost: "bg-transparent text-white disabled:opacity-100",
+//     },
+//   },
+//   slots: {
+//     iconContainer:
+//       "grid aspect-square place-items-center rounded-r-lg group-disabled:bg-transparent overflow-hidden",
+//   },
+// })
 
 // ------------------------------
 // Component definition
@@ -19,96 +53,70 @@ type ButtonProps = {
 export function Button({
   size = "large",
   look = "primary",
-  hasIcon = false,
-  isLoading = false,
   className,
   children,
   ...restProps
 }: ButtonProps & React.ComponentProps<"button">) {
-  const baseClasses = twMerge(
-    "group font-semibold flex items-stretch focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none",
+  return (
+    <button
+      className={twMerge(baseClasses, size[size], lookClasses[look], className)}
+      {...restProps}
+    >
+      {children}
+    </button>
   )
+}
 
-  // We use `let` here because we'll redefine this for buttons with icon
-  let alignClasses = "justify-center"
+// ------------------------------
+// ------------------------------
+// ------------------------------
+// ------------------------------
+// ------------------------------
 
-  const colorClasses: Record<NonNullable<ButtonProps["look"]>, string> = {
-    primary:
-      "bg-primary-500 hover:bg-primary-600 text-white shadow-md disabled:shadow-none",
-    secondary: "bg-primary-100 hover:bg-primary-200 text-primary-700",
-    ghost: "bg-transparent text-white disabled:opacity-100",
-  }
+// ------------------------------
+// Prop types
+// ------------------------------
+type IconButtonProps = {
+  size?: "large" | "small"
+  status: "IDLE" | "LOADING" | "SUCCESS" | "ERROR"
+  className?: string
+  children: React.ReactNode
+}
 
-  const spacingClasses: Record<NonNullable<ButtonProps["size"]>, string> = {
-    small: "px-3 py-1",
-    large: "px-5 py-3",
-  }
-  const radiusClasses: Record<NonNullable<ButtonProps["size"]>, string> = {
-    small: "rounded",
-    large: "rounded-lg",
-  }
-
-  // ------------------------------
-  // Button without icon (only Primary buttons can have an icon)
-  // ------------------------------
-  if (look !== "primary" || hasIcon === false) {
-    return (
-      <button
-        className={twMerge(
-          baseClasses,
-          alignClasses,
-          spacingClasses[size],
-          radiusClasses[size],
-          colorClasses[look],
-          className,
-        )}
-        {...restProps}
-      >
-        {children}
-      </button>
-    )
-  }
-
+export function IconButton({
+  size = "large",
+  status = "IDLE",
+  className = "",
+  children,
+  ...restProps
+}) {
   // ------------------------------
   // Button with icon
   // ------------------------------
+
+  const baseClasses =
+    "group font-semibold flex items-stretch justify-beetween focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none rounded-lg"
+
   const iconContainerBaseClasses = twMerge(
     "grid aspect-square place-items-center rounded-r-lg group-disabled:bg-transparent overflow-hidden",
     size === "small" ? "px-1" : "px-3",
   )
 
-  alignClasses = "justify-between"
-
-  const iconContainerClasses: Omit<
-    Record<NonNullable<ButtonProps["look"]>, string>,
-    "ghost"
-  > = {
-    primary: twMerge(
-      "bg-primary-400/50 group-hover:bg-primary-500/50 focus:bg-primary-400/50 group-disabled:pointer-events-none",
-      size === "large" && !isLoading && "group-hover:bg-stripes",
-    ),
-    secondary:
-      "bg-primary-200/50 group-hover:bg-primary-300/50 focus:bg-primary-200/50 ",
-  }
+  const iconContainerLookClasses = twMerge(
+    "bg-primary-400/50 group-hover:bg-primary-500/50 focus:bg-primary-400/50 group-disabled:pointer-events-none",
+    size === "large" && status === "LOADING" && "group-hover:bg-stripes",
+  )
 
   return (
     <button
-      className={twMerge(
-        baseClasses,
-        alignClasses,
-        colorClasses[look],
-        radiusClasses[size],
-      )}
+      className={twMerge(baseClasses, lookClasses["primary"])}
       {...restProps}
     >
-      <span className={twMerge(spacingClasses[size])}>{children}</span>
+      <span className={twMerge(sizeClasses[size])}>{children}</span>
       <span
-        className={twMerge(
-          iconContainerBaseClasses,
-          iconContainerClasses[look],
-        )}
+        className={twMerge(iconContainerBaseClasses, iconContainerLookClasses)}
       >
-        {isLoading ? (
+        {status === "loading" ? (
           <LoadingSpinner size={size} />
         ) : (
           <ChevronRightIcon className="h-5 w-5 text-inherit" />
