@@ -19,6 +19,7 @@ import {
 } from "@internationalized/date"
 import cx from "classnames"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
+import { tv } from "tailwind-variants"
 
 import { useBookingAvailabilities } from "@/context/booking-availabilities"
 import { useSelectedDate } from "@/context/selected-date"
@@ -134,10 +135,6 @@ function getCalendarCellClasses({
   // Today's day
   const isCurrentDay = isToday(date, getLocalTimeZone())
 
-  // Common classes for all calendar days
-  const baseClasses =
-    "relative mx-auto grid aspect-square w-12 max-w-full place-items-center rounded-full focus:outline-none focus:ring focus:ring-primary-400 focus:ring-offset-1"
-
   // Possible UI "states" of a calendar day:
   type Status =
     | "SELECTED"
@@ -145,6 +142,18 @@ function getCalendarCellClasses({
     | "VACANCY"
     | "NO_VACANCY"
     | "TODAY_NO_VACANCY"
+
+  // Function to work out in which "status" the day is
+  const getStatus: () => Status = () => {
+    if (isSelected) return "SELECTED"
+    if (isDisabled) return "DISABLED"
+    if (hasAvailability) return "VACANCY"
+    return isCurrentDay ? "TODAY_NO_VACANCY" : "NO_VACANCY"
+  }
+
+  // Common classes for all calendar days
+  const baseClasses =
+    "relative mx-auto grid aspect-square w-12 max-w-full place-items-center rounded-full focus:outline-none focus:ring focus:ring-primary-400 focus:ring-offset-1"
 
   // Style variants for each possible UI "state"
   const statusClasses: Record<Status, string> = {
@@ -154,14 +163,6 @@ function getCalendarCellClasses({
     NO_VACANCY: "text-slate-800 hover:bg-slate-100",
     TODAY_NO_VACANCY:
       "font-bold text-primary-700 hover:bg-slate-100 hover:text-slate-800",
-  }
-
-  //  Working out in which "status" the day is
-  const getStatus: () => Status = () => {
-    if (isSelected) return "SELECTED"
-    if (isDisabled) return "DISABLED"
-    if (hasAvailability) return "VACANCY"
-    return isCurrentDay ? "TODAY_NO_VACANCY" : "NO_VACANCY"
   }
 
   // Mix all classes in a blender, serve with ice 🍹
