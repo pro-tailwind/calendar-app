@@ -10,11 +10,9 @@ import {
   parseDateTime,
 } from "@internationalized/date"
 
-import { Button } from "./button"
-import { Availability } from "../data"
-
 import { useSelectedDate } from "@/context/selected-date"
 import { useBookingAvailabilities } from "@/context/booking-availabilities"
+import { Button } from "./button"
 
 export function TimePicker() {
   const { selectedDate } = useSelectedDate()
@@ -35,11 +33,12 @@ export function TimePicker() {
           {formatter.format(selectedDate.toDate(getLocalTimeZone()))}
         </h2>
       </div>
-      <div className="-mx-4 mt-2 overflow-y-auto px-4">
+      <div className="-mx-4 mt-4 overflow-y-auto px-4">
         <div className="relative">
+          {/* Blur mask for days without availability */}
           <div
             className={cx(
-              "absolute -inset-x-4 inset-y-0 backdrop-blur-sm backdrop-saturate-0 transition",
+              "absolute -inset-x-4 -inset-y-1 blur-sm backdrop-saturate-0 transition",
               hasAvailability
                 ? "pointer-events-none z-0 opacity-0 duration-300 ease-out"
                 : "z-10 opacity-100 ease-in",
@@ -47,7 +46,7 @@ export function TimePicker() {
           ></div>
 
           {hasAvailability ? (
-            <ul className="space-y-2 sm:pb-8 md:pb-40">
+            <ul className="space-y-2 pt-2 sm:pb-8 md:pb-40">
               {availabilities.map((availability) => (
                 <TimeSlot
                   key={availability.startTime}
@@ -59,7 +58,7 @@ export function TimePicker() {
             </ul>
           ) : (
             // Empty list placeholder (faks list)
-            <ul className="space-y-2" aria-hidden="true">
+            <ul className="space-y-2 py-2" aria-hidden="true">
               {["8:00 AM", "9:00 AM", "2:00 PM", "4:00 PM"].map((time) => {
                 return (
                   <li
@@ -75,7 +74,7 @@ export function TimePicker() {
           )}
         </div>
         {!hasAvailability && (
-          <p className="pb-4 text-center text-sm text-slate-500 sm:pb-8">
+          <p className="mt-2 pb-4 text-center text-sm text-slate-500 sm:pb-8">
             No booking availabilities on this day.
           </p>
         )}
