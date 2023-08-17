@@ -1,3 +1,5 @@
+![seo-image](https://github.com/pro-tailwind/protailwind-calendar-app/assets/485747/7d61c3e7-c4ea-434a-8bbc-4ab30eb3ced3)
+
 # Booking UI App
 
 This is the starter app for the [Pro Tailwind](https://protailwind.com) workshops.
