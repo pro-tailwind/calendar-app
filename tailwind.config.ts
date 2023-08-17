@@ -33,6 +33,16 @@ const config = {
             ) 
             1fr`,
       }),
+      animation: {
+        subtle: "subtle 20s ease-in-out infinite",
+      },
+      keyframes: {
+        subtle: {
+          "0%": { transform: "translateX(0)" },
+          "50%": { transform: "translateX(-5%) translateY(5%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
     },
   },
   plugins: [bgStripesPlugin, multiThemePlugin({ themes: colorThemes })],

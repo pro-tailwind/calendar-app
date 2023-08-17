@@ -94,7 +94,7 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
   return (
     <li
       className={cx(
-        "flex gap-1 overflow-hidden rounded-lg",
+        "flex items-center gap-1 overflow-hidden rounded",
         isSelected && "bg-primary-600 bg-stripes",
       )}
     >
@@ -105,11 +105,11 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
         )}
       >
         <Button
-          look={isSelected ? "ghost" : "secondary"}
+          impact={isSelected ? "none" : "light"}
           disabled={isSelected}
           className={cx(
-            "w-full focus:ring-inset focus:ring-offset-0",
-            isSelected && "text-white",
+            "w-full focus:ring-inset focus:ring-offset-0 active:translate-y-0",
+            isSelected && "text-white disabled:opacity-100",
           )}
           onClick={() => setSelectedTime(availability.startTime)}
         >
@@ -119,10 +119,9 @@ function TimeSlot({ availability, selectedTime, setSelectedTime }) {
       <div className="m-2 basis-1/2">
         <Button
           size="small"
-          look="secondary"
-          hasIcon
+          impact="light"
           tabIndex={isSelected ? 0 : -1}
-          className="w-full focus:ring-inset focus:ring-offset-0"
+          className="w-full focus-visible:ring-inset focus-visible:ring-offset-0"
           onClick={() =>
             router.push(`/booking-details?time=${availability.startTime}`)
           }
