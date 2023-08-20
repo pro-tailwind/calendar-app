@@ -1,6 +1,15 @@
-const plugin = require("tailwindcss/plugin")
+import plugin from "tailwindcss/plugin"
 
-module.exports = plugin.withOptions(function (options) {
+type Options = {
+  name?: string
+  color?: string
+  opacity?: string
+  size?: string
+  angle?: string
+  speed?: string
+}
+
+export default plugin.withOptions(function (options: Options) {
   return function ({ addUtilities }) {
     const name = options?.name ?? "bg-stripes"
     return addUtilities({
@@ -8,7 +17,7 @@ module.exports = plugin.withOptions(function (options) {
         // Set options with fallback values
         "--stripes-color": options?.color ?? "255 255 255",
         "--stripes-opacity": options?.opacity ?? "0.2",
-        "--stripes-size": options?.size ?? 12,
+        "--stripes-size": options?.size ?? "12px",
         "--stripes-angle": options?.angle ?? "-45deg",
         "--stripes-speed": options?.speed ?? "0.7s",
 
@@ -18,8 +27,8 @@ module.exports = plugin.withOptions(function (options) {
         "&:before": {
           content: '""',
           position: "absolute",
-          top: 0,
-          right: 0,
+          top: "0",
+          right: "0",
           height: "100%",
           width: "calc(100% + var(--stripes-size))",
           backgroundImage: `linear-gradient(

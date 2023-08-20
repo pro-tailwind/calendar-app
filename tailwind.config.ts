@@ -1,12 +1,10 @@
 import { Config } from "tailwindcss"
 import defaultTheme from "tailwindcss/defaultTheme"
 
-// Multi-theme strategy
-import colorThemes from "./themes.json"
-import multiThemePlugin from "./src/plugins/multi-theme"
-
 // Animated background stripes
 import bgStripesPlugin from "./src/plugins/bg-stripes"
+// Multi-theme strategy
+import multiThemePlugin from "./src/plugins/multi-theme"
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Tailwind config
@@ -25,9 +23,9 @@ const config = {
       // Theme-based custom grid for the `BackgroundSplit` component
       gridTemplateColumns: ({ theme }) => ({
         "background-split": `1fr 
-            ${theme("width.100")} 
+            ${theme("width.96")} 
             calc(
-              ${theme("maxWidth.7xl")} - ${theme("width.100")} - ${theme(
+              ${theme("maxWidth.7xl")} - ${theme("width.96")} - ${theme(
                 "padding.8",
               )}
             ) 
@@ -45,7 +43,7 @@ const config = {
       },
     },
   },
-  plugins: [bgStripesPlugin, multiThemePlugin({ themes: colorThemes })],
+  plugins: [bgStripesPlugin, multiThemePlugin],
 } satisfies Config
 
 export default config

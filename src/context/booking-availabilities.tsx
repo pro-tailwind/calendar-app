@@ -1,19 +1,31 @@
-import { createContext, useContext } from "react"
+"use client"
+
+import { createContext, useContext, useState, useEffect } from "react"
 
 import {
-  bookingAvailabilities,
+  generateBookingAvailabilities,
   Availability,
-} from "@/data/booking-availabilities"
+} from "@/utils/generate-booking-availabilities"
 
 const BookingAvailibilitiesContext = createContext<{
   bookingAvailabilities: Availability[]
 }>({
-  bookingAvailabilities,
+  bookingAvailabilities: [],
 })
 
 export function BookingAvailabilitiesProvider({ children }) {
+  const [bookingAvailabilities, setBookingAvailabilities] = useState<
+    Availability[]
+  >([])
+
+  useEffect(() => {
+    setBookingAvailabilities(generateBookingAvailabilities())
+  }, [])
+  const availabilities = bookingAvailabilities
   return (
-    <BookingAvailibilitiesContext.Provider value={{ bookingAvailabilities }}>
+    <BookingAvailibilitiesContext.Provider
+      value={{ bookingAvailabilities: availabilities }}
+    >
       {children}
     </BookingAvailibilitiesContext.Provider>
   )
